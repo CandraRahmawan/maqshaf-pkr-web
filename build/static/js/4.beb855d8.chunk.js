@@ -7,13 +7,13 @@
       r.r(t);
       var o = r(97),
         c = r(0),
-        s = r(76),
-        a = r.n(s),
-        n = r(55),
-        i = r(131),
+        a = r(76),
+        s = r.n(a),
+        i = r(55),
+        n = r(131),
         l = r(133),
         d = r(129),
-        j = function (e) {
+        p = function (e) {
           return {
             rootStyle: { backgroundColor: e.primaryColor, color: e.whiteColor },
             wrapperStyle: { padding: "16px 32px", color: e.whiteColor },
@@ -25,54 +25,59 @@
             },
           };
         },
-        p = r(3);
-      t.default = Object(n.a)(j)(function (e) {
+        j = r(3);
+      t.default = Object(i.a)(p)(function (e) {
         var t = e.classes,
           r = Object(c.useState)([]),
-          s = Object(o.a)(r, 2),
-          n = s[0],
-          j = s[1],
-          b = t.rootStyle,
-          h = t.wrapperStyle,
-          u = t.searchStyle;
+          a = Object(o.a)(r, 2),
+          i = a[0],
+          p = a[1],
+          h = t.rootStyle,
+          u = t.wrapperStyle,
+          b = t.searchStyle;
         return (
           Object(c.useEffect)(function () {
-            a()("/mastergood/all").then(function (e) {
-              return j(e.data.data);
+            s()(
+              "".concat(
+                "https://maqshaf-api-dev.pesantrenkhoirurrooziqiin.com",
+                "/mastergood/all"
+              )
+            ).then(function (e) {
+              return p(e.data.data);
             });
           }, []),
-          console.log("goods", n),
-          Object(p.jsx)("div", {
-            className: b,
-            children: Object(p.jsxs)("div", {
-              className: h,
+          console.log("goods", i),
+          Object(j.jsx)("div", {
+            className: h,
+            children: Object(j.jsxs)("div", {
+              className: u,
               children: [
-                Object(p.jsx)("form", {
+                Object(j.jsx)("form", {
                   oValidate: !0,
                   autoComplete: "off",
-                  children: Object(p.jsx)(i.a, {
-                    className: u,
+                  children: Object(j.jsx)(n.a, {
+                    className: b,
                     InputProps: {
-                      startAdornment: Object(p.jsx)(l.a, {
+                      startAdornment: Object(j.jsx)(l.a, {
                         position: "start",
-                        children: Object(p.jsx)(d.a, { color: "white" }),
+                        children: Object(j.jsx)(d.a, { color: "white" }),
                       }),
                     },
                   }),
                 }),
-                Object(p.jsx)("div", {
+                Object(j.jsx)("div", {
                   children:
-                    null === n || void 0 === n
+                    null === i || void 0 === i
                       ? void 0
-                      : n.map(function (e) {
-                          return Object(p.jsxs)("div", {
+                      : i.map(function (e) {
+                          return Object(j.jsxs)("div", {
                             children: [
-                              Object(p.jsx)("h3", { children: e.name }),
-                              Object(p.jsx)("img", {
+                              Object(j.jsx)("h3", { children: e.name }),
+                              Object(j.jsx)("img", {
                                 src: e.image,
                                 width: "60",
                               }),
-                              Object(p.jsx)("p", { children: e.price }),
+                              Object(j.jsx)("p", { children: e.price }),
                             ],
                           });
                         }),
@@ -85,4 +90,4 @@
     },
   },
 ]);
-//# sourceMappingURL=4.cd0c00ed.chunk.js.map
+//# sourceMappingURL=4.beb855d8.chunk.js.map

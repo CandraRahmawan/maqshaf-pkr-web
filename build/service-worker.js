@@ -3579,14 +3579,14 @@
             (self.addEventListener("install", ve),
             self.addEventListener("activate", de));
       })([
-        { revision: "e24aa6ef758155b577ecbd92d9125531", url: "/index.html" },
+        { revision: "2ba1cb45cf07abc4dc0c51ef8da60053", url: "/index.html" },
         { revision: null, url: "/static/css/main.2cdc59ca.chunk.css" },
         { revision: null, url: "/static/js/2.77c50986.chunk.js" },
         { revision: null, url: "/static/js/3.783fd946.chunk.js" },
-        { revision: null, url: "/static/js/4.cd0c00ed.chunk.js" },
+        { revision: null, url: "/static/js/4.beb855d8.chunk.js" },
         { revision: null, url: "/static/js/5.f212eb7c.chunk.js" },
         { revision: null, url: "/static/js/main.6b46912c.chunk.js" },
-        { revision: null, url: "/static/js/runtime-main.60c1a3b2.js" },
+        { revision: null, url: "/static/js/runtime-main.d23e05b9.js" },
       ]),
       pe(_e);
     var Le,
