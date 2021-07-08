@@ -6,12 +6,15 @@ import { TextField, InputAdornment } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import styles from "./style";
 
+const api_url =
+  process.env.NODE_ENV === "development" ? "" : process.env.REACT_APP_API;
+
 const SearchView = ({ classes }) => {
   const [goods, setGoods] = useState([]);
   const { rootStyle, wrapperStyle, searchStyle } = classes;
 
   useEffect(() => {
-    axios("/mastergood/all").then((resp) => setGoods(resp.data.data));
+    axios(`${api_url}/mastergood/all`).then((resp) => setGoods(resp.data.data));
   }, []);
 
   console.log("goods", goods);
