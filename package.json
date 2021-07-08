@@ -64,6 +64,7 @@
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0"
   },
+  "proxy": "https://maqshaf-api-dev.pesantrenkhoirurrooziqiin.com",
   "engines": {
     "node": ">=12.16.x",
     "yarn": ">=1.22.x"
@@ -104,7 +105,7 @@
     "coverageThreshold": {
       "global": {
         "branches": 0,
-        "functions": 5,
+        "functions": 0,
         "lines": 3,
         "statements": 3
       }
