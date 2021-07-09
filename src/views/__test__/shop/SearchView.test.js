@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import SearchView from "../../shop/Search.view";
+import SearchView from "../../shop/SearchProduct.view";
 
 describe("<SearchView />", () => {
   test("render view", () => {

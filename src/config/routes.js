@@ -4,7 +4,7 @@ const routes = [
   {
     path: "/",
     exact: true,
-    component: lazy(() => import("views/shop/Search.view")),
+    component: lazy(() => import("views/shop/SearchProduct.view")),
   },
   // {
   //   path: "*",

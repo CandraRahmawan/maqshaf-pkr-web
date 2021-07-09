@@ -31,6 +31,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-i18next": "^11.11.1",
     "react-loading-skeleton": "^2.2.0",
     "react-query": "^3.18.1",
     "react-router-dom": "^5.2.0",
@@ -106,8 +107,8 @@
       "global": {
         "branches": 0,
         "functions": 0,
-        "lines": 3,
-        "statements": 3
+        "lines": 0,
+        "statements": 0
       }
     }
   },

@@ -1,30 +1,33 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { object } from "prop-types";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { TextField, InputAdornment } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+import { Card } from "apps/components/ui";
 import styles from "./style";
 
 const api_url =
   process.env.NODE_ENV === "development" ? "" : process.env.REACT_APP_API;
 
-const SearchView = ({ classes }) => {
+const SearchProductContainer = (props) => {
+  const { classes, t } = props;
   const [goods, setGoods] = useState([]);
-  const { rootStyle, wrapperStyle, searchStyle } = classes;
 
   useEffect(() => {
     axios(`${api_url}/mastergood/all`).then((resp) => setGoods(resp.data.data));
   }, []);
 
-  console.log("goods", goods);
-
   return (
-    <div className={rootStyle}>
-      <div className={wrapperStyle}>
+    <div className={classes.root}>
+      <div className={classes.wrapperHeader}>
+        <h2>{t("greeting")}</h2>
+        <h4>{t("subGreeting")}</h4>
         <form oValidate autoComplete="off">
           <TextField
-            className={searchStyle}
+            size="medium"
+            variant="outlined"
+            className={classes.search}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -34,22 +37,27 @@ const SearchView = ({ classes }) => {
             }}
           />
         </form>
-        <div>
-          {goods?.map((item) => (
-            <div>
-              <h3>{item.name}</h3>
-              <img src={item.image} width="60" />
-              <p>{item.price}</p>
-            </div>
-          ))}
-        </div>
+      </div>
+      <div>
+        {goods?.map((item) => (
+          <div>
+            <Card
+              image={item.image}
+              title={item.name}
+              description={item.description}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-SearchView.propTypes = {
-  classes: PropTypes.object.isRequired,
+SearchProductContainer.propTypes = {
+  t: object.isRequired,
+  history: object.isRequired,
+  location: object.isRequired,
+  classes: object.isRequired,
 };
 
-export default withStyles(styles)(SearchView);
+export default withStyles(styles)(SearchProductContainer);

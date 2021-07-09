@@ -9,8 +9,8 @@ const theme = createTheme({
   },
 });
 
-const Themes = ({ children }) => (
+const ThemesProvider = ({ children }) => (
   <ThemeProvider theme={theme}>{children}</ThemeProvider>
 );
 
-export default Themes;
+export default ThemesProvider;
