@@ -1,8 +1,8 @@
 (this["webpackJsonpmaqshaf-pkr-web"] =
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
-  [5],
+  [7],
   {
-    130: function (t, n, e) {
+    165: function (t, n, e) {
       "use strict";
       e.r(n),
         e.d(n, "getCLS", function () {
@@ -228,4 +228,4 @@
     },
   },
 ]);
-//# sourceMappingURL=5.f212eb7c.chunk.js.map
+//# sourceMappingURL=7.f2d34bfc.chunk.js.map
