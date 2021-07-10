@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { object } from "prop-types";
+import { object, func } from "prop-types";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
-import { TextField, InputAdornment } from "@material-ui/core";
+import { TextField, InputAdornment, Container, Grid } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { Card } from "apps/components/ui";
 import styles from "./style";
@@ -21,40 +21,49 @@ const SearchProductContainer = (props) => {
   return (
     <div className={classes.root}>
       <div className={classes.wrapperHeader}>
-        <h2>{t("greeting")}</h2>
-        <h4>{t("subGreeting")}</h4>
-        <form oValidate autoComplete="off">
-          <TextField
-            size="medium"
-            variant="outlined"
-            className={classes.search}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search color="white" />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </form>
-      </div>
-      <div>
-        {goods?.map((item) => (
-          <div>
-            <Card
-              image={item.image}
-              title={item.name}
-              description={item.description}
+        <Container>
+          <h2>{t("greeting")}</h2>
+          <h4>{t("subGreeting")}</h4>
+          <form autoComplete="off">
+            <TextField
+              size="medium"
+              variant="outlined"
+              className={classes.search}
+              placeholder={t("searchPlaceholder")}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search color="white" />
+                  </InputAdornment>
+                ),
+              }}
             />
-          </div>
-        ))}
+          </form>
+        </Container>
       </div>
+      <Container className={classes.listProduct}>
+        <Grid container className={classes.root} spacing={2}>
+          <Grid item xs={12}>
+            <Grid container justifyContent="center" spacing={2}>
+              {goods?.map((item) => (
+                <Grid key={item.masterGoodsId} item>
+                  <Card
+                    image={item.image}
+                    title={item.name}
+                    price={item.price}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 };
 
 SearchProductContainer.propTypes = {
-  t: object.isRequired,
+  t: func.isRequired,
   history: object.isRequired,
   location: object.isRequired,
   classes: object.isRequired,

@@ -3,16 +3,16 @@ const styles = (theme) => ({
     color: theme.whiteColor,
   },
   wrapperHeader: {
-    padding: "16px",
+    padding: "16px 0",
     color: theme.whiteColor,
     backgroundColor: theme.primaryColor,
     "& h4": {
-      marginTop: "4px",
-      marginBottom: "32px",
+      marginTop: 4,
+      marginBottom: 32,
     },
     "& h2": {
-      marginTop: "0",
-      marginBottom: "4px",
+      marginTop: 0,
+      marginBottom: 4,
     },
     "& .MuiInputBase-root": {
       color: "inherit",
@@ -24,13 +24,17 @@ const styles = (theme) => ({
       border: "none",
     },
     "& .MuiOutlinedInput-input": {
-      padding: "12px",
-      fontSize: "22px",
+      padding: 12,
+      fontSize: 22,
     },
   },
   search: {
     width: "100%",
     backgroundColor: "#2196f3",
+    borderRadius: 10,
+  },
+  listProduct: {
+    marginTop: 16,
   },
 });
 

@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { Spinner } from "apps/components/ui";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import routes from "config/routes";
 
@@ -14,7 +15,7 @@ export default function Router() {
               path={path}
               exact={exact}
               render={(props) => (
-                <Suspense fallback="loading...">
+                <Suspense fallback={<Spinner label="Sedang memuat data..." />}>
                   <Component {...props} />
                 </Suspense>
               )}

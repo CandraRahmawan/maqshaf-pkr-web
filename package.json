@@ -93,7 +93,7 @@
     "hooks": {
       "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "yarn test"
+      "pre-push": "yarn build && git commit --amend--no-edit && yarn test"
     }
   },
   "lint-staged": {
