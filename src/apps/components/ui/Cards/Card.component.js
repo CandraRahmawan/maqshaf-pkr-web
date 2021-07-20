@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
       width: 200,
       height: 60,
       fontSize: 20,
+      [theme.breakpoints.down("xs")]: {
+        width: "auto",
+        height: "auto",
+      },
     },
 
     "& .MuiTypography-h6": {
@@ -34,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     margin: 16,
   },
 
-  contentbackground: {
+  content_background: {
     backgroundColor: "#f5f5f5",
   },
 }));
@@ -44,7 +48,7 @@ const CardComponent = (props) => {
   const classes = useStyles();
   return (
     <Card className={classes.root} key={title}>
-      <CardActionArea className={classes.contentBackground}>
+      <CardActionArea className={classes.content_background}>
         <CardMedia className={classes.media} image={image} title={title} />
       </CardActionArea>
       <CardContent>
