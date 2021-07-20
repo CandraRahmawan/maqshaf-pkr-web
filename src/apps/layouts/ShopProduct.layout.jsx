@@ -3,10 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Footer } from "apps/components/core";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: "#eee",
-    height: "100vh",
-  },
+  root: {},
 }));
 
 const ShopProductLayout = ({ children, t }) => {
