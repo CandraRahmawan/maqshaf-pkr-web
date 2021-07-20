@@ -34,7 +34,8 @@ const styles = (theme) => ({
     borderRadius: 10,
   },
   listProduct: {
-    marginTop: 16,
+    marginTop: 32,
+    minHeight: 300,
   },
 });
 

@@ -12,7 +12,7 @@ const SearchProductView = (props) => {
         <title>{t("metaTitle")}</title>
         <meta name="description" content={t("metaTitle")} />
       </Helmet>
-      <ShopProductLayout>
+      <ShopProductLayout t={t}>
         <SearchProductContainer t={t} history={history} location={location} />
       </ShopProductLayout>
     </>
@@ -25,4 +25,6 @@ SearchProductView.propTypes = {
   location: object.isRequired,
 };
 
-export default withTranslation("search_product")(SearchProductView);
+export default withTranslation(["search_product", "glossary"])(
+  SearchProductView
+);
