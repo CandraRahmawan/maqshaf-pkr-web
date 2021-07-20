@@ -3579,17 +3579,17 @@
             (self.addEventListener("install", ve),
             self.addEventListener("activate", de));
       })([
-        { revision: "565c2f08fbe9307bd85e6171135bc2a2", url: "/index.html" },
-        { revision: null, url: "/static/css/main.2cdc59ca.chunk.css" },
+        { revision: "59ee13ff6bc0e43fb69f8d4c20b0b4a8", url: "/index.html" },
+        { revision: null, url: "/static/css/main.5273e165.chunk.css" },
         { revision: null, url: "/static/js/2.d51773f9.chunk.js" },
         { revision: null, url: "/static/js/3.f2aead2c.chunk.js" },
         { revision: null, url: "/static/js/4.e9da4106.chunk.js" },
         { revision: null, url: "/static/js/5.24d85d53.chunk.js" },
         { revision: null, url: "/static/js/6.6b6bd967.chunk.js" },
-        { revision: null, url: "/static/js/7.29fe32fa.chunk.js" },
+        { revision: null, url: "/static/js/7.4390ed4e.chunk.js" },
         { revision: null, url: "/static/js/8.b63c4395.chunk.js" },
         { revision: null, url: "/static/js/main.f4e0afe7.chunk.js" },
-        { revision: null, url: "/static/js/runtime-main.d276d763.js" },
+        { revision: null, url: "/static/js/runtime-main.ac11ffb3.js" },
         { revision: null, url: "/static/media/getFetch.582d29c4.cjs" },
       ]),
       pe(_e);
