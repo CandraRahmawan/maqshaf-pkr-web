@@ -3579,17 +3579,17 @@
             (self.addEventListener("install", ve),
             self.addEventListener("activate", de));
       })([
-        { revision: "59ee13ff6bc0e43fb69f8d4c20b0b4a8", url: "/index.html" },
+        { revision: "788b5f5d316daaed1e8d7406205e1fb6", url: "/index.html" },
         { revision: null, url: "/static/css/main.5273e165.chunk.css" },
         { revision: null, url: "/static/js/2.d51773f9.chunk.js" },
         { revision: null, url: "/static/js/3.f2aead2c.chunk.js" },
         { revision: null, url: "/static/js/4.e9da4106.chunk.js" },
         { revision: null, url: "/static/js/5.24d85d53.chunk.js" },
-        { revision: null, url: "/static/js/6.6b6bd967.chunk.js" },
+        { revision: null, url: "/static/js/6.2398adb2.chunk.js" },
         { revision: null, url: "/static/js/7.4390ed4e.chunk.js" },
         { revision: null, url: "/static/js/8.b63c4395.chunk.js" },
         { revision: null, url: "/static/js/main.f4e0afe7.chunk.js" },
-        { revision: null, url: "/static/js/runtime-main.ac11ffb3.js" },
+        { revision: null, url: "/static/js/runtime-main.99afbb8a.js" },
         { revision: null, url: "/static/media/getFetch.582d29c4.cjs" },
       ]),
       pe(_e);

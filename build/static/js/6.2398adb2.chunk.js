@@ -2,40 +2,44 @@
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
   [6],
   {
-    173: function (a, e, t) {
+    173: function (t, a, e) {
       "use strict";
-      t.r(e);
-      var c = t(41),
-        r = t(89),
-        i = t(174),
-        n = t(175),
-        o = t(176),
-        s = t(177),
-        h = t(122),
-        b = t(178),
-        d = t(179),
-        j = t(2),
-        l = Object(r.a)(function (a) {
-          var e;
+      e.r(a);
+      var c = e(41),
+        r = e(89),
+        i = e(174),
+        n = e(175),
+        o = e(176),
+        s = e(177),
+        h = e(122),
+        b = e(178),
+        d = e(179),
+        j = e(2),
+        l = Object(r.a)(function (t) {
+          var a;
           return {
             root:
-              ((e = { borderRadius: 10 }),
-              Object(c.a)(e, a.breakpoints.down("xs"), { width: 300 }),
-              Object(c.a)(e, "& .MuiTypography-h5", {
-                width: 200,
-                height: 60,
-                fontSize: 20,
-              }),
-              Object(c.a)(e, "& .MuiTypography-h6", { fontWeight: 400 }),
-              e),
+              ((a = { borderRadius: 10 }),
+              Object(c.a)(a, t.breakpoints.down("xs"), { width: 300 }),
+              Object(c.a)(
+                a,
+                "& .MuiTypography-h5",
+                Object(c.a)(
+                  { width: 200, height: 60, fontSize: 20 },
+                  t.breakpoints.down("xs"),
+                  { width: "auto", height: "auto" }
+                )
+              ),
+              Object(c.a)(a, "& .MuiTypography-h6", { fontWeight: 400 }),
+              a),
             media: { height: 140, backgroundSize: "contain", margin: 16 },
-            contentbackground: { backgroundColor: "#f5f5f5" },
+            content_background: { backgroundColor: "#f5f5f5" },
           };
         });
-      e.default = function (a) {
-        var e = a.image,
-          t = a.title,
-          c = a.price,
+      a.default = function (t) {
+        var a = t.image,
+          e = t.title,
+          c = t.price,
           r = l();
         return Object(j.jsxs)(
           i.a,
@@ -43,11 +47,11 @@
             className: r.root,
             children: [
               Object(j.jsx)(n.a, {
-                className: r.contentBackground,
+                className: r.content_background,
                 children: Object(j.jsx)(o.a, {
                   className: r.media,
-                  image: e,
-                  title: t,
+                  image: a,
+                  title: e,
                 }),
               }),
               Object(j.jsxs)(s.a, {
@@ -60,7 +64,7 @@
                   Object(j.jsx)(h.a, {
                     gutterBottom: !0,
                     variant: "h5",
-                    children: t,
+                    children: e,
                   }),
                   Object(j.jsx)(h.a, {
                     color: "textSecondary",
@@ -78,10 +82,10 @@
               }),
             ],
           },
-          t
+          e
         );
       };
     },
   },
 ]);
-//# sourceMappingURL=6.6b6bd967.chunk.js.map
+//# sourceMappingURL=6.2398adb2.chunk.js.map
