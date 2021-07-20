@@ -1,23 +1,23 @@
 (this["webpackJsonpmaqshaf-pkr-web"] =
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
-  [6],
+  [7],
   {
-    183: function (e, t, r) {
+    187: function (e, t, r) {
       "use strict";
       r.r(t);
-      var n = r(120),
-        o = r(184),
-        c = r(150),
-        i = r(0),
-        a = r(123),
+      var n = r(123),
+        i = r(188),
+        c = r(153),
+        o = r(0),
+        a = r(126),
         s = r.n(a),
         l = r(20),
-        d = r(177),
-        j = r(181),
-        u = r(178),
-        h = r(89),
-        b = r(179),
-        m = r(23),
+        d = r(180),
+        j = r(184),
+        h = r(181),
+        u = r(91),
+        b = r(182),
+        m = r(25),
         p = function (e) {
           return {
             root: { color: e.whiteColor },
@@ -37,19 +37,19 @@
               backgroundColor: "#2196f3",
               borderRadius: 10,
             },
-            listProduct: { marginTop: 16 },
+            listProduct: { marginTop: 32, minHeight: 300 },
           };
         },
         O = r(2),
         x = Object(l.a)(p)(function (e) {
           var t = e.classes,
             r = e.t,
-            n = Object(i.useState)([]),
-            o = Object(c.a)(n, 2),
-            a = o[0],
-            l = o[1];
+            n = Object(o.useState)([]),
+            i = Object(c.a)(n, 2),
+            a = i[0],
+            l = i[1];
           return (
-            Object(i.useEffect)(function () {
+            Object(o.useEffect)(function () {
               s()(
                 "".concat(
                   "https://maqshaf-api-dev.pesantrenkhoirurrooziqiin.com",
@@ -76,7 +76,7 @@
                           className: t.search,
                           placeholder: r("searchPlaceholder"),
                           InputProps: {
-                            startAdornment: Object(O.jsx)(u.a, {
+                            startAdornment: Object(O.jsx)(h.a, {
                               position: "start",
                               children: Object(O.jsx)(b.a, { color: "white" }),
                             }),
@@ -88,14 +88,14 @@
                 }),
                 Object(O.jsx)(d.a, {
                   className: t.listProduct,
-                  children: Object(O.jsx)(h.a, {
+                  children: Object(O.jsx)(u.a, {
                     container: !0,
                     className: t.root,
                     spacing: 2,
-                    children: Object(O.jsx)(h.a, {
+                    children: Object(O.jsx)(u.a, {
                       item: !0,
                       xs: 12,
-                      children: Object(O.jsx)(h.a, {
+                      children: Object(O.jsx)(u.a, {
                         container: !0,
                         justifyContent: "center",
                         spacing: 2,
@@ -104,7 +104,7 @@
                             ? void 0
                             : a.map(function (e) {
                                 return Object(O.jsx)(
-                                  h.a,
+                                  u.a,
                                   {
                                     item: !0,
                                     children: Object(O.jsx)(m.a, {
@@ -124,19 +124,26 @@
             })
           );
         }),
-        f = r(87),
-        g = Object(f.a)(function (e) {
-          return { root: { backgroundColor: "#eee" } };
+        f = r(89),
+        g = Object(o.lazy)(function () {
+          return r.e(5).then(r.bind(null, 185));
         }),
-        v = function (e) {
+        v = Object(f.a)(function (e) {
+          return { root: { backgroundColor: "#eee", height: "100vh" } };
+        }),
+        w = function (e) {
           var t = e.children,
-            r = g();
-          return Object(O.jsx)("div", { className: r.root, children: t });
+            r = e.t,
+            n = v();
+          return Object(O.jsxs)("div", {
+            className: n.root,
+            children: [t, Object(O.jsx)(g, { t: r })],
+          });
         };
-      t.default = Object(o.a)("search_product")(function (e) {
+      t.default = Object(i.a)(["search_product", "glossary"])(function (e) {
         var t = e.t,
           r = e.history,
-          o = e.location;
+          i = e.location;
         return Object(O.jsxs)(O.Fragment, {
           children: [
             Object(O.jsxs)(n.a, {
@@ -148,8 +155,9 @@
                 }),
               ],
             }),
-            Object(O.jsx)(v, {
-              children: Object(O.jsx)(x, { t: t, history: r, location: o }),
+            Object(O.jsx)(w, {
+              t: t,
+              children: Object(O.jsx)(x, { t: t, history: r, location: i }),
             }),
           ],
         });
@@ -157,4 +165,4 @@
     },
   },
 ]);
-//# sourceMappingURL=6.67a5b925.chunk.js.map
+//# sourceMappingURL=7.29fe32fa.chunk.js.map

@@ -2,7 +2,7 @@
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
   [0],
   {
-    23: function (e, n, t) {
+    25: function (e, n, t) {
       "use strict";
       t.d(n, "a", function () {
         return u;
@@ -11,9 +11,9 @@
           return s;
         });
       var a = t(0),
-        c = t(89),
-        r = t(91),
-        o = t(87),
+        c = t(91),
+        r = t(93),
+        o = t(89),
         i = t(2),
         l = Object(o.a)({ root: { textAlign: "center", marginTop: "30%" } }),
         s = function (e) {
@@ -33,20 +33,20 @@
           });
         },
         u = Object(a.lazy)(function () {
-          return Promise.all([t.e(4), t.e(5)]).then(t.bind(null, 170));
+          return Promise.all([t.e(4), t.e(6)]).then(t.bind(null, 173));
         });
     },
-    69: function (e, n, t) {},
-    70: function (e, n, t) {
+    71: function (e, n, t) {},
+    72: function (e, n, t) {
       "use strict";
       t.r(n);
       var a = t(0),
         c = t.n(a),
-        r = t(36),
+        r = t(37),
         o = t.n(r),
-        i = t(92),
-        l = t(86),
-        s = t(56),
+        i = t(94),
+        l = t(88),
+        s = t(58),
         u = t(2),
         j = Object(s.a)({
           primaryColor: "#00a8ff",
@@ -57,10 +57,10 @@
           var n = e.children;
           return Object(u.jsx)(l.a, { theme: j, children: n });
         },
-        h = t(23),
-        d = t(34),
-        f = t(44),
-        m = t(50);
+        h = t(25),
+        d = t(35),
+        f = t(47),
+        m = t(52);
       d.a
         .use(m.a)
         .use(f.e)
@@ -72,15 +72,15 @@
           defaultNS: "common",
         });
       var x = d.a,
-        O = t(54),
-        p = t(55),
+        O = t(56),
+        p = t(57),
         g = t(4),
         v = [
           {
             path: "/",
             exact: !0,
             component: Object(a.lazy)(function () {
-              return Promise.all([t.e(3), t.e(6)]).then(t.bind(null, 183));
+              return Promise.all([t.e(3), t.e(7)]).then(t.bind(null, 187));
             }),
           },
         ];
@@ -122,8 +122,8 @@
         e &&
           e instanceof Function &&
           t
-            .e(7)
-            .then(t.bind(null, 180))
+            .e(8)
+            .then(t.bind(null, 183))
             .then(function (n) {
               var t = n.getCLS,
                 a = n.getFID,
@@ -133,7 +133,7 @@
               t(e), a(e), c(e), r(e), o(e);
             });
       };
-      t(69);
+      t(71);
       o.a.render(
         Object(u.jsx)(c.a.StrictMode, {
           children: Object(u.jsx)(a.Suspense, {
@@ -159,6 +159,6 @@
         k();
     },
   },
-  [[70, 1, 2]],
+  [[72, 1, 2]],
 ]);
-//# sourceMappingURL=main.cb9f62aa.chunk.js.map
+//# sourceMappingURL=main.f4e0afe7.chunk.js.map

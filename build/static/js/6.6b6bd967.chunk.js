@@ -1,19 +1,19 @@
 (this["webpackJsonpmaqshaf-pkr-web"] =
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
-  [5],
+  [6],
   {
-    170: function (a, e, t) {
+    173: function (a, e, t) {
       "use strict";
       t.r(e);
-      var c = t(45),
-        r = t(87),
-        i = t(171),
-        n = t(172),
-        o = t(173),
-        s = t(174),
-        h = t(119),
-        b = t(175),
-        d = t(176),
+      var c = t(41),
+        r = t(89),
+        i = t(174),
+        n = t(175),
+        o = t(176),
+        s = t(177),
+        h = t(122),
+        b = t(178),
+        d = t(179),
         j = t(2),
         l = Object(r.a)(function (a) {
           var e;
@@ -84,4 +84,4 @@
     },
   },
 ]);
-//# sourceMappingURL=5.4028005a.chunk.js.map
+//# sourceMappingURL=6.6b6bd967.chunk.js.map
