@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   container: {
-    margin: "12px 0 8px 0",
+    margin: "12px auto 8px auto",
     textAlign: "center",
     [theme.breakpoints.down("xs")]: {
-      margin: "8px 0",
+      margin: "8px auto",
     },
 
     "& img": {

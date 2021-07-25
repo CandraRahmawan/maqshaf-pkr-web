@@ -3,5 +3,6 @@
   "metaDescription": "Maqshaf - Pesantren Khoirur Rooziqiin",
   "greeting": "Assalamu alaikum, Para Santri",
   "subGreeting": "Mau beli jajan apa hari ini ?",
-  "searchPlaceholder": "Cari jajan disini..."
+  "searchPlaceholder": "Cari jajan disini...",
+  "addToCart": "Masukkan ke keranjang"
 }

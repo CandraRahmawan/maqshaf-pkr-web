@@ -6,6 +6,10 @@ const useStyles = makeStyles({
   root: {
     textAlign: "center",
     marginTop: "30%",
+
+    "& p": {
+      color: "#000",
+    },
   },
 });
 
