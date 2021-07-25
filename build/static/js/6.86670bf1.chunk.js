@@ -1,16 +1,16 @@
 (this["webpackJsonpmaqshaf-pkr-web"] =
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
-  [5],
+  [6],
   {
-    185: function (r, e, t) {
+    200: function (r, e, t) {
       "use strict";
       t.r(e);
-      var o = t(41),
-        p = t(91),
-        n = t(180),
-        a = t(21),
+      var o = t(50),
+        p = t(103),
+        n = t(195),
+        a = t(29),
         i = t(1),
-        s = (t(11), t(22));
+        s = (t(14), t(30));
       function c(r, e) {
         var t = {};
         return (
@@ -61,8 +61,8 @@
             o
           );
         },
-        u = t(16),
-        d = t(44);
+        u = t(22),
+        d = t(53);
       function h(r, e) {
         return e && "string" === typeof e
           ? e.split(".").reduce(function (r, e) {
@@ -179,7 +179,7 @@
           (b({ prop: "size", cssProperty: "width", transform: K }),
           b({ prop: "size", cssProperty: "height", transform: K }),
           m(k, T, C, N, S, A, b({ prop: "boxSizing" }))),
-        R = t(95),
+        R = t(108),
         B = m(
           b({ prop: "fontFamily", themeKey: "typography" }),
           b({ prop: "fontSize", themeKey: "typography" }),
@@ -189,13 +189,13 @@
           b({ prop: "lineHeight" }),
           b({ prop: "textAlign" })
         ),
-        E = t(3),
+        E = t(5),
         G = t(0),
         I = t.n(G),
-        W = t(18),
-        H = t(24),
+        W = t(26),
+        H = t(33),
         q = t.n(H),
-        F = t(75);
+        F = t(85);
       function J(r, e) {
         var t = {};
         return (
@@ -205,7 +205,7 @@
           t
         );
       }
-      var D = t(23),
+      var D = t(31),
         L = function (r) {
           var e = (function (r) {
             return function (e) {
@@ -280,8 +280,8 @@
         },
         M = f(m(g, j, x, O, v, w, P, z, R.b, B)),
         Q = L("div")(M, { name: "MuiBox" }),
-        U = t(89),
-        V = t(2),
+        U = t(101),
+        V = t(4),
         X = Object(U.a)(function (r) {
           var e;
           return {
@@ -293,8 +293,8 @@
               position: "relative",
             },
             container:
-              ((e = { margin: "12px 0 8px 0", textAlign: "center" }),
-              Object(o.a)(e, r.breakpoints.down("xs"), { margin: "8px 0" }),
+              ((e = { margin: "12px auto 8px auto", textAlign: "center" }),
+              Object(o.a)(e, r.breakpoints.down("xs"), { margin: "8px auto" }),
               Object(o.a)(
                 e,
                 "& img",
@@ -372,4 +372,4 @@
     },
   },
 ]);
-//# sourceMappingURL=5.24d85d53.chunk.js.map
+//# sourceMappingURL=6.86670bf1.chunk.js.map
