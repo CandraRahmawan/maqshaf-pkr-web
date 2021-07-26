@@ -6,5 +6,5 @@ export default configureStore({
   reducer: {
     cartSelected: cartSelectedReducer,
   },
-  devTools: isDevelopment || localStorage.getItem("redux-debug"),
+  devTools: isDevelopment || Boolean(localStorage.getItem("redux-debug")),
 });
