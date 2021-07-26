@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
   root: {
     borderRadius: 10,
     [theme.breakpoints.down("xs")]: {
-      width: 150,
+      minWidth: 150,
     },
 
     "& .MuiCardContent-root": {

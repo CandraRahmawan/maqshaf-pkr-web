@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { I18nextProvider } from "react-i18next";
 import ThemeProvider from "providers/Themes.provider";
 import QueryClientProvider from "providers/QueryClient.provider";
+import ReduxProvider from "providers/Redux.provider";
 import { Spinner } from "apps/components/ui";
 import i18n from "lib/i18n";
 import App from "./apps";
@@ -15,11 +16,13 @@ ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback={<Spinner label="Sedang memnuat halaman..." />}>
       <I18nextProvider i18n={i18n}>
-        <ThemeProvider>
-          <QueryClientProvider>
-            <App />
-          </QueryClientProvider>
-        </ThemeProvider>
+        <ReduxProvider>
+          <ThemeProvider>
+            <QueryClientProvider>
+              <App />
+            </QueryClientProvider>
+          </ThemeProvider>
+        </ReduxProvider>
       </I18nextProvider>
     </Suspense>
   </React.StrictMode>,

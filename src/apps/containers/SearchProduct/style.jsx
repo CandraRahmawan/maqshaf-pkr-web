@@ -2,6 +2,19 @@ const styles = (theme) => ({
   root: {
     color: theme.whiteColor,
   },
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+    backgroundColor: theme.orangeColor,
+    color: theme.whiteColor,
+  },
+  badge: {
+    position: "fixed",
+    bottom: theme.spacing(8),
+    right: theme.spacing(3),
+    zIndex: 1,
+  },
   wrapperHeader: {
     padding: "16px 0",
     color: theme.whiteColor,

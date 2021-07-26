@@ -1,4 +1,3 @@
-import { makeStyles } from "@material-ui/core/styles";
 import { string, number, func } from "prop-types";
 import {
   Card,
@@ -16,12 +15,31 @@ import { rupiahFormat } from "helpers/formattor.helper";
 import { useStyles } from "./style";
 
 const CardComponent = (props) => {
-  const { image, title, price, currency, category, t } = props;
+  const {
+    image,
+    title,
+    price,
+    currency,
+    category,
+    t,
+    openModal,
+    addCartAction,
+  } = props;
   const classes = useStyles();
   const isXsDevice = useMediaQuery((theme) => theme.breakpoints.down("xs"));
   return (
     <Card className={classes.root} key={title}>
-      <CardActionArea className={classes.content_background}>
+      <CardActionArea
+        className={classes.content_background}
+        onClick={() => {
+          openModal();
+          addCartAction({
+            qty: 1,
+            price,
+            name: title,
+          });
+        }}
+      >
         <CardMedia className={classes.media} image={image} title={title} />
       </CardActionArea>
       <CardContent>
@@ -36,7 +54,18 @@ const CardComponent = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" variant="contained">
+        <Button
+          size="small"
+          color="primary"
+          variant="contained"
+          onClick={() =>
+            addCartAction({
+              qty: 1,
+              price,
+              name: title,
+            })
+          }
+        >
           {isXsDevice ? <AddShoppingCartIcon /> : t("search_product:addToCart")}
         </Button>
       </CardActions>
@@ -51,6 +80,8 @@ CardComponent.propTypes = {
   price: number.isRequired,
   currency: string.isRequired,
   category: string.isRequired,
+  openModal: func.isRequired,
+  addCartAction: func.isRequired,
 };
 
 export default CardComponent;
