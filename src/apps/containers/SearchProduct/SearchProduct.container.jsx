@@ -11,16 +11,24 @@ import {
   DialogActions,
   Button,
   DialogContent,
-  DialogContentText,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
   Fab,
   Badge,
+  Divider,
+  IconButton,
+  Typography,
+  Box,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { Search, ShoppingCart } from "@material-ui/icons";
+import { Search, ShoppingCart, Close } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import { Card, Spinner } from "apps/components/ui";
 import useSearchProductHook from "hooks/useSearchProduct.hook";
-import { selectCart } from "redux/reducers/cartSelected.reducer";
+import { selectCart, clearCart } from "redux/reducers/cartSelected.reducer";
+import { rupiahFormat } from "helpers/formattor.helper";
 
 import styles from "./style";
 
@@ -29,7 +37,7 @@ const SearchProductContainer = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const { goodList, isLoading, setKeyword } = useSearchProductHook();
-  const { items } = useSelector((state) => state.cartSelected);
+  const { items, total } = useSelector((state) => state.cartSelected);
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -40,7 +48,7 @@ const SearchProductContainer = (props) => {
   };
 
   const addCartAction = (items) => {
-    dispatch(selectCart({ items: [items] }));
+    dispatch(selectCart({ items }));
   };
 
   return (
@@ -83,6 +91,7 @@ const SearchProductContainer = (props) => {
                       category={item.category}
                       openModal={handleOpenModal}
                       addCartAction={addCartAction}
+                      selectedItems={items}
                     />
                   </Grid>
                 ))}
@@ -100,32 +109,74 @@ const SearchProductContainer = (props) => {
           horizontal: "right",
         }}
       >
-        <Fab aria-label="test" className={classes.fab}>
+        <Fab
+          aria-label="test"
+          onClick={() => items.length > 0 && handleOpenModal()}
+          className={classes.fab}
+        >
           <ShoppingCart />
         </Fab>
       </Badge>
-      <Dialog open={open} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <Dialog
+        fullScreen
+        open={open}
+        aria-labelledby="form-dialog-title"
+        onClose={handleCloseModal}
+      >
+        <DialogTitle disableTypography>
+          <Typography variant="h6">
+            {t("search_product:modalTotalSummaryTitle")}
+          </Typography>
+          <IconButton
+            aria-label="close"
+            className={classes.closeButton}
+            onClick={handleCloseModal}
+          >
+            <Close />
+          </IconButton>
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
+          <p>{t("search_product:modalTotalSummaryInfo")}</p>
+          <List>
+            {items.map((item) => (
+              <>
+                <ListItem>
+                  <ListItemAvatar className={classes.listModalImage}>
+                    <img src={item.image} alt={item.name} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    className={classes.listModalText}
+                    primary={item.name}
+                    secondary={rupiahFormat(item.price, item.currency)}
+                  />
+                </ListItem>
+                <Divider />
+              </>
+            ))}
+          </List>
+          <Box display="flex" justifyContent="space-between">
+            <div>
+              <Typography variant="subtitle1" color="disabled">
+                {t("search_product:modalTotalBuy")}
+              </Typography>
+            </div>
+            <div>
+              <Typography variant="subtitle1">{rupiahFormat(total)}</Typography>
+            </div>
+          </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseModal} color="primary">
-            Cancel
+          <Button
+            onClick={() => {
+              dispatch(clearCart());
+              handleCloseModal();
+            }}
+            color="primary"
+          >
+            {t("common:cancel")}
           </Button>
           <Button onClick={handleCloseModal} color="primary">
-            Subscribe
+            {t("common:pay")}
           </Button>
         </DialogActions>
       </Dialog>

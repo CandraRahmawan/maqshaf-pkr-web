@@ -1,4 +1,4 @@
-import { string, number, func } from "prop-types";
+import { string, number, func, array } from "prop-types";
 import {
   Card,
   CardActionArea,
@@ -8,11 +8,14 @@ import {
   Button,
   Typography,
   useMediaQuery,
+  Snackbar,
 } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { rupiahFormat } from "helpers/formattor.helper";
 
 import { useStyles } from "./style";
+import { useState } from "react";
 
 const CardComponent = (props) => {
   const {
@@ -24,20 +27,27 @@ const CardComponent = (props) => {
     t,
     openModal,
     addCartAction,
+    selectedItems,
   } = props;
+  const [showAlert, setShowAlert] = useState(false);
   const classes = useStyles();
   const isXsDevice = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+  const handleShowAlert = () => setShowAlert(true);
   return (
     <Card className={classes.root} key={title}>
       <CardActionArea
         className={classes.content_background}
         onClick={() => {
           openModal();
-          addCartAction({
-            qty: 1,
-            price,
-            name: title,
-          });
+          addCartAction([
+            {
+              qty: 1,
+              price,
+              currency,
+              name: title,
+              image,
+            },
+          ]);
         }}
       >
         <CardMedia className={classes.media} image={image} title={title} />
@@ -50,7 +60,7 @@ const CardComponent = (props) => {
           {title}
         </Typography>
         <Typography color="textSecondary" variant="h6">
-          {`${currency}. ${rupiahFormat(price)}`}
+          {rupiahFormat(price, currency)}
         </Typography>
       </CardContent>
       <CardActions>
@@ -59,16 +69,36 @@ const CardComponent = (props) => {
           color="primary"
           variant="contained"
           onClick={() =>
-            addCartAction({
-              qty: 1,
-              price,
-              name: title,
-            })
+            addCartAction([
+              ...selectedItems,
+              {
+                image,
+                qty: 1,
+                currency,
+                price,
+                name: title,
+              },
+            ])
           }
         >
-          {isXsDevice ? <AddShoppingCartIcon /> : t("search_product:addToCart")}
+          {isXsDevice ? (
+            <AddShoppingCartIcon onClick={handleShowAlert} />
+          ) : (
+            <span onClick={handleShowAlert}>
+              {t("search_product:addToCart")}}
+            </span>
+          )}
         </Button>
       </CardActions>
+      <Snackbar
+        open={showAlert}
+        autoHideDuration={2000}
+        onClose={() => setShowAlert(false)}
+      >
+        <Alert severity="success" variant="filled">
+          {t("search_product:alert.successAddCart")}
+        </Alert>
+      </Snackbar>
     </Card>
   );
 };
@@ -82,6 +112,7 @@ CardComponent.propTypes = {
   category: string.isRequired,
   openModal: func.isRequired,
   addCartAction: func.isRequired,
+  selectedItems: array.isRequired,
 };
 
 export default CardComponent;

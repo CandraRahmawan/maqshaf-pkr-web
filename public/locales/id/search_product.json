@@ -4,5 +4,11 @@
   "greeting": "Assalamu alaikum, Para Santri",
   "subGreeting": "Mau beli jajan apa hari ini ?",
   "searchPlaceholder": "Cari jajan disini...",
-  "addToCart": "Masukkan ke keranjang"
+  "addToCart": "Masukkan ke keranjang",
+  "modalTotalSummaryTitle": "Total Jajanan",
+  "modalTotalBuy": "Total Bayar",
+  "modalTotalSummaryInfo": "Pastikan Jajanan yang dipilih sudah sesuai",
+  "alert": {
+    "successAddCart": "Jajanan berhasil ditambahkan"
+  }
 }
