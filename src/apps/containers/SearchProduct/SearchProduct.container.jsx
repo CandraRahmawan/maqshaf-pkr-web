@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { object, func } from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { useParams } from "react-router-dom";
 import {
   TextField,
   InputAdornment,
@@ -8,42 +9,36 @@ import {
   Grid,
   Dialog,
   DialogTitle,
-  DialogActions,
-  Button,
-  DialogContent,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
   Fab,
   Badge,
-  Divider,
   IconButton,
   Typography,
-  Box,
 } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { Search, ShoppingCart, Close } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import { Card, Spinner } from "apps/components/ui";
+import { SearchProduct } from "apps/components/core";
 import useSearchProductHook from "hooks/useSearchProduct.hook";
-import { selectCart, clearCart } from "redux/reducers/cartSelected.reducer";
-import { rupiahFormat } from "helpers/formattor.helper";
+import { selectCart } from "redux/reducers/cartSelected.reducer";
 
 import styles from "./style";
 
 const SearchProductContainer = (props) => {
-  const { classes, t } = props;
+  const { classes, t, history } = props;
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const { goodList, isLoading, setKeyword } = useSearchProductHook();
   const { items, total } = useSelector((state) => state.cartSelected);
+  const { action } = useParams();
+  const isIdentityAction = action === "identitas";
 
   const handleOpenModal = () => {
     setOpen(true);
   };
 
   const handleCloseModal = () => {
+    history.replace("/");
     setOpen(false);
   };
 
@@ -125,7 +120,9 @@ const SearchProductContainer = (props) => {
       >
         <DialogTitle disableTypography>
           <Typography variant="h6">
-            {t("search_product:modalTotalSummaryTitle")}
+            {isIdentityAction
+              ? t("search_product:dialogIdentityDataTitle")
+              : t("search_product:dialogTotalSummaryTitle")}
           </Typography>
           <IconButton
             aria-label="close"
@@ -135,50 +132,21 @@ const SearchProductContainer = (props) => {
             <Close />
           </IconButton>
         </DialogTitle>
-        <DialogContent>
-          <p>{t("search_product:modalTotalSummaryInfo")}</p>
-          <List>
-            {items.map((item) => (
-              <>
-                <ListItem>
-                  <ListItemAvatar className={classes.listModalImage}>
-                    <img src={item.image} alt={item.name} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    className={classes.listModalText}
-                    primary={item.name}
-                    secondary={rupiahFormat(item.price, item.currency)}
-                  />
-                </ListItem>
-                <Divider />
-              </>
-            ))}
-          </List>
-          <Box display="flex" justifyContent="space-between">
-            <div>
-              <Typography variant="subtitle1" color="disabled">
-                {t("search_product:modalTotalBuy")}
-              </Typography>
-            </div>
-            <div>
-              <Typography variant="subtitle1">{rupiahFormat(total)}</Typography>
-            </div>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => {
-              dispatch(clearCart());
-              handleCloseModal();
-            }}
-            color="primary"
-          >
-            {t("common:cancel")}
-          </Button>
-          <Button onClick={handleCloseModal} color="primary">
-            {t("common:pay")}
-          </Button>
-        </DialogActions>
+        {isIdentityAction ? (
+          <SearchProduct.IdentityDataDialog
+            t={t}
+            handleCloseModal={handleCloseModal}
+            history={history}
+          />
+        ) : (
+          <SearchProduct.SummaryDialog
+            t={t}
+            handleCloseModal={handleCloseModal}
+            items={items}
+            history={history}
+            total={total}
+          />
+        )}
       </Dialog>
     </div>
   );

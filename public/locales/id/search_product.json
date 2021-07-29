@@ -5,9 +5,10 @@
   "subGreeting": "Mau beli jajan apa hari ini ?",
   "searchPlaceholder": "Cari jajan disini...",
   "addToCart": "Masukkan ke keranjang",
-  "modalTotalSummaryTitle": "Total Jajanan",
-  "modalTotalBuy": "Total Bayar",
-  "modalTotalSummaryInfo": "Pastikan Jajanan yang dipilih sudah sesuai",
+  "dialogTotalSummaryTitle": "Total Jajanan",
+  "dialogTotalBuy": "Total Bayar",
+  "dialogTotalSummaryInfo": "Pastikan Jajanan yang dipilih sudah sesuai",
+  "dialogIdentityDataTitle": "Scan QRCode Data Santri",
   "alert": {
     "successAddCart": "Jajanan berhasil ditambahkan"
   }

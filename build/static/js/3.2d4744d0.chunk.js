@@ -1,4 +1,4 @@
-/*! For license information please see 3.7c126b33.chunk.js.LICENSE.txt */
+/*! For license information please see 3.2d4744d0.chunk.js.LICENSE.txt */
 (this["webpackJsonpmaqshaf-pkr-web"] =
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
   [3],
@@ -308,7 +308,7 @@
         l = n(1),
         c = n(46),
         f = n.n(c),
-        d = (n(35), n(8)),
+        d = (n(36), n(8)),
         p =
           (n(23),
           (function (e) {
@@ -1535,7 +1535,7 @@
     },
     function (e, t, n) {
       "use strict";
-      var r = n(35),
+      var r = n(36),
         i = {
           childContextTypes: !0,
           contextType: !0,
@@ -1859,7 +1859,7 @@
             return s()(g, n), g;
           };
         },
-        p = n(33);
+        p = n(34);
       t.a = function (e, t) {
         return d(e, Object(r.a)({ defaultTheme: p.a }, t));
       };
@@ -1881,69 +1881,20 @@
     },
     function (e, t, n) {
       "use strict";
-      n.d(t, "a", function () {
-        return a;
-      });
-      var r = n(28);
-      var i = n(64),
-        o = n(38);
-      function a(e) {
-        return (
-          (function (e) {
-            if (Array.isArray(e)) return Object(r.a)(e);
-          })(e) ||
-          Object(i.a)(e) ||
-          Object(o.a)(e) ||
-          (function () {
-            throw new TypeError(
-              "Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
-            );
-          })()
-        );
-      }
-    },
-    function (e, t, n) {
-      "use strict";
-      var r = n(87);
-      t.a = function (e, t) {
-        return t ? Object(r.a)(e, t, { clone: !1 }) : e;
-      };
-    },
-    function (e, t, n) {
-      "use strict";
-      var r = n(72),
-        i = Object(r.a)();
-      t.a = i;
-    },
-    function (e, t, n) {
-      "use strict";
-      n.d(t, "a", function () {
-        return o;
-      });
-      var r = n(2),
-        i = console || { error: r.i, warn: r.i, log: r.i };
-      function o() {
-        return i;
-      }
-    },
-    function (e, t, n) {
-      "use strict";
-      e.exports = n(83);
-    },
-    ,
-    function (e, t, n) {
-      "use strict";
-      n.d(t, "c", function () {
+      n.d(t, "d", function () {
         return u;
       }),
-        n.d(t, "a", function () {
+        n.d(t, "c", function () {
           return l;
         }),
-        n.d(t, "b", function () {
+        n.d(t, "a", function () {
           return c;
         }),
-        n.d(t, "d", function () {
+        n.d(t, "b", function () {
           return f;
+        }),
+        n.d(t, "e", function () {
+          return d;
         });
       var r = n(73);
       function i(e) {
@@ -2054,7 +2005,12 @@
           Number((0.2126 * t[0] + 0.7152 * t[1] + 0.0722 * t[2]).toFixed(3))
         );
       }
-      function l(e, t) {
+      function l(e) {
+        var t =
+          arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0.15;
+        return s(e) > 0.5 ? f(e, t) : d(e, t);
+      }
+      function c(e, t) {
         return (
           (e = o(e)),
           (t = i(t)),
@@ -2063,14 +2019,14 @@
           a(e)
         );
       }
-      function c(e, t) {
+      function f(e, t) {
         if (((e = o(e)), (t = i(t)), -1 !== e.type.indexOf("hsl")))
           e.values[2] *= 1 - t;
         else if (-1 !== e.type.indexOf("rgb"))
           for (var n = 0; n < 3; n += 1) e.values[n] *= 1 - t;
         return a(e);
       }
-      function f(e, t) {
+      function d(e, t) {
         if (((e = o(e)), (t = i(t)), -1 !== e.type.indexOf("hsl")))
           e.values[2] += (100 - e.values[2]) * t;
         else if (-1 !== e.type.indexOf("rgb"))
@@ -2078,6 +2034,58 @@
         return a(e);
       }
     },
+    function (e, t, n) {
+      "use strict";
+      n.d(t, "a", function () {
+        return a;
+      });
+      var r = n(28);
+      var i = n(64),
+        o = n(38);
+      function a(e) {
+        return (
+          (function (e) {
+            if (Array.isArray(e)) return Object(r.a)(e);
+          })(e) ||
+          Object(i.a)(e) ||
+          Object(o.a)(e) ||
+          (function () {
+            throw new TypeError(
+              "Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+            );
+          })()
+        );
+      }
+    },
+    function (e, t, n) {
+      "use strict";
+      var r = n(87);
+      t.a = function (e, t) {
+        return t ? Object(r.a)(e, t, { clone: !1 }) : e;
+      };
+    },
+    function (e, t, n) {
+      "use strict";
+      var r = n(72),
+        i = Object(r.a)();
+      t.a = i;
+    },
+    function (e, t, n) {
+      "use strict";
+      n.d(t, "a", function () {
+        return o;
+      });
+      var r = n(2),
+        i = console || { error: r.i, warn: r.i, log: r.i };
+      function o() {
+        return i;
+      }
+    },
+    function (e, t, n) {
+      "use strict";
+      e.exports = n(83);
+    },
+    ,
     function (e, t, n) {
       "use strict";
       n.d(t, "a", function () {
@@ -3610,7 +3618,7 @@
             );
           };
         t.a = f;
-      }.call(this, n(51)));
+      }.call(this, n(52)));
     },
     function (e, t, n) {
       var r = n(84);
@@ -6709,18 +6717,6 @@
         );
       }
     },
-    function (e, t) {
-      var n;
-      n = (function () {
-        return this;
-      })();
-      try {
-        n = n || new Function("return this")();
-      } catch (r) {
-        "object" === typeof window && (n = window);
-      }
-      e.exports = n;
-    },
     function (e, t, n) {
       "use strict";
       n.d(t, "b", function () {
@@ -6780,6 +6776,18 @@
           return Math.round(10 * (4 + 15 * Math.pow(t, 0.25) + t / 5));
         },
       };
+    },
+    function (e, t) {
+      var n;
+      n = (function () {
+        return this;
+      })();
+      try {
+        n = n || new Function("return this")();
+      } catch (r) {
+        "object" === typeof window && (n = window);
+      }
+      e.exports = n;
     },
     function (e, t) {
       (e.exports = function (e, t, n) {
@@ -6949,7 +6957,7 @@
         var f = n || o;
         return i.a.createElement(f.Provider, { value: u }, a);
       };
-      n(1), n(8), n(23), n(35);
+      n(1), n(8), n(23), n(36);
       function d() {
         return Object(r.useContext)(o);
       }
@@ -7067,9 +7075,9 @@
       n.d(t, "a", function () {
         return a;
       });
-      n(31), n(1);
+      n(32), n(1);
       var r = n(16),
-        i = (n(12), n(32), { xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920 }),
+        i = (n(12), n(33), { xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920 }),
         o = {
           keys: ["xs", "sm", "md", "lg", "xl"],
           up: function (e) {
@@ -7674,7 +7682,7 @@
               : void 0
           );
         };
-      }.call(this, n(51)));
+      }.call(this, n(52)));
     },
     function (e, t) {
       (e.exports = function (e, t) {
@@ -8138,7 +8146,7 @@
           A400: "#00e676",
           A700: "#00c853",
         },
-        b = n(37),
+        b = n(31),
         w = {
           text: {
             primary: "rgba(0, 0, 0, 0.87)",
@@ -8193,7 +8201,7 @@
           (e.hasOwnProperty(n)
             ? (e[t] = e[n])
             : "light" === t
-            ? (e.light = Object(b.d)(e.main, i))
+            ? (e.light = Object(b.e)(e.main, i))
             : "dark" === t && (e.dark = Object(b.b)(e.main, o)));
       }
       function O(e) {
@@ -8227,7 +8235,7 @@
             "tonalOffset",
           ]);
         function F(e) {
-          return Object(b.c)(e, k.text.primary) >= L
+          return Object(b.d)(e, k.text.primary) >= L
             ? k.text.primary
             : w.text.primary;
         }
@@ -8456,7 +8464,7 @@
           n
         );
       }
-      var A = n(52),
+      var A = n(51),
         M = n(58);
       function F() {
         for (
@@ -18749,7 +18757,7 @@
             },
           };
         },
-        tt = n(31),
+        tt = n(32),
         nt = "",
         rt = "",
         it = "",
@@ -19426,7 +19434,7 @@
       "use strict";
       var r = n(1),
         i = n(89),
-        o = n(33);
+        o = n(34);
       t.a = function (e) {
         var t =
           arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
@@ -19831,7 +19839,7 @@
         i = n(2),
         o = n(22),
         a = n(7),
-        u = n(34),
+        u = n(35),
         s = n(17),
         l = (function () {
           function e(e) {
@@ -20926,7 +20934,7 @@
       });
       var r = n(50),
         i = n(57),
-        o = n(32);
+        o = n(33);
       var a = { m: "margin", p: "padding" },
         u = {
           t: "Top",
@@ -21033,4 +21041,4 @@
     },
   ],
 ]);
-//# sourceMappingURL=3.7c126b33.chunk.js.map
+//# sourceMappingURL=3.2d4744d0.chunk.js.map

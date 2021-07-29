@@ -15,16 +15,6 @@ const styles = (theme) => ({
     right: theme.spacing(3),
     zIndex: 1,
   },
-  listModalImage: {
-    marginRight: 12,
-    "& img": {
-      width: 50,
-      height: 50,
-    },
-  },
-  listModalText: {
-    color: theme.blackColor,
-  },
   closeButton: {
     position: "absolute",
     right: theme.spacing(1),

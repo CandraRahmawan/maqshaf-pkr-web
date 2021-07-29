@@ -2,7 +2,7 @@ import { lazy } from "react";
 
 const routes = [
   {
-    path: "/",
+    path: "/:action(identitas|pin)?",
     exact: true,
     component: lazy(() => import("views/shop/SearchProduct.view")),
   },
