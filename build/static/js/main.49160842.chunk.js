@@ -1,19 +1,22 @@
 (this["webpackJsonpmaqshaf-pkr-web"] =
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
-  [1],
+  [3],
   {
-    37: function (e, t, n) {
+    35: function (e, t, n) {
       "use strict";
-      n.d(t, "a", function () {
-        return u;
+      n.d(t, "b", function () {
+        return d;
       }),
-        n.d(t, "b", function () {
+        n.d(t, "c", function () {
           return s;
+        }),
+        n.d(t, "a", function () {
+          return u;
         });
-      var r = n(0),
-        c = n(107),
-        a = n(109),
-        o = n(105),
+      var c = n(0),
+        r = n(108),
+        a = n(110),
+        o = n(106),
         i = n(4),
         l = Object(o.a)({
           root: {
@@ -25,9 +28,9 @@
         s = function (e) {
           var t = e.label,
             n = l();
-          return Object(i.jsx)(c.a, {
+          return Object(i.jsx)(r.a, {
             container: !0,
-            children: Object(i.jsxs)(c.a, {
+            children: Object(i.jsxs)(r.a, {
               className: n.root,
               item: !0,
               xs: 12,
@@ -38,11 +41,20 @@
             }),
           });
         },
-        u = Object(r.lazy)(function () {
-          return Promise.all([n.e(0), n.e(5), n.e(12)]).then(n.bind(null, 253));
+        u = {
+          Floating: Object(c.lazy)(function () {
+            return Promise.all([n.e(0), n.e(2), n.e(15)]).then(
+              n.bind(null, 282)
+            );
+          }),
+        },
+        d = Object(c.lazy)(function () {
+          return Promise.all([n.e(0), n.e(2), n.e(8), n.e(14)]).then(
+            n.bind(null, 310)
+          );
         });
     },
-    54: function (e, t, n) {
+    52: function (e, t, n) {
       "use strict";
       n.d(t, "c", function () {
         return o;
@@ -50,8 +62,8 @@
         n.d(t, "a", function () {
           return i;
         });
-      var r = n(42),
-        c = Object(r.b)({
+      var c = n(42),
+        r = Object(c.b)({
           name: "cartSelected",
           initialState: { total: 0, qty: 0, items: [] },
           reducers: {
@@ -78,37 +90,36 @@
             },
           },
         }),
-        a = c.actions,
+        a = r.actions,
         o = a.selectCart,
         i = a.clearCart;
-      t.b = c.reducer;
+      t.b = r.reducer;
     },
-    85: function (e, t, n) {},
-    86: function (e, t, n) {
+    86: function (e, t, n) {},
+    87: function (e, t, n) {
       "use strict";
       n.r(t);
-      var r = n(0),
-        c = n.n(r),
+      var c = n(0),
+        r = n.n(c),
         a = n(30),
         o = n.n(a),
-        i = n(110),
-        l = n(104),
-        s = n(72),
+        i = n(111),
+        l = n(105),
+        s = n(73),
         u = n(4),
         d = Object(s.a)({
           primaryColor: "#00a8ff",
           orangeColor: "#ff9100",
           whiteColor: "#fff",
-          blackColor: "#000",
-          color: { white: "#fff" },
+          color: { white: "#fff", black: "#000" },
         }),
         j = function (e) {
           var t = e.children;
           return Object(u.jsx)(l.a, { theme: d, children: t });
         },
-        b = n(111),
-        f = n(97),
-        h = n(66);
+        b = n(112),
+        f = n(98),
+        h = n(67);
       function m(e) {
         var t = e.children,
           n = new b.a({
@@ -130,7 +141,7 @@
       }
       var O = n(51),
         p = n(42),
-        x = n(54),
+        x = n(52),
         g = Object(p.a)({
           reducer: { cartSelected: x.b },
           devTools: Boolean(localStorage.getItem("redux-debug")),
@@ -139,13 +150,13 @@
         var t = e.children;
         return Object(u.jsx)(O.a, { store: g, children: t });
       }
-      var w = n(37),
+      var w = n(35),
         y = n(47),
-        C = n(61),
-        S = n(67);
+        S = n(62),
+        k = n(68);
       y.a
-        .use(S.a)
-        .use(C.e)
+        .use(k.a)
+        .use(S.e)
         .init({
           fallbackLng: "id",
           lng: "id",
@@ -153,36 +164,36 @@
           ns: ["common"],
           defaultNS: "common",
         });
-      var k = y.a,
-        q = n(71),
-        F = n(62),
-        B = n(6),
-        I = [
+      var C = y.a,
+        q = n(72),
+        F = n(63),
+        P = n(6),
+        B = [
           {
             path: "/:action(identitas|pin)?",
             exact: !0,
-            component: Object(r.lazy)(function () {
-              return Promise.all([n.e(0), n.e(4), n.e(9)]).then(
-                n.bind(null, 245)
+            component: Object(c.lazy)(function () {
+              return Promise.all([n.e(0), n.e(7), n.e(12)]).then(
+                n.bind(null, 301)
               );
             }),
           },
         ];
-      function P() {
+      function I() {
         return Object(u.jsx)(F.a, {
-          children: Object(u.jsx)(B.c, {
-            children: I.map(function (e, t) {
+          children: Object(u.jsx)(P.c, {
+            children: B.map(function (e, t) {
               var n = e.path,
-                c = e.exact,
+                r = e.exact,
                 a = e.component;
               return Object(u.jsx)(
-                B.a,
+                P.a,
                 {
                   path: n,
-                  exact: c,
+                  exact: r,
                   render: function (e) {
-                    return Object(u.jsx)(r.Suspense, {
-                      fallback: Object(u.jsx)(w.b, {
+                    return Object(u.jsx)(c.Suspense, {
+                      fallback: Object(u.jsx)(w.c, {
                         label: "Sedang memuat data...",
                       }),
                       children: Object(u.jsx)(a, Object(q.a)({}, e)),
@@ -206,30 +217,30 @@
         e &&
           e instanceof Function &&
           n
-            .e(13)
-            .then(n.bind(null, 237))
+            .e(16)
+            .then(n.bind(null, 292))
             .then(function (t) {
               var n = t.getCLS,
-                r = t.getFID,
-                c = t.getFCP,
+                c = t.getFID,
+                r = t.getFCP,
                 a = t.getLCP,
                 o = t.getTTFB;
-              n(e), r(e), c(e), a(e), o(e);
+              n(e), c(e), r(e), a(e), o(e);
             });
       };
-      n(85);
+      n(86);
       o.a.render(
-        Object(u.jsx)(c.a.StrictMode, {
-          children: Object(u.jsx)(r.Suspense, {
-            fallback: Object(u.jsx)(w.b, {
+        Object(u.jsx)(r.a.StrictMode, {
+          children: Object(u.jsx)(c.Suspense, {
+            fallback: Object(u.jsx)(w.c, {
               label: "Sedang memnuat halaman...",
             }),
             children: Object(u.jsx)(i.a, {
-              i18n: k,
+              i18n: C,
               children: Object(u.jsx)(v, {
                 children: Object(u.jsx)(j, {
                   children: Object(u.jsx)(m, {
-                    children: Object(u.jsx)(P, {}),
+                    children: Object(u.jsx)(I, {}),
                   }),
                 }),
               }),
@@ -249,6 +260,6 @@
         T();
     },
   },
-  [[86, 2, 3]],
+  [[87, 4, 5]],
 ]);
-//# sourceMappingURL=main.d8c6471b.chunk.js.map
+//# sourceMappingURL=main.49160842.chunk.js.map

@@ -1,11 +1,11 @@
-/*! For license information please see 3.a8c74137.chunk.js.LICENSE.txt */
+/*! For license information please see 5.8248165d.chunk.js.LICENSE.txt */
 (this["webpackJsonpmaqshaf-pkr-web"] =
   this["webpackJsonpmaqshaf-pkr-web"] || []).push([
-  [3],
+  [5],
   [
     function (e, t, n) {
       "use strict";
-      e.exports = n(76);
+      e.exports = n(77);
     },
     function (e, t, n) {
       "use strict";
@@ -42,41 +42,44 @@
         n.d(t, "a", function () {
           return s;
         }),
-        n.d(t, "q", function () {
+        n.d(t, "r", function () {
           return l;
         }),
-        n.d(t, "k", function () {
+        n.d(t, "l", function () {
           return c;
         }),
-        n.d(t, "j", function () {
+        n.d(t, "k", function () {
           return f;
         }),
-        n.d(t, "h", function () {
+        n.d(t, "j", function () {
           return d;
         }),
-        n.d(t, "g", function () {
+        n.d(t, "h", function () {
           return p;
         }),
-        n.d(t, "d", function () {
+        n.d(t, "g", function () {
           return h;
         }),
-        n.d(t, "c", function () {
+        n.d(t, "d", function () {
           return v;
         }),
-        n.d(t, "l", function () {
+        n.d(t, "c", function () {
           return y;
         }),
         n.d(t, "m", function () {
-          return m;
+          return g;
         }),
-        n.d(t, "o", function () {
+        n.d(t, "n", function () {
           return b;
         }),
         n.d(t, "p", function () {
-          return O;
+          return w;
         }),
-        n.d(t, "n", function () {
+        n.d(t, "q", function () {
           return S;
+        }),
+        n.d(t, "o", function () {
+          return E;
         });
       var r = n(3),
         i = "undefined" === typeof window;
@@ -94,16 +97,25 @@
         return Math.max(e + (t || 0) - Date.now(), 0);
       }
       function c(e, t, n) {
-        return x(e)
+        return O(e)
           ? "function" === typeof t
             ? Object(r.a)({}, n, { queryKey: e, queryFn: t })
             : Object(r.a)({}, t, { queryKey: e })
           : e;
       }
       function f(e, t, n) {
-        return x(e) ? [Object(r.a)({}, t, { queryKey: e }), n] : [e || {}, t];
+        return O(e)
+          ? "function" === typeof t
+            ? Object(r.a)({}, n, { mutationKey: e, mutationFn: t })
+            : Object(r.a)({}, t, { mutationKey: e })
+          : "function" === typeof e
+          ? Object(r.a)({}, t, { mutationFn: e })
+          : Object(r.a)({}, e);
       }
-      function d(e, t) {
+      function d(e, t, n) {
+        return O(e) ? [Object(r.a)({}, t, { queryKey: e }), n] : [e || {}, t];
+      }
+      function p(e, t) {
         var n = e.active,
           r = e.exact,
           i = e.fetching,
@@ -111,10 +123,10 @@
           a = e.predicate,
           u = e.queryKey,
           s = e.stale;
-        if (x(u))
+        if (O(u))
           if (r) {
-            if (t.queryHash !== h(u, t.options)) return !1;
-          } else if (!y(t.queryKey, u)) return !1;
+            if (t.queryHash !== v(u, t.options)) return !1;
+          } else if (!g(t.queryKey, u)) return !1;
         var l = (function (e, t) {
           return (!0 === e && !0 === t) || (null == e && null == t)
             ? "all"
@@ -136,32 +148,32 @@
           !(a && !a(t))
         );
       }
-      function p(e, t) {
+      function h(e, t) {
         var n = e.exact,
           r = e.fetching,
           i = e.predicate,
           o = e.mutationKey;
-        if (x(o)) {
+        if (O(o)) {
           if (!t.options.mutationKey) return !1;
           if (n) {
-            if (v(t.options.mutationKey) !== v(o)) return !1;
-          } else if (!y(t.options.mutationKey, o)) return !1;
+            if (y(t.options.mutationKey) !== y(o)) return !1;
+          } else if (!g(t.options.mutationKey, o)) return !1;
         }
         return (
           ("boolean" !== typeof r || ("loading" === t.state.status) === r) &&
           !(i && !i(t))
         );
       }
-      function h(e, t) {
-        return ((null == t ? void 0 : t.queryKeyHashFn) || v)(e);
+      function v(e, t) {
+        return ((null == t ? void 0 : t.queryKeyHashFn) || y)(e);
       }
-      function v(e) {
+      function y(e) {
         var t,
           n = s(e);
         return (
           (t = n),
           JSON.stringify(t, function (e, t) {
-            return w(t)
+            return k(t)
               ? Object.keys(t)
                   .sort()
                   .reduce(function (e, n) {
@@ -171,23 +183,23 @@
           })
         );
       }
-      function y(e, t) {
-        return g(s(e), s(t));
-      }
       function g(e, t) {
+        return m(s(e), s(t));
+      }
+      function m(e, t) {
         return (
           e === t ||
           (typeof e === typeof t &&
             !(!e || !t || "object" !== typeof e || "object" !== typeof t) &&
             !Object.keys(t).some(function (n) {
-              return !g(e[n], t[n]);
+              return !m(e[n], t[n]);
             }))
         );
       }
-      function m(e, t) {
+      function b(e, t) {
         if (e === t) return e;
         var n = Array.isArray(e) && Array.isArray(t);
-        if (n || (w(e) && w(t))) {
+        if (n || (k(e) && k(t))) {
           for (
             var r = n ? e.length : Object.keys(e).length,
               i = n ? t : Object.keys(t),
@@ -199,36 +211,36 @@
             s++
           ) {
             var l = n ? s : i[s];
-            (a[l] = m(e[l], t[l])), a[l] === e[l] && u++;
+            (a[l] = b(e[l], t[l])), a[l] === e[l] && u++;
           }
           return r === o && u === r ? e : a;
         }
         return t;
       }
-      function b(e, t) {
+      function w(e, t) {
         if ((e && !t) || (t && !e)) return !1;
         for (var n in e) if (e[n] !== t[n]) return !1;
         return !0;
       }
-      function w(e) {
-        if (!k(e)) return !1;
+      function k(e) {
+        if (!x(e)) return !1;
         var t = e.constructor;
         if ("undefined" === typeof t) return !0;
         var n = t.prototype;
-        return !!k(n) && !!n.hasOwnProperty("isPrototypeOf");
-      }
-      function k(e) {
-        return "[object Object]" === Object.prototype.toString.call(e);
+        return !!x(n) && !!n.hasOwnProperty("isPrototypeOf");
       }
       function x(e) {
-        return "string" === typeof e || Array.isArray(e);
+        return "[object Object]" === Object.prototype.toString.call(e);
       }
       function O(e) {
+        return "string" === typeof e || Array.isArray(e);
+      }
+      function S(e) {
         return new Promise(function (t) {
           setTimeout(t, e);
         });
       }
-      function S(e) {
+      function E(e) {
         Promise.resolve()
           .then(e)
           .catch(function (e) {
@@ -258,7 +270,7 @@
     },
     function (e, t, n) {
       "use strict";
-      e.exports = n(80);
+      e.exports = n(81);
     },
     function (e, t, n) {
       "use strict";
@@ -311,7 +323,7 @@
         l = n(1),
         c = n(46),
         f = n.n(c),
-        d = (n(36), n(8)),
+        d = (n(37), n(8)),
         p =
           (n(23),
           (function (e) {
@@ -551,7 +563,7 @@
               var t = this;
               this.transactions
                 ? this.queue.push(e)
-                : Object(r.n)(function () {
+                : Object(r.o)(function () {
                     t.notifyFn(e);
                   });
             }),
@@ -574,7 +586,7 @@
                 t = this.queue;
               (this.queue = []),
                 t.length &&
-                  Object(r.n)(function () {
+                  Object(r.o)(function () {
                     e.batchNotifyFn(function () {
                       t.forEach(function (t) {
                         e.notifyFn(t);
@@ -646,7 +658,7 @@
       };
     },
     function (e, t, n) {
-      e.exports = n(81)();
+      e.exports = n(82)();
     },
     ,
     function (e, t, n) {
@@ -1432,7 +1444,7 @@
                     !d && y
                       ? (f.failureCount++,
                         null == e.onFail || e.onFail(f.failureCount, t),
-                        Object(o.p)(v)
+                        Object(o.q)(v)
                           .then(function () {
                             if (!r.a.isFocused() || !i.a.isOnline())
                               return new Promise(function (t) {
@@ -1542,7 +1554,7 @@
     },
     function (e, t, n) {
       "use strict";
-      var r = n(36),
+      var r = n(37),
         i = {
           childContextTypes: !0,
           contextType: !0,
@@ -1820,9 +1832,9 @@
         a = n.n(o),
         u = (n(12), n(23)),
         s = n.n(u),
-        l = n(89),
-        c = n(108),
-        f = n(88),
+        l = n(90),
+        c = n(109),
+        f = n(89),
         d = function (e) {
           var t =
             arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
@@ -1884,7 +1896,7 @@
             console.error(t);
           }
       })(),
-        (e.exports = n(77));
+        (e.exports = n(78));
     },
     function (e, t, n) {
       "use strict";
@@ -1903,7 +1915,7 @@
         n.d(t, "e", function () {
           return d;
         });
-      var r = n(73);
+      var r = n(74);
       function i(e) {
         var t =
             arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : 0,
@@ -2043,7 +2055,7 @@
     },
     function (e, t, n) {
       "use strict";
-      var r = n(87);
+      var r = n(88);
       t.a = function (e, t) {
         return t ? Object(r.a)(e, t, { clone: !1 }) : e;
       };
@@ -2054,7 +2066,7 @@
         return a;
       });
       var r = n(28);
-      var i = n(65),
+      var i = n(66),
         o = n(38);
       function a(e) {
         return (
@@ -2073,10 +2085,11 @@
     },
     function (e, t, n) {
       "use strict";
-      var r = n(72),
+      var r = n(73),
         i = Object(r.a)();
       t.a = i;
     },
+    ,
     function (e, t, n) {
       "use strict";
       n.d(t, "a", function () {
@@ -2090,9 +2103,8 @@
     },
     function (e, t, n) {
       "use strict";
-      e.exports = n(83);
+      e.exports = n(84);
     },
-    ,
     function (e, t, n) {
       "use strict";
       n.d(t, "a", function () {
@@ -3625,10 +3637,10 @@
             );
           };
         t.a = f;
-      }.call(this, n(55)));
+      }.call(this, n(53)));
     },
     function (e, t, n) {
-      var r = n(84);
+      var r = n(85);
       (e.exports = p),
         (e.exports.parse = o),
         (e.exports.compile = function (e, t) {
@@ -3860,7 +3872,7 @@
       }
       var a = n(18),
         u = n(10),
-        s = n(60),
+        s = n(61),
         l = n.n(s),
         c = n(14);
       function f(e, t) {
@@ -6670,7 +6682,7 @@
       n.d(t, "a", function () {
         return i;
       });
-      var r = n(73);
+      var r = n(74);
       function i(e) {
         if ("string" !== typeof e) throw new Error(Object(r.a)(7));
         return e.charAt(0).toUpperCase() + e.slice(1);
@@ -6828,7 +6840,7 @@
         var f = n || o;
         return i.a.createElement(f.Provider, { value: u }, a);
       };
-      n(1), n(8), n(23), n(36);
+      n(1), n(8), n(23), n(37);
       function d() {
         return Object(r.useContext)(o);
       }
@@ -6940,14 +6952,27 @@
         k = n(30);
       (b = k.unstable_batchedUpdates), (a = b);
     },
+    ,
+    function (e, t) {
+      var n;
+      n = (function () {
+        return this;
+      })();
+      try {
+        n = n || new Function("return this")();
+      } catch (r) {
+        "object" === typeof window && (n = window);
+      }
+      e.exports = n;
+    },
     function (e, t, n) {
       "use strict";
       n.d(t, "a", function () {
         return a;
       });
-      var r = n(63);
+      var r = n(64);
       var i = n(38),
-        o = n(64);
+        o = n(65);
       function a(e, t) {
         return (
           Object(r.a)(e) ||
@@ -7047,19 +7072,6 @@
         },
       };
     },
-    ,
-    function (e, t) {
-      var n;
-      n = (function () {
-        return this;
-      })();
-      try {
-        n = n || new Function("return this")();
-      } catch (r) {
-        "object" === typeof window && (n = window);
-      }
-      e.exports = n;
-    },
     function (e, t, n) {
       "use strict";
       n.d(t, "a", function () {
@@ -7120,6 +7132,231 @@
         tooltip: 1500,
       };
     },
+    function (e, t, n) {
+      "use strict";
+      n.d(t, "a", function () {
+        return s;
+      }),
+        n.d(t, "b", function () {
+          return l;
+        });
+      var r = n(3),
+        i = n(36),
+        o = n(7),
+        a = n(17),
+        u = n(2),
+        s = (function () {
+          function e(e) {
+            (this.options = Object(r.a)({}, e.defaultOptions, e.options)),
+              (this.mutationId = e.mutationId),
+              (this.mutationCache = e.mutationCache),
+              (this.observers = []),
+              (this.state = e.state || l());
+          }
+          var t = e.prototype;
+          return (
+            (t.setState = function (e) {
+              this.dispatch({ type: "setState", state: e });
+            }),
+            (t.addObserver = function (e) {
+              -1 === this.observers.indexOf(e) && this.observers.push(e);
+            }),
+            (t.removeObserver = function (e) {
+              this.observers = this.observers.filter(function (t) {
+                return t !== e;
+              });
+            }),
+            (t.cancel = function () {
+              return this.retryer
+                ? (this.retryer.cancel(),
+                  this.retryer.promise.then(u.i).catch(u.i))
+                : Promise.resolve();
+            }),
+            (t.continue = function () {
+              return this.retryer
+                ? (this.retryer.continue(), this.retryer.promise)
+                : this.execute();
+            }),
+            (t.execute = function () {
+              var e,
+                t = this,
+                n = "loading" === this.state.status,
+                r = Promise.resolve();
+              return (
+                n ||
+                  (this.dispatch({
+                    type: "loading",
+                    variables: this.options.variables,
+                  }),
+                  (r = r
+                    .then(function () {
+                      return null == t.options.onMutate
+                        ? void 0
+                        : t.options.onMutate(t.state.variables);
+                    })
+                    .then(function (e) {
+                      e !== t.state.context &&
+                        t.dispatch({
+                          type: "loading",
+                          context: e,
+                          variables: t.state.variables,
+                        });
+                    }))),
+                r
+                  .then(function () {
+                    return t.executeMutation();
+                  })
+                  .then(function (t) {
+                    e = t;
+                  })
+                  .then(function () {
+                    return null == t.options.onSuccess
+                      ? void 0
+                      : t.options.onSuccess(
+                          e,
+                          t.state.variables,
+                          t.state.context
+                        );
+                  })
+                  .then(function () {
+                    return null == t.options.onSettled
+                      ? void 0
+                      : t.options.onSettled(
+                          e,
+                          null,
+                          t.state.variables,
+                          t.state.context
+                        );
+                  })
+                  .then(function () {
+                    return t.dispatch({ type: "success", data: e }), e;
+                  })
+                  .catch(function (e) {
+                    return (
+                      t.mutationCache.config.onError &&
+                        t.mutationCache.config.onError(
+                          e,
+                          t.state.variables,
+                          t.state.context,
+                          t
+                        ),
+                      Object(i.a)().error(e),
+                      Promise.resolve()
+                        .then(function () {
+                          return null == t.options.onError
+                            ? void 0
+                            : t.options.onError(
+                                e,
+                                t.state.variables,
+                                t.state.context
+                              );
+                        })
+                        .then(function () {
+                          return null == t.options.onSettled
+                            ? void 0
+                            : t.options.onSettled(
+                                void 0,
+                                e,
+                                t.state.variables,
+                                t.state.context
+                              );
+                        })
+                        .then(function () {
+                          throw (t.dispatch({ type: "error", error: e }), e);
+                        })
+                    );
+                  })
+              );
+            }),
+            (t.executeMutation = function () {
+              var e,
+                t = this;
+              return (
+                (this.retryer = new a.a({
+                  fn: function () {
+                    return t.options.mutationFn
+                      ? t.options.mutationFn(t.state.variables)
+                      : Promise.reject("No mutationFn found");
+                  },
+                  onFail: function () {
+                    t.dispatch({ type: "failed" });
+                  },
+                  onPause: function () {
+                    t.dispatch({ type: "pause" });
+                  },
+                  onContinue: function () {
+                    t.dispatch({ type: "continue" });
+                  },
+                  retry: null != (e = this.options.retry) ? e : 0,
+                  retryDelay: this.options.retryDelay,
+                })),
+                this.retryer.promise
+              );
+            }),
+            (t.dispatch = function (e) {
+              var t = this;
+              (this.state = (function (e, t) {
+                switch (t.type) {
+                  case "failed":
+                    return Object(r.a)({}, e, {
+                      failureCount: e.failureCount + 1,
+                    });
+                  case "pause":
+                    return Object(r.a)({}, e, { isPaused: !0 });
+                  case "continue":
+                    return Object(r.a)({}, e, { isPaused: !1 });
+                  case "loading":
+                    return Object(r.a)({}, e, {
+                      context: t.context,
+                      data: void 0,
+                      error: null,
+                      isPaused: !1,
+                      status: "loading",
+                      variables: t.variables,
+                    });
+                  case "success":
+                    return Object(r.a)({}, e, {
+                      data: t.data,
+                      error: null,
+                      status: "success",
+                      isPaused: !1,
+                    });
+                  case "error":
+                    return Object(r.a)({}, e, {
+                      data: void 0,
+                      error: t.error,
+                      failureCount: e.failureCount + 1,
+                      isPaused: !1,
+                      status: "error",
+                    });
+                  case "setState":
+                    return Object(r.a)({}, e, t.state);
+                  default:
+                    return e;
+                }
+              })(this.state, e)),
+                o.a.batch(function () {
+                  t.observers.forEach(function (t) {
+                    t.onMutationUpdate(e);
+                  }),
+                    t.mutationCache.notify(t);
+                });
+            }),
+            e
+          );
+        })();
+      function l() {
+        return {
+          context: void 0,
+          data: void 0,
+          error: null,
+          failureCount: 0,
+          isPaused: !1,
+          status: "idle",
+          variables: void 0,
+        };
+      }
+    },
     function (e, t) {
       function n(t) {
         return (
@@ -7165,9 +7402,9 @@
         n.d(t, "e", function () {
           return m;
         });
-      var r = n(69),
+      var r = n(70),
         i = n.n(r),
-        o = n(70),
+        o = n(71),
         a = n.n(o),
         u = n(57),
         s = n.n(u),
@@ -7488,7 +7725,7 @@
     function (e, t, n) {
       "use strict";
       var r = n(24),
-        i = n(68);
+        i = n(69);
       function o(e, t) {
         if (!(e instanceof t))
           throw new TypeError("Cannot call a class as a function");
@@ -7870,7 +8107,7 @@
               : void 0
           );
         };
-      }.call(this, n(55)));
+      }.call(this, n(53)));
     },
     function (e, t) {
       (e.exports = function (e, t) {
@@ -7938,7 +8175,7 @@
       "use strict";
       var r = n(19),
         i = n(5),
-        o = n(87),
+        o = n(88),
         a = n(1),
         u = ["xs", "sm", "md", "lg", "xl"];
       function s(e) {
@@ -8039,7 +8276,7 @@
           n
         );
       }
-      var c = n(73),
+      var c = n(74),
         f = { black: "#000", white: "#fff" },
         d = {
           50: "#fafafa",
@@ -8440,7 +8677,7 @@
           R(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8),
         ],
         N = { borderRadius: 4 },
-        L = n(112);
+        L = n(113);
       function T() {
         var e =
           arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 8;
@@ -8471,7 +8708,7 @@
           n
         );
       }
-      var A = n(53),
+      var A = n(55),
         M = n(59);
       function F() {
         for (
@@ -8939,7 +9176,7 @@
       "use strict";
       var r = n(0),
         i = n(44),
-        o = n(78);
+        o = n(79);
       function a(e) {
         for (
           var t = "https://reactjs.org/docs/error-decoder.html?invariant=" + e,
@@ -16522,7 +16759,7 @@
     },
     function (e, t, n) {
       "use strict";
-      e.exports = n(79);
+      e.exports = n(80);
     },
     function (e, t, n) {
       "use strict";
@@ -16875,7 +17112,7 @@
     },
     function (e, t, n) {
       "use strict";
-      var r = n(82);
+      var r = n(83);
       function i() {}
       function o() {}
       (o.resetWarningCache = i),
@@ -18323,7 +18560,7 @@
         we = function (e) {
           return new ge(e);
         },
-        ke = (we(), n(106)),
+        ke = (we(), n(107)),
         xe = {
           set: function (e, t, n, r) {
             var i = e.get(t);
@@ -18337,7 +18574,7 @@
             e.get(t).delete(n);
           },
         },
-        Oe = n(88),
+        Oe = n(89),
         Se = (n(12), n(40)),
         Ee = [
           "checked",
@@ -19158,7 +19395,7 @@
         return (on += 1);
       }
       n(16);
-      var un = n(87);
+      var un = n(88);
       function sn(e) {
         var t = "function" === typeof e;
         return {
@@ -19414,7 +19651,7 @@
         i = n(0),
         o = n.n(i),
         a = (n(12), n(39)),
-        u = n(88),
+        u = n(89),
         s = n(40);
       t.a = function (e) {
         var t = e.children,
@@ -19440,7 +19677,7 @@
     function (e, t, n) {
       "use strict";
       var r = n(1),
-        i = n(89),
+        i = n(90),
         o = n(34);
       t.a = function (e) {
         var t =
@@ -19823,7 +20060,7 @@
         return o;
       });
       var r = n(0),
-        i = n(61);
+        i = n(62);
       function o(e) {
         var t = e.i18n,
           n = e.defaultNS,
@@ -19846,7 +20083,7 @@
         i = n(2),
         o = n(22),
         a = n(7),
-        u = n(35),
+        u = n(36),
         s = n(17),
         l = (function () {
           function e(e) {
@@ -19903,7 +20140,7 @@
                 )
                   ? (a = o)
                   : !1 !== this.options.structuralSharing &&
-                    (a = Object(i.m)(o, a)),
+                    (a = Object(i.n)(o, a)),
                 this.dispatch({
                   data: a,
                   type: "success",
@@ -19951,7 +20188,7 @@
                 void 0 === e && (e = 0),
                 this.state.isInvalidated ||
                   !this.state.dataUpdatedAt ||
-                  !Object(i.q)(this.state.dataUpdatedAt, e)
+                  !Object(i.r)(this.state.dataUpdatedAt, e)
               );
             }),
             (t.onFocus = function () {
@@ -20277,215 +20514,8 @@
             t
           );
         })(c.a),
-        d = (function () {
-          function e(e) {
-            (this.options = Object(r.a)({}, e.defaultOptions, e.options)),
-              (this.mutationId = e.mutationId),
-              (this.mutationCache = e.mutationCache),
-              (this.observers = []),
-              (this.state = e.state || {
-                context: void 0,
-                data: void 0,
-                error: null,
-                failureCount: 0,
-                isPaused: !1,
-                status: "idle",
-                variables: void 0,
-              });
-          }
-          var t = e.prototype;
-          return (
-            (t.setState = function (e) {
-              this.dispatch({ type: "setState", state: e });
-            }),
-            (t.addObserver = function (e) {
-              -1 === this.observers.indexOf(e) && this.observers.push(e);
-            }),
-            (t.removeObserver = function (e) {
-              this.observers = this.observers.filter(function (t) {
-                return t !== e;
-              });
-            }),
-            (t.cancel = function () {
-              return this.retryer
-                ? (this.retryer.cancel(),
-                  this.retryer.promise.then(i.i).catch(i.i))
-                : Promise.resolve();
-            }),
-            (t.continue = function () {
-              return this.retryer
-                ? (this.retryer.continue(), this.retryer.promise)
-                : this.execute();
-            }),
-            (t.execute = function () {
-              var e,
-                t = this,
-                n = "loading" === this.state.status,
-                r = Promise.resolve();
-              return (
-                n ||
-                  (this.dispatch({
-                    type: "loading",
-                    variables: this.options.variables,
-                  }),
-                  (r = r
-                    .then(function () {
-                      return null == t.options.onMutate
-                        ? void 0
-                        : t.options.onMutate(t.state.variables);
-                    })
-                    .then(function (e) {
-                      e !== t.state.context &&
-                        t.dispatch({
-                          type: "loading",
-                          context: e,
-                          variables: t.state.variables,
-                        });
-                    }))),
-                r
-                  .then(function () {
-                    return t.executeMutation();
-                  })
-                  .then(function (t) {
-                    e = t;
-                  })
-                  .then(function () {
-                    return null == t.options.onSuccess
-                      ? void 0
-                      : t.options.onSuccess(
-                          e,
-                          t.state.variables,
-                          t.state.context
-                        );
-                  })
-                  .then(function () {
-                    return null == t.options.onSettled
-                      ? void 0
-                      : t.options.onSettled(
-                          e,
-                          null,
-                          t.state.variables,
-                          t.state.context
-                        );
-                  })
-                  .then(function () {
-                    return t.dispatch({ type: "success", data: e }), e;
-                  })
-                  .catch(function (e) {
-                    return (
-                      t.mutationCache.config.onError &&
-                        t.mutationCache.config.onError(
-                          e,
-                          t.state.variables,
-                          t.state.context,
-                          t
-                        ),
-                      Object(u.a)().error(e),
-                      Promise.resolve()
-                        .then(function () {
-                          return null == t.options.onError
-                            ? void 0
-                            : t.options.onError(
-                                e,
-                                t.state.variables,
-                                t.state.context
-                              );
-                        })
-                        .then(function () {
-                          return null == t.options.onSettled
-                            ? void 0
-                            : t.options.onSettled(
-                                void 0,
-                                e,
-                                t.state.variables,
-                                t.state.context
-                              );
-                        })
-                        .then(function () {
-                          throw (t.dispatch({ type: "error", error: e }), e);
-                        })
-                    );
-                  })
-              );
-            }),
-            (t.executeMutation = function () {
-              var e,
-                t = this;
-              return (
-                (this.retryer = new s.a({
-                  fn: function () {
-                    return t.options.mutationFn
-                      ? t.options.mutationFn(t.state.variables)
-                      : Promise.reject("No mutationFn found");
-                  },
-                  onFail: function () {
-                    t.dispatch({ type: "failed" });
-                  },
-                  onPause: function () {
-                    t.dispatch({ type: "pause" });
-                  },
-                  onContinue: function () {
-                    t.dispatch({ type: "continue" });
-                  },
-                  retry: null != (e = this.options.retry) ? e : 0,
-                  retryDelay: this.options.retryDelay,
-                })),
-                this.retryer.promise
-              );
-            }),
-            (t.dispatch = function (e) {
-              var t = this;
-              (this.state = (function (e, t) {
-                switch (t.type) {
-                  case "failed":
-                    return Object(r.a)({}, e, {
-                      failureCount: e.failureCount + 1,
-                    });
-                  case "pause":
-                    return Object(r.a)({}, e, { isPaused: !0 });
-                  case "continue":
-                    return Object(r.a)({}, e, { isPaused: !1 });
-                  case "loading":
-                    return Object(r.a)({}, e, {
-                      context: t.context,
-                      data: void 0,
-                      error: null,
-                      isPaused: !1,
-                      status: "loading",
-                      variables: t.variables,
-                    });
-                  case "success":
-                    return Object(r.a)({}, e, {
-                      data: t.data,
-                      error: null,
-                      status: "success",
-                      isPaused: !1,
-                    });
-                  case "error":
-                    return Object(r.a)({}, e, {
-                      data: void 0,
-                      error: t.error,
-                      failureCount: e.failureCount + 1,
-                      isPaused: !1,
-                      status: "error",
-                    });
-                  case "setState":
-                    return Object(r.a)({}, e, t.state);
-                  default:
-                    return e;
-                }
-              })(this.state, e)),
-                a.a.batch(function () {
-                  t.observers.forEach(function (t) {
-                    t.onMutationUpdate(e);
-                  }),
-                    t.mutationCache.notify(t);
-                });
-            }),
-            e
-          );
-        })();
-      var p = (function (e) {
+        d = n(60),
+        p = (function (e) {
           function t(t) {
             var n;
             return (
@@ -20499,7 +20529,7 @@
           var n = t.prototype;
           return (
             (n.build = function (e, t, n) {
-              var r = new d({
+              var r = new d.a({
                 mutationCache: this,
                 mutationId: ++this.mutationId,
                 options: e.defaultMutationOptions(t),
@@ -20630,7 +20660,7 @@
               : n.state.data;
           }),
           (t.setQueryData = function (e, t, n) {
-            var r = Object(i.k)(e),
+            var r = Object(i.l)(e),
               o = this.defaultQueryOptions(r);
             return this.queryCache.build(this, o).setData(t, n);
           }),
@@ -20728,7 +20758,7 @@
             );
           }),
           (t.fetchQuery = function (e, t, n) {
-            var r = Object(i.k)(e, t, n),
+            var r = Object(i.l)(e, t, n),
               o = this.defaultQueryOptions(r);
             "undefined" === typeof o.retry && (o.retry = !1);
             var a = this.queryCache.build(this, o);
@@ -20740,7 +20770,7 @@
             return this.fetchQuery(e, t, n).then(i.i).catch(i.i);
           }),
           (t.fetchInfiniteQuery = function (e, t, n) {
-            var r = Object(i.k)(e, t, n);
+            var r = Object(i.l)(e, t, n);
             return (
               (r.behavior = {
                 onFetch: function (e) {
@@ -20869,7 +20899,7 @@
             return e
               ? null ==
                 (t = this.queryDefaults.find(function (t) {
-                  return Object(i.l)(e, t.queryKey);
+                  return Object(i.m)(e, t.queryKey);
                 }))
                 ? void 0
                 : t.defaultOptions
@@ -20891,7 +20921,7 @@
             return e
               ? null ==
                 (t = this.mutationDefaults.find(function (t) {
-                  return Object(i.l)(e, t.mutationKey);
+                  return Object(i.m)(e, t.mutationKey);
                 }))
                 ? void 0
                 : t.defaultOptions
@@ -20939,7 +20969,7 @@
       n.d(t, "a", function () {
         return f;
       });
-      var r = n(52),
+      var r = n(54),
         i = n(56),
         o = n(32);
       var a = { m: "margin", p: "padding" },
@@ -21048,4 +21078,4 @@
     },
   ],
 ]);
-//# sourceMappingURL=3.a8c74137.chunk.js.map
+//# sourceMappingURL=5.8248165d.chunk.js.map
