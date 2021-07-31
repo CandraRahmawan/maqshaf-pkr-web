@@ -18,7 +18,11 @@
           return fetch(
             (function (t, e, n) {
               return i()(t, n) + (c(e) ? "?".concat(r.a.stringify(n)) : "");
-            })("https://maqshaf-api.pesantrenkhoirurrooziqiin.com" + t, e, n),
+            })(
+              "https://maqshaf-api-dev.pesantrenkhoirurrooziqiin.com" + t,
+              e,
+              n
+            ),
             {
               method: e,
               headers: { "Content-Type": "application/json" },
@@ -348,4 +352,4 @@
     },
   },
 ]);
-//# sourceMappingURL=12.03564315.chunk.js.map
+//# sourceMappingURL=12.21a38ad4.chunk.js.map
