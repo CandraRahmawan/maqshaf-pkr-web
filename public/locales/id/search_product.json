@@ -6,9 +6,10 @@
   "searchPlaceholder": "Cari jajan disini...",
   "addToCart": "Masukkan ke keranjang",
   "dialogTotalSummaryTitle": "Total Jajanan",
-  "dialogTotalBuy": "Total Bayar",
+  "dialogTotalBuy": "Total Bayar Jajan",
   "dialogTotalSummaryInfo": "Pastikan Jajanan yang dipilih sudah sesuai",
-  "dialogIdentityDataTitle": "Scan QRCode Data Santri",
+  "dialogIdentityDataTitle": "Scan QRCode Identitas Santri",
+  "dialogConfirmationPin": "Otorisasi Pin",
   "alert": {
     "successAddCart": "Jajanan berhasil ditambahkan"
   }

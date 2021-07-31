@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import Spinner from "./Spinner/Spinner.component";
+import Alert from "./Alerts";
 
 const Card = lazy(() => import("./Cards/Card.component"));
 
-export { Card, Spinner };
+export { Card, Spinner, Alert };

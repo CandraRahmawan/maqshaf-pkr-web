@@ -1,8 +1,13 @@
 import { useQuery } from "react-query";
 import { fetchApiClient } from "helpers/fetchApi.helper";
+import { useEffect } from "react";
 
-const useGetUserByQrCodeHook = (code) => {
-  const { data: user, isLoading } = useQuery(["getUserByQrCode", code], () =>
+const useGetUserByQrCodeHook = (code, setShowAlert) => {
+  const {
+    data: user,
+    error: errorUser,
+    isLoading,
+  } = useQuery(["getUserByQrCode", code], () =>
     fetchApiClient(
       `/user/saldo`,
       "GET",
@@ -14,7 +19,14 @@ const useGetUserByQrCodeHook = (code) => {
       }
     )
   );
-  return { user, isLoading };
+
+  useEffect(() => {
+    if (errorUser) {
+      setShowAlert(true);
+    }
+  }, [errorUser]);
+
+  return { user, errorUser, isLoading };
 };
 
 export default useGetUserByQrCodeHook;

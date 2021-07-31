@@ -12,6 +12,9 @@ const bindUrlWithParam = (url, method, data) =>
 export const fetchApiClient = (url, method, data) =>
   fetch(bindUrlWithParam(API_URL + url, method, data), {
     method,
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: !isMethodGET(method) ? JSON.stringify(data) : undefined,
   })
     .then((response) => response.json())

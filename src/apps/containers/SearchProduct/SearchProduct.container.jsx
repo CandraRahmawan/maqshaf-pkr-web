@@ -29,9 +29,10 @@ const SearchProductContainer = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const { goodList, isLoading, setKeyword } = useSearchProductHook();
-  const { items, total } = useSelector((state) => state.cartSelected);
+  const { items, total, qty } = useSelector((state) => state.cartSelected);
   const { action } = useParams();
   const isIdentityAction = action === "identitas";
+  const isEnterPinAction = action === "pin";
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -122,6 +123,8 @@ const SearchProductContainer = (props) => {
           <Typography variant="h6">
             {isIdentityAction
               ? t("search_product:dialogIdentityDataTitle")
+              : isEnterPinAction
+              ? t("search_product:dialogConfirmationPin")
               : t("search_product:dialogTotalSummaryTitle")}
           </Typography>
           <IconButton
@@ -137,6 +140,17 @@ const SearchProductContainer = (props) => {
             t={t}
             handleCloseModal={handleCloseModal}
             history={history}
+            items={items}
+            total={total}
+            qty={qty}
+          />
+        ) : isEnterPinAction ? (
+          <SearchProduct.ConfirmationPinDialog
+            t={t}
+            handleCloseModal={handleCloseModal}
+            items={items}
+            history={history}
+            total={total}
           />
         ) : (
           <SearchProduct.SummaryDialog

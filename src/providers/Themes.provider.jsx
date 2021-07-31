@@ -5,9 +5,9 @@ const theme = createTheme({
   primaryColor: "#00a8ff",
   orangeColor: "#ff9100",
   whiteColor: "#fff",
-  blackColor: "#000",
   color: {
     white: "#fff",
+    black: "#000",
   },
 });
 

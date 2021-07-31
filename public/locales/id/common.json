@@ -1,5 +1,13 @@
 {
   "loading": "memuat data...",
   "cancel": "Batalkan",
-  "pay": "Bayar Sekarang"
+  "pay": "Bayar Sekarang",
+  "next": "Lanjutkan",
+  "balance": "Saldo",
+  "confirmation": "Konfirmasi",
+  "label": {
+    "enterPin": "Masukkan PIN",
+    "transactionCode": "Kode Transaksi",
+    "totalBuy": "Total Bayar"
+  }
 }

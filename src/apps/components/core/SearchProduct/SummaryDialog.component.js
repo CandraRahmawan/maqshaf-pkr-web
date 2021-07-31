@@ -29,11 +29,11 @@ const SummaryDialogComponent = (props) => {
           {items.map((item, index) => (
             <>
               <ListItem key={index}>
-                <ListItemAvatar className={classes.listModalImage}>
+                <ListItemAvatar className={classes.list_modal_image}>
                   <img src={item.image} alt={item.name} />
                 </ListItemAvatar>
                 <ListItemText
-                  className={classes.listModalText}
+                  className={classes.list_modal_text}
                   primary={item.name}
                   secondary={rupiahFormat(item.price, item.currency)}
                 />
@@ -64,7 +64,7 @@ const SummaryDialogComponent = (props) => {
           {t("common:cancel")}
         </Button>
         <Button onClick={() => history.push("/identitas")} color="primary">
-          {t("common:pay")}
+          {t("common:next")}
         </Button>
       </DialogActions>
     </>
