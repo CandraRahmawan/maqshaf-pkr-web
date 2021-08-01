@@ -4,4 +4,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #eee;
+
+  .swal2-container {
+    z-index: 9991;
+  }
 }

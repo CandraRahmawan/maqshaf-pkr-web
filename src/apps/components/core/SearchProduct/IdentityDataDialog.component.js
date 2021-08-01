@@ -37,7 +37,7 @@ const IdentityDataDialogComponent = (props) => {
   const getUser = get(user, "data", {});
 
   const { isLoadingMutationBuy, mutateBuy, errorMutationBuy } =
-    useTransactionDebitHook(history, setShowAlert);
+    useTransactionDebitHook(history, setShowAlert, t);
 
   const handleScan = (data) => {
     if (data) {

@@ -148,9 +148,7 @@ const SearchProductContainer = (props) => {
           <SearchProduct.ConfirmationPinDialog
             t={t}
             handleCloseModal={handleCloseModal}
-            items={items}
             history={history}
-            total={total}
           />
         ) : (
           <SearchProduct.SummaryDialog

@@ -11,6 +11,7 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
 import "styles/styles.scss";
+import "sweetalert2/src/sweetalert2.scss";
 
 ReactDOM.render(
   <React.StrictMode>

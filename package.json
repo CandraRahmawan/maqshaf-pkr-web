@@ -42,6 +42,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "string-template": "^1.0.0",
+    "sweetalert2": "^11.1.0",
+    "sweetalert2-react-content": "^4.1.1",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.3",
     "workbox-broadcast-update": "^5.1.3",

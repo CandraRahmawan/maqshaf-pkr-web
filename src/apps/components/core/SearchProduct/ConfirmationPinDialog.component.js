@@ -1,5 +1,5 @@
+import { useState } from "react";
 import {
-  Box,
   Button,
   DialogContent,
   DialogActions,
@@ -8,22 +8,33 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography,
   TextField,
   Avatar,
+  CircularProgress,
 } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { func, array, object, number } from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { func, object } from "prop-types";
+import { AccountBalanceWallet, AccountBox } from "@material-ui/icons";
 import { rupiahFormat } from "helpers/formattor.helper";
 import { clearCart } from "redux/reducers/cartSelected.reducer";
+import useTransactionDebitHook from "hooks/useTransactionDebit.hook";
+import { Alert } from "apps/components/ui";
 
 import useStyles from "./useStyle";
-import { AccountBalanceWallet, AccountBox } from "@material-ui/icons";
 
 const ConfirmationPinDialogComponent = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { t, handleCloseModal, items, history, total } = props;
+  const { total, saldo, transactionCode, userId, transactionId } = useSelector(
+    (state) => state.transaction
+  );
+  const { t, handleCloseModal, history } = props;
+  const [showAlert, setShowAlert] = useState(false);
+  const [pin, setPin] = useState();
+
+  const { mutateDebit, errorMutationDebit, isLoadingMutationDebit } =
+    useTransactionDebitHook(history, setShowAlert, t);
+
   return (
     <>
       <DialogContent>
@@ -36,17 +47,22 @@ const ConfirmationPinDialogComponent = (props) => {
             </ListItemAvatar>
             <ListItemText
               primary={t("common:label.transactionCode")}
-              secondary={"123123"}
+              secondary={transactionCode}
             />
           </ListItem>
+          <Divider />
           <ListItem key="saldo">
             <ListItemAvatar>
               <Avatar>
                 <AccountBalanceWallet />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={t("common:balance")} secondary={"45555"} />
+            <ListItemText
+              primary={t("common:balance")}
+              secondary={rupiahFormat(saldo)}
+            />
           </ListItem>
+          <Divider />
           <ListItem key="total">
             <ListItemAvatar>
               <Avatar>
@@ -55,11 +71,13 @@ const ConfirmationPinDialogComponent = (props) => {
             </ListItemAvatar>
             <ListItemText
               primary={t("common:label.totalBuy")}
-              secondary={"2000"}
+              secondary={rupiahFormat(total)}
             />
           </ListItem>
+          <Divider />
         </List>
         <TextField
+          onChange={(event) => setPin(event.target.value)}
           label={t("common:label.enterPin")}
           type="password"
           className={classes.input_pin}
@@ -75,10 +93,31 @@ const ConfirmationPinDialogComponent = (props) => {
         >
           {t("common:cancel")}
         </Button>
-        <Button onClick={() => history.push("/identitas")} color="primary">
+        <Button
+          onClick={() =>
+            mutateDebit({
+              totalBayar: total,
+              updatedBy: userId.toString(),
+              userId,
+              pin,
+              transactionId,
+            })
+          }
+          color="primary"
+          disabled={isLoadingMutationDebit}
+        >
           {t("common:confirmation")}
+          {isLoadingMutationDebit && (
+            <CircularProgress size={18} className={classes.button_progress} />
+          )}
         </Button>
       </DialogActions>
+      <Alert.Floating
+        severity="error"
+        showAlert={showAlert}
+        setShowAlert={setShowAlert}
+        text={errorMutationDebit?.message || t("glossary:failedDebit")}
+      />
     </>
   );
 };
@@ -86,9 +125,7 @@ const ConfirmationPinDialogComponent = (props) => {
 ConfirmationPinDialogComponent.propTypes = {
   t: func.isRequired,
   handleCloseModal: func.isRequired,
-  items: array.isRequired,
   history: object.isRequired,
-  total: number.isRequired,
 };
 
 export default ConfirmationPinDialogComponent;
