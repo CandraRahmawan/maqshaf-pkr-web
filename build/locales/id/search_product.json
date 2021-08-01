@@ -11,6 +11,7 @@
   "dialogIdentityDataTitle": "Scan QRCode Identitas Santri",
   "dialogConfirmationPin": "Otorisasi Pin",
   "alert": {
-    "successAddCart": "Jajanan berhasil ditambahkan"
+    "successAddCart": "Jajanan berhasil ditambahkan",
+    "successPay": "Pembayaran sukses"
   }
 }
