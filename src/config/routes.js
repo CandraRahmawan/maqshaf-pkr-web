@@ -6,6 +6,11 @@ const routes = [
     exact: true,
     component: lazy(() => import("views/shop/SearchProduct.view")),
   },
+  {
+    path: "/dashboard/produk",
+    exact: true,
+    component: lazy(() => import("views/dashboard/products/ProductList.view")),
+  },
   // {
   //   path: "*",
   //   component: lazy(() => import("views/error-page/404")),
