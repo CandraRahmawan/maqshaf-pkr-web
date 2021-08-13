@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Button,
   DialogContent,
@@ -11,16 +11,16 @@ import {
   TextField,
   Avatar,
   CircularProgress,
-} from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { func, object } from "prop-types";
-import { AccountBalanceWallet, AccountBox } from "@material-ui/icons";
-import { rupiahFormat } from "helpers/formattor.helper";
-import { clearCart } from "redux/reducers/cartSelected.reducer";
-import useTransactionDebitHook from "hooks/useTransactionDebit.hook";
-import { Alert } from "apps/components/ui";
+} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { func, object } from 'prop-types';
+import { AccountBalanceWallet, AccountBox } from '@material-ui/icons';
+import { rupiahFormat } from 'helpers/formattor.helper';
+import { clearCart } from 'redux/reducers/cartSelected.reducer';
+import useTransactionDebitHook from 'hooks/Shop/useTransactionDebit.hook';
+import { Alert } from 'apps/components/ui';
 
-import useStyles from "./useStyle";
+import useStyles from './useStyle';
 
 const ConfirmationPinDialogComponent = (props) => {
   const classes = useStyles();
@@ -32,8 +32,11 @@ const ConfirmationPinDialogComponent = (props) => {
   const [showAlert, setShowAlert] = useState(false);
   const [pin, setPin] = useState();
 
-  const { mutateDebit, errorMutationDebit, isLoadingMutationDebit } =
-    useTransactionDebitHook(history, setShowAlert, t);
+  const { mutateDebit, errorMutationDebit, isLoadingMutationDebit } = useTransactionDebitHook(
+    history,
+    setShowAlert,
+    t
+  );
 
   return (
     <>
@@ -45,10 +48,7 @@ const ConfirmationPinDialogComponent = (props) => {
                 <AccountBox />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText
-              primary={t("common:label.transactionCode")}
-              secondary={transactionCode}
-            />
+            <ListItemText primary={t('common:label.transactionCode')} secondary={transactionCode} />
           </ListItem>
           <Divider />
           <ListItem key="saldo">
@@ -57,10 +57,7 @@ const ConfirmationPinDialogComponent = (props) => {
                 <AccountBalanceWallet />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText
-              primary={t("common:balance")}
-              secondary={rupiahFormat(saldo)}
-            />
+            <ListItemText primary={t('common:balance')} secondary={rupiahFormat(saldo)} />
           </ListItem>
           <Divider />
           <ListItem key="total">
@@ -69,16 +66,13 @@ const ConfirmationPinDialogComponent = (props) => {
                 <AccountBalanceWallet />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText
-              primary={t("common:label.totalBuy")}
-              secondary={rupiahFormat(total)}
-            />
+            <ListItemText primary={t('common:label.totalBuy')} secondary={rupiahFormat(total)} />
           </ListItem>
           <Divider />
         </List>
         <TextField
           onChange={(event) => setPin(event.target.value)}
-          label={t("common:label.enterPin")}
+          label={t('common:label.enterPin')}
           type="password"
           className={classes.input_pin}
         />
@@ -91,7 +85,7 @@ const ConfirmationPinDialogComponent = (props) => {
           }}
           color="primary"
         >
-          {t("common:cancel")}
+          {t('common:cancel')}
         </Button>
         <Button
           onClick={() =>
@@ -106,7 +100,7 @@ const ConfirmationPinDialogComponent = (props) => {
           color="primary"
           disabled={isLoadingMutationDebit}
         >
-          {t("common:confirmation")}
+          {t('common:confirmation')}
           {isLoadingMutationDebit && (
             <CircularProgress size={18} className={classes.button_progress} />
           )}
@@ -116,7 +110,7 @@ const ConfirmationPinDialogComponent = (props) => {
         severity="error"
         showAlert={showAlert}
         setShowAlert={setShowAlert}
-        text={errorMutationDebit?.message || t("glossary:failedDebit")}
+        text={errorMutationDebit?.message || t('glossary:failedDebit')}
       />
     </>
   );
