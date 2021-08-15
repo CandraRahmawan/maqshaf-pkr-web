@@ -3,14 +3,12 @@
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "table": {
     "header": {
-      "no": "No",
       "image": "Gambar",
       "code": "Kode",
       "name": "Nama",
       "price": "Harga",
       "category": "Kategori",
-      "status": "Status",
-      "action": "Aksi"
+      "status": "Status"
     }
   }
 }

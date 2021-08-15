@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Dashboard, Storefront } from '@material-ui/icons';
+import { ChevronLeft, ChevronRight, Dashboard, Storefront, People } from '@material-ui/icons';
 import { useTheme } from '@material-ui/core/styles';
 
 import useStyles from './style';
@@ -49,11 +49,19 @@ const SidebarMenuLeftComponent = (props) => {
           </ListItem>
         </Link>
         <Link to="/dashboard/produk">
-          <ListItem button key="producy">
+          <ListItem button key="product">
             <ListItemIcon>
               <Storefront />
             </ListItemIcon>
             <ListItemText primary={t('common:leftMenu.product')} />
+          </ListItem>
+        </Link>
+        <Link to="/dashboard/santri">
+          <ListItem button key="user">
+            <ListItemIcon>
+              <People />
+            </ListItemIcon>
+            <ListItemText primary={t('common:leftMenu.user')} />
           </ListItem>
         </Link>
       </List>

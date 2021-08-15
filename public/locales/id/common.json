@@ -6,6 +6,10 @@
   "balance": "Saldo",
   "confirmation": "Konfirmasi",
   "label": {
+    "no": "No",
+    "action": "Aksi",
+    "createdAt": "Tanggal dibuat",
+    "createdBy": "Dibuat oleh",
     "enterPin": "Masukkan PIN",
     "transactionCode": "Kode Transaksi",
     "totalBuy": "Total Bayar"
@@ -13,6 +17,7 @@
   "leftMenu": {
     "menu": "Menu",
     "dashboard": "Dasbor",
-    "product": "Produk Jajanan"
+    "product": "Produk Jajanan",
+    "user": "Santri"
   }
 }

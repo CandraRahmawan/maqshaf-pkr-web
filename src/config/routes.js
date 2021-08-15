@@ -16,6 +16,11 @@ const routes = [
     exact: true,
     component: lazy(() => import('views/dashboard/products/ProductList.view')),
   },
+  {
+    path: '/dashboard/santri',
+    exact: true,
+    component: lazy(() => import('views/dashboard/users/UserList.view')),
+  },
   // {
   //   path: "*",
   //   component: lazy(() => import("views/error-page/404")),
