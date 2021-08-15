@@ -1,9 +1,9 @@
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
-import clsx from "clsx";
-import { func } from "prop-types";
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
+import clsx from 'clsx';
+import { func } from 'prop-types';
 
-import useStyles from "./style";
+import useStyles from './style';
 
 const HeaderComponent = ({ t, open, handleDrawerOpen }) => {
   const classes = useStyles();
@@ -26,7 +26,7 @@ const HeaderComponent = ({ t, open, handleDrawerOpen }) => {
             <Menu />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            {t('glossary:dashboardTitle')}
           </Typography>
         </Toolbar>
       </AppBar>

@@ -6,16 +6,18 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from "@material-ui/core";
-import { ChevronLeft, ChevronRight, Inbox, Mail } from "@material-ui/icons";
-import { useTheme } from "@material-ui/core/styles";
+  Typography,
+} from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, Dashboard, Storefront } from '@material-ui/icons';
+import { useTheme } from '@material-ui/core/styles';
 
-import useStyles from "./style";
+import useStyles from './style';
 
 const SidebarMenuLeftComponent = (props) => {
   const classes = useStyles();
   const theme = useTheme();
-  const { open, handleDrawerClose } = props;
+  const { open, handleDrawerClose, t } = props;
 
   return (
     <Drawer
@@ -28,31 +30,32 @@ const SidebarMenuLeftComponent = (props) => {
       }}
     >
       <div className={classes.drawer_header}>
+        <div className={classes.menu_title_wrapper}>
+          <img src="/assets/logo192.png" width={30} height={30} />
+          <Typography variant="h5">{t('common:leftMenu.menu')}</Typography>
+        </div>
         <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "ltr" ? <ChevronLeft /> : <ChevronRight />}
+          {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
         </IconButton>
       </div>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
+        <Link to="/dashboard">
+          <ListItem button key="dashboard">
             <ListItemIcon>
-              {index % 2 === 0 ? <Inbox /> : <Mail />}
+              <Dashboard />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={t('common:leftMenu.dashboard')} />
           </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
+        </Link>
+        <Link to="/dashboard/produk">
+          <ListItem button key="producy">
             <ListItemIcon>
-              {index % 2 === 0 ? <Inbox /> : <Mail />}
+              <Storefront />
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={t('common:leftMenu.product')} />
           </ListItem>
-        ))}
+        </Link>
       </List>
     </Drawer>
   );

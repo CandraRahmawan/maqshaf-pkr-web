@@ -9,5 +9,10 @@
     "enterPin": "Masukkan PIN",
     "transactionCode": "Kode Transaksi",
     "totalBuy": "Total Bayar"
+  },
+  "leftMenu": {
+    "menu": "Menu",
+    "dashboard": "Dasbor",
+    "product": "Produk Jajanan"
   }
 }
