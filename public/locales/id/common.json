@@ -18,6 +18,11 @@
     "menu": "Menu",
     "dashboard": "Dasbor",
     "product": "Produk Jajanan",
-    "user": "Santri"
+    "user": "Santri",
+    "admin": "Administrator",
+    "transaction": "Transaksi",
+    "in": "Masuk / Kredit",
+    "out": "Keluar / Debit",
+    "checkBalanced": "Lihat Saldo"
   }
 }

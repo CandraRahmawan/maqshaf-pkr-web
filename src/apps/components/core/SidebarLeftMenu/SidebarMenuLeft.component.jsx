@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Divider,
   Drawer,
@@ -7,9 +8,23 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
+  Collapse,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Dashboard, Storefront, People } from '@material-ui/icons';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Dashboard,
+  Storefront,
+  People,
+  SupervisedUserCircle,
+  ExpandLess,
+  ExpandMore,
+  CallReceived,
+  CallMade,
+  AccountBalanceWallet,
+  CreditCard,
+} from '@material-ui/icons';
 import { useTheme } from '@material-ui/core/styles';
 
 import useStyles from './style';
@@ -18,6 +33,11 @@ const SidebarMenuLeftComponent = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const { open, handleDrawerClose, t } = props;
+  const [openSubmenu, setOpenSubmenu] = useState(false);
+
+  const handleSubmenuClick = () => {
+    setOpenSubmenu(!openSubmenu);
+  };
 
   return (
     <Drawer
@@ -64,6 +84,47 @@ const SidebarMenuLeftComponent = (props) => {
             <ListItemText primary={t('common:leftMenu.user')} />
           </ListItem>
         </Link>
+        <Link to="/dashboard/administrator">
+          <ListItem button key="administrator">
+            <ListItemIcon>
+              <SupervisedUserCircle />
+            </ListItemIcon>
+            <ListItemText primary={t('common:leftMenu.admin')} />
+          </ListItem>
+        </Link>
+        <ListItem button key="transaction" onClick={handleSubmenuClick}>
+          <ListItemIcon>
+            <AccountBalanceWallet />
+          </ListItemIcon>
+          <ListItemText primary={t('common:leftMenu.transaction')} />
+          {openSubmenu ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={openSubmenu} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <Link to="/dashboard/transaksi/masuk">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <CallReceived />
+                </ListItemIcon>
+                <ListItemText primary={t('common:leftMenu.in')} />
+              </ListItem>
+            </Link>
+            <Link to="/dashboard/transaksi/keluar">
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <CallMade />
+                </ListItemIcon>
+                <ListItemText primary={t('common:leftMenu.out')} />
+              </ListItem>
+            </Link>
+          </List>
+        </Collapse>
+        <ListItem button key="balanced">
+          <ListItemIcon>
+            <CreditCard />
+          </ListItemIcon>
+          <ListItemText primary={t('common:leftMenu.checkBalanced')} />
+        </ListItem>
       </List>
     </Drawer>
   );

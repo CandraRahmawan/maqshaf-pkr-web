@@ -21,6 +21,21 @@ const routes = [
     exact: true,
     component: lazy(() => import('views/dashboard/users/UserList.view')),
   },
+  {
+    path: '/dashboard/administrator',
+    exact: true,
+    component: lazy(() => import('views/dashboard/users/UserList.view')),
+  },
+  {
+    path: '/dashboard/transaksi/masuk',
+    exact: true,
+    component: lazy(() => import('views/dashboard/users/UserList.view')),
+  },
+  {
+    path: '/dashboard/transaksi/keluar',
+    exact: true,
+    component: lazy(() => import('views/dashboard/users/UserList.view')),
+  },
   // {
   //   path: "*",
   //   component: lazy(() => import("views/error-page/404")),

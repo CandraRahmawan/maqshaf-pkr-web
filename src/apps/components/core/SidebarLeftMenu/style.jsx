@@ -39,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
       alignSelf: 'center',
     },
   },
+
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
 }));
 
 export default useStyles;
