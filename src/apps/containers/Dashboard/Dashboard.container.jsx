@@ -1,13 +1,13 @@
 import { func, object } from 'prop-types';
 
-const ProductListContainer = () => {
+const DashboardContainer = () => {
   return <div>Dashbaord</div>;
 };
 
-ProductListContainer.propTypes = {
+DashboardContainer.propTypes = {
   t: func.isRequired,
   history: object.isRequired,
   location: object.isRequired,
 };
 
-export default ProductListContainer;
+export default DashboardContainer;
