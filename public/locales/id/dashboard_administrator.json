@@ -1,10 +1,10 @@
 {
-  "metaTitle": "Daftar Santri",
+  "metaTitle": "Daftar Administrator",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "table": {
     "header": {
-      "nis": "NIS",
-      "class": "Kelas"
+      "username": "Username",
+      "id": "Admin ID"
     }
   }
 }

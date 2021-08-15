@@ -1,19 +1,19 @@
-import format from "string-template";
-import qs from "qs";
+import format from 'string-template';
+import qs from 'qs';
 
-const API_URL =
-  process.env.NODE_ENV === "development" ? "" : process.env.REACT_APP_API;
+const API_URL = process.env.NODE_ENV === 'development' ? '' : process.env.REACT_APP_API;
 
-const isMethodGET = (method) => method === "GET";
+const isMethodGET = (method) => method === 'GET';
 
 const bindUrlWithParam = (url, method, data) =>
-  format(url, data) + (isMethodGET(method) ? `?${qs.stringify(data)}` : "");
+  format(url, data) + (isMethodGET(method) ? `?${qs.stringify(data)}` : '');
 
 export const fetchApiClient = (url, method, data) =>
   fetch(bindUrlWithParam(API_URL + url, method, data), {
     method,
     headers: {
-      "Content-Type": "application/json",
+      api_token: 'hdXIyzaBgzosavCeVJkQr8jKdRLiWXRVOzOzO7Bt',
+      'Content-Type': 'application/json',
     },
     body: !isMethodGET(method) ? JSON.stringify(data) : undefined,
   })

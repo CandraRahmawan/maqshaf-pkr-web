@@ -2,8 +2,8 @@ import { TableRow, TableCell } from '@material-ui/core';
 import { func, object } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { DataTables } from 'apps/components/ui';
-import useGetAllUserHook from 'hooks/Dashboard/Users/useGetAllUser.hook';
 import { defaultFormatDate } from 'helpers/formattor.helper';
+import useGetAllAdministratorHook from 'hooks/Dashboard/Administrator/useGetAllAdministrator.hook';
 
 import styles from './style';
 
@@ -13,24 +13,20 @@ const headers = (t) => [
     label: t('common:label.no'),
   },
   {
-    name: 'nis',
-    label: t('dashboard_user:table.header.nis'),
+    name: 'id',
+    label: t('dashboard_administrator:table.header.id'),
+  },
+  {
+    name: 'username',
+    label: t('dashboard_administrator:table.header.username'),
   },
   {
     name: 'fullName',
     label: t('common:label.fullName'),
   },
   {
-    name: 'class',
-    label: t('dashboard_user:table.header.class'),
-  },
-  {
     name: 'createdAt',
     label: t('common:label.createdAt'),
-  },
-  {
-    name: 'createdBy',
-    label: t('common:label.createdBy'),
   },
   {
     name: 'action',
@@ -38,8 +34,8 @@ const headers = (t) => [
   },
 ];
 
-const UserListContainer = ({ t }) => {
-  const { data, isLoading } = useGetAllUserHook();
+const AdministratorListContainer = ({ t }) => {
+  const { data, isLoading } = useGetAllAdministratorHook();
   return (
     <DataTables isLoading={isLoading} headers={headers(t)}>
       {data?.data?.map((row, index) => (
@@ -47,11 +43,10 @@ const UserListContainer = ({ t }) => {
           <TableCell component="th" scope="row">
             {index + 1}
           </TableCell>
-          <TableCell>{row.nis}</TableCell>
+          <TableCell>{row.administratorId}</TableCell>
+          <TableCell>{row.username}</TableCell>
           <TableCell>{row.fullName}</TableCell>
-          <TableCell>{row.class}</TableCell>
           <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
-          <TableCell>{row.createdBy}</TableCell>
           <TableCell>-</TableCell>
         </TableRow>
       ))}
@@ -59,11 +54,11 @@ const UserListContainer = ({ t }) => {
   );
 };
 
-UserListContainer.propTypes = {
+AdministratorListContainer.propTypes = {
   classes: object.isRequired,
   t: func.isRequired,
   history: object.isRequired,
   location: object.isRequired,
 };
 
-export default withStyles(styles)(UserListContainer);
+export default withStyles(styles)(AdministratorListContainer);
