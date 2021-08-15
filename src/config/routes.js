@@ -36,6 +36,11 @@ const routes = [
     exact: true,
     component: lazy(() => import('views/dashboard/users/UserList.view')),
   },
+  {
+    path: '/dashboard/cek-saldo',
+    exact: true,
+    component: lazy(() => import('views/dashboard/CheckBalanced.view')),
+  },
   // {
   //   path: "*",
   //   component: lazy(() => import("views/error-page/404")),

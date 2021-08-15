@@ -119,12 +119,14 @@ const SidebarMenuLeftComponent = (props) => {
             </Link>
           </List>
         </Collapse>
-        <ListItem button key="balanced">
-          <ListItemIcon>
-            <CreditCard />
-          </ListItemIcon>
-          <ListItemText primary={t('common:leftMenu.checkBalanced')} />
-        </ListItem>
+        <Link to="/dashboard/cek-saldo">
+          <ListItem button key="balanced">
+            <ListItemIcon>
+              <CreditCard />
+            </ListItemIcon>
+            <ListItemText primary={t('common:leftMenu.checkBalanced')} />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   );

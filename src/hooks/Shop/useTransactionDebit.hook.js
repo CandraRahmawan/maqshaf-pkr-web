@@ -23,7 +23,7 @@ const useTransactionDebitHook = (history, setShowAlert, t) => {
 
   useEffect(() => {
     if (dataMutationBuy?.data) {
-      const getResult = dataMutationBuy?.data[0];
+      const getResult = dataMutationBuy?.data;
       dispatch(setTransaction(getResult));
       history.push('/pin');
     }
