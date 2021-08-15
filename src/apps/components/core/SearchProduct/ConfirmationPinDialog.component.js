@@ -90,7 +90,7 @@ const ConfirmationPinDialogComponent = (props) => {
         <Button
           onClick={() =>
             mutateDebit({
-              totalBayar: total,
+              total,
               updatedBy: userId.toString(),
               userId,
               pin,
