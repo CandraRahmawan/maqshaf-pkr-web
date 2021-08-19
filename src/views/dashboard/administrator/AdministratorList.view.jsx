@@ -12,7 +12,7 @@ const AdministratorListView = (props) => {
         <title>{t('dashboard_administrator:metaTitle')}</title>
         <meta name="description" content={t('dashboard_administrator:metaDescription')} />
       </Helmet>
-      <DashboardLayout t={t}>
+      <DashboardLayout t={t} history={history}>
         <AdministratorListContainer t={t} history={history} location={location} />
       </DashboardLayout>
     </>

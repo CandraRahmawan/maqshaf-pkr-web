@@ -5,5 +5,6 @@ import Skeleton from './Skeleton';
 
 const Card = lazy(() => import('./Cards/Card.component'));
 const DataTables = lazy(() => import('./DataTables/DataTable.component'));
+const Button = lazy(() => import('./Button/Button.component'));
 
-export { Card, Spinner, Alert, Skeleton, DataTables };
+export { Card, Spinner, Alert, Skeleton, DataTables, Button };

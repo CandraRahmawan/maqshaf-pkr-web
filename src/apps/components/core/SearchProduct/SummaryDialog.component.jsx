@@ -9,13 +9,13 @@ import {
   ListItemAvatar,
   ListItemText,
   Typography,
-} from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { func, array, object, number } from "prop-types";
-import { rupiahFormat } from "helpers/formattor.helper";
-import { clearCart } from "redux/reducers/cartSelected.reducer";
+} from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { func, array, object, number } from 'prop-types';
+import { rupiahFormat } from 'helpers/formattor.helper';
+import { clearCart } from 'redux/reducers/cartSelected.reducer';
 
-import useStyles from "./useStyle";
+import useStyles from './useStyle';
 
 const SummaryDialogComponent = (props) => {
   const classes = useStyles();
@@ -24,7 +24,7 @@ const SummaryDialogComponent = (props) => {
   return (
     <>
       <DialogContent>
-        <p>{t("search_product:dialogTotalSummaryInfo")}</p>
+        <p>{t('search_product:dialogTotalSummaryInfo')}</p>
         <List>
           {items.map((item, index) => (
             <>
@@ -45,7 +45,7 @@ const SummaryDialogComponent = (props) => {
         <Box display="flex" justifyContent="space-between">
           <div>
             <Typography variant="subtitle1" color="disabled">
-              {t("search_product:dialogTotalBuy")}
+              {t('search_product:dialogTotalBuy')}
             </Typography>
           </div>
           <div>
@@ -61,10 +61,10 @@ const SummaryDialogComponent = (props) => {
           }}
           color="primary"
         >
-          {t("common:cancel")}
+          {t('common:cancel')}
         </Button>
-        <Button onClick={() => history.push("/identitas")} color="primary">
-          {t("common:next")}
+        <Button onClick={() => history.push('/identitas')} color="primary">
+          {t('common:next')}
         </Button>
       </DialogActions>
     </>

@@ -1,14 +1,14 @@
-import { CircularProgress, Grid } from "@material-ui/core";
-import { string } from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { CircularProgress, Grid } from '@material-ui/core';
+import { string } from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    textAlign: "center",
-    marginTop: "30%",
+    textAlign: 'center',
+    marginTop: '30%',
 
-    "& p": {
-      color: "#000",
+    '& p': {
+      color: '#000',
     },
   },
 });

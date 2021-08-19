@@ -12,7 +12,7 @@ const UserListView = (props) => {
         <title>{t('dashboard_user:metaTitle')}</title>
         <meta name="description" content={t('dashboard_user:metaDescription')} />
       </Helmet>
-      <DashboardLayout t={t}>
+      <DashboardLayout t={t} history={history}>
         <UserListContainer t={t} history={history} location={location} />
       </DashboardLayout>
     </>

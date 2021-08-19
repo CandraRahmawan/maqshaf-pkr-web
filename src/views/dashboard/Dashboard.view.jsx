@@ -12,7 +12,7 @@ const ProductListView = (props) => {
         <title>{t('dashboard:metaTitle')}</title>
         <meta name="description" content={t('dashboard:metaDescription')} />
       </Helmet>
-      <DashboardLayout t={t}>
+      <DashboardLayout t={t} history={history}>
         <DashboardContainer t={t} history={history} location={location} />
       </DashboardLayout>
     </>

@@ -5,7 +5,7 @@ import { func } from 'prop-types';
 
 import useStyles from './style';
 
-const HeaderComponent = ({ t, open, handleDrawerOpen }) => {
+const DashboardComponent = ({ t, open, handleDrawerOpen }) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -34,8 +34,8 @@ const HeaderComponent = ({ t, open, handleDrawerOpen }) => {
   );
 };
 
-HeaderComponent.propTypes = {
+DashboardComponent.propTypes = {
   t: func.isRequired,
 };
 
-export default HeaderComponent;
+export default DashboardComponent;

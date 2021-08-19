@@ -1,15 +1,11 @@
-import Alert from "@material-ui/lab/Alert";
-import { Snackbar } from "@material-ui/core";
-import { bool, func } from "prop-types";
+import Alert from '@material-ui/lab/Alert';
+import { Snackbar } from '@material-ui/core';
+import { bool, func } from 'prop-types';
 
 const FloatingComponent = (props) => {
   const { showAlert, setShowAlert, text, severity } = props;
   return (
-    <Snackbar
-      open={showAlert}
-      autoHideDuration={2000}
-      onClose={() => setShowAlert(false)}
-    >
+    <Snackbar open={showAlert} autoHideDuration={2000} onClose={() => setShowAlert(false)}>
       <Alert severity={severity} variant="filled">
         {text}
       </Alert>
@@ -18,7 +14,7 @@ const FloatingComponent = (props) => {
 };
 
 FloatingComponent.defaultProps = {
-  severity: "success",
+  severity: 'success',
 };
 
 FloatingComponent.propTypes = {

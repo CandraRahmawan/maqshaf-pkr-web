@@ -1,4 +1,5 @@
-import { string, number, func, array } from "prop-types";
+import { useState } from 'react';
+import { string, number, func, array } from 'prop-types';
 import {
   Card,
   CardActionArea,
@@ -9,29 +10,19 @@ import {
   Typography,
   useMediaQuery,
   Snackbar,
-} from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import { rupiahFormat } from "helpers/formattor.helper";
+} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { rupiahFormat } from 'helpers/formattor.helper';
 
-import { useStyles } from "./style";
-import { useState } from "react";
+import { useStyles } from './style';
 
 const CardComponent = (props) => {
-  const {
-    image,
-    title,
-    price,
-    currency,
-    category,
-    t,
-    openModal,
-    addCartAction,
-    selectedItems,
-  } = props;
+  const { image, title, price, currency, category, t, openModal, addCartAction, selectedItems } =
+    props;
   const [showAlert, setShowAlert] = useState(false);
   const classes = useStyles();
-  const isXsDevice = useMediaQuery((theme) => theme.breakpoints.down("xs"));
+  const isXsDevice = useMediaQuery((theme) => theme.breakpoints.down('xs'));
   const handleShowAlert = () => setShowAlert(true);
   return (
     <Card className={classes.root} key={title}>
@@ -84,19 +75,13 @@ const CardComponent = (props) => {
           {isXsDevice ? (
             <AddShoppingCartIcon onClick={handleShowAlert} />
           ) : (
-            <span onClick={handleShowAlert}>
-              {t("search_product:addToCart")}}
-            </span>
+            <span onClick={handleShowAlert}>{t('search_product:addToCart')}}</span>
           )}
         </Button>
       </CardActions>
-      <Snackbar
-        open={showAlert}
-        autoHideDuration={2000}
-        onClose={() => setShowAlert(false)}
-      >
+      <Snackbar open={showAlert} autoHideDuration={2000} onClose={() => setShowAlert(false)}>
         <Alert severity="success" variant="filled">
-          {t("search_product:alert.successAddCart")}
+          {t('search_product:alert.successAddCart')}
         </Alert>
       </Snackbar>
     </Card>

@@ -12,7 +12,7 @@ const ProductListView = (props) => {
         <title>{t('dashboard_check_balanced:metaTitle')}</title>
         <meta name="description" content={t('dashboard_check_balanced:metaDescription')} />
       </Helmet>
-      <DashboardLayout t={t}>
+      <DashboardLayout t={t} history={history}>
         <CheckBalancedContainer t={t} history={history} location={location} />
       </DashboardLayout>
     </>
