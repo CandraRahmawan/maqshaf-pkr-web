@@ -38,13 +38,17 @@
           return 'GET' === n;
         },
         l = function (n, t, e) {
+          var a;
           return fetch(
             (function (n, t, e) {
               return r()(n, e) + (u(t) ? '?'.concat(o.a.stringify(e)) : '');
             })('https://maqshaf-api-dev.pesantrenkhoirurrooziqiin.com' + n, t, e),
             {
               method: t,
-              headers: { api_token: Object(s.a)().token, 'Content-Type': 'application/json' },
+              headers: {
+                api_token: null === (a = Object(s.a)()) || void 0 === a ? void 0 : a.token,
+                'Content-Type': 'application/json',
+              },
               body: u(t) ? void 0 : JSON.stringify(e),
             }
           )
@@ -310,4 +314,4 @@
     },
   },
 ]);
-//# sourceMappingURL=18.2189e0ea.chunk.js.map
+//# sourceMappingURL=18.9cc046f8.chunk.js.map

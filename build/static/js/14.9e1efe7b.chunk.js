@@ -1,4 +1,4 @@
-/*! For license information please see 14.84ce4eb4.chunk.js.LICENSE.txt */
+/*! For license information please see 14.9e1efe7b.chunk.js.LICENSE.txt */
 (this['webpackJsonpmaqshaf-pkr-web'] = this['webpackJsonpmaqshaf-pkr-web'] || []).push([
   [14],
   {
@@ -59,13 +59,17 @@
           return 'GET' === e;
         },
         u = function (e, t, n) {
+          var r;
           return fetch(
             (function (e, t, n) {
               return o()(e, n) + (c(t) ? '?'.concat(i.a.stringify(n)) : '');
             })('https://maqshaf-api-dev.pesantrenkhoirurrooziqiin.com' + e, t, n),
             {
               method: t,
-              headers: { api_token: Object(s.a)().token, 'Content-Type': 'application/json' },
+              headers: {
+                api_token: null === (r = Object(s.a)()) || void 0 === r ? void 0 : r.token,
+                'Content-Type': 'application/json',
+              },
               body: c(t) ? void 0 : JSON.stringify(n),
             }
           )
@@ -4038,4 +4042,4 @@
     },
   },
 ]);
-//# sourceMappingURL=14.84ce4eb4.chunk.js.map
+//# sourceMappingURL=14.9e1efe7b.chunk.js.map
