@@ -14,7 +14,7 @@ export const fetchApiClient = (url, method, data) =>
   fetch(bindUrlWithParam(API_URL + url, method, data), {
     method,
     headers: {
-      api_token: getUser().token,
+      api_token: getUser()?.token,
       'Content-Type': 'application/json',
     },
     body: !isMethodGET(method) ? JSON.stringify(data) : undefined,
