@@ -6,8 +6,24 @@
   "balance": "Saldo",
   "confirmation": "Konfirmasi",
   "label": {
+    "no": "No",
+    "fullName": "Nama Lengkap",
+    "action": "Aksi",
+    "createdAt": "Tanggal dibuat",
+    "createdBy": "Dibuat oleh",
     "enterPin": "Masukkan PIN",
     "transactionCode": "Kode Transaksi",
     "totalBuy": "Total Bayar"
+  },
+  "leftMenu": {
+    "menu": "Menu",
+    "dashboard": "Dasbor",
+    "product": "Produk Jajanan",
+    "user": "Santri",
+    "admin": "Administrator",
+    "transaction": "Transaksi",
+    "in": "Masuk / Kredit",
+    "out": "Keluar / Debit",
+    "checkBalanced": "Lihat Saldo"
   }
 }

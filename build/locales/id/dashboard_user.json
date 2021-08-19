@@ -1,0 +1,10 @@
+{
+  "metaTitle": "Daftar Santri",
+  "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
+  "table": {
+    "header": {
+      "nis": "NIS",
+      "class": "Kelas"
+    }
+  }
+}

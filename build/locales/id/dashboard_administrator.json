@@ -1,0 +1,10 @@
+{
+  "metaTitle": "Daftar Administrator",
+  "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
+  "table": {
+    "header": {
+      "username": "Username",
+      "id": "Admin ID"
+    }
+  }
+}
