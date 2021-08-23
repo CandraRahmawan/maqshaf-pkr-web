@@ -24,8 +24,11 @@ import {
   CallMade,
   AccountBalanceWallet,
   CreditCard,
+  ExitToApp,
 } from '@material-ui/icons';
 import { useTheme } from '@material-ui/core/styles';
+import { Dialog } from 'apps/components/ui';
+import { logout } from 'helpers/auth.helper';
 
 import useStyles from './style';
 
@@ -34,6 +37,7 @@ const SidebarMenuLeftComponent = (props) => {
   const theme = useTheme();
   const { open, handleDrawerClose, t } = props;
   const [openSubmenu, setOpenSubmenu] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleSubmenuClick = () => {
     setOpenSubmenu(!openSubmenu);
@@ -127,7 +131,23 @@ const SidebarMenuLeftComponent = (props) => {
             <ListItemText primary={t('common:leftMenu.checkBalanced')} />
           </ListItem>
         </Link>
+        <div onClick={() => setOpenDialog(true)}>
+          <ListItem button key="logout">
+            <ListItemIcon>
+              <ExitToApp />
+            </ListItemIcon>
+            <ListItemText primary={t('common:leftMenu.logout')} />
+          </ListItem>
+        </div>
       </List>
+      <Dialog
+        t={t}
+        open={openDialog}
+        handleOk={logout}
+        handleClose={() => setOpenDialog(false)}
+        title={t('common:confirmation')}
+        content={t('dashboard:confirmationLogout')}
+      />
     </Drawer>
   );
 };

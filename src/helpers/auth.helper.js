@@ -10,3 +10,8 @@ export const getUser = () => {
     return null;
   }
 };
+
+export const logout = () => {
+  localStorage.clear();
+  window.location.replace('/dashboard/login');
+};

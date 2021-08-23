@@ -1,7 +1,7 @@
 import format from 'string-template';
 import qs from 'qs';
 import { IS_OK, IS_UNAUTHORIZED } from 'constants/httpStatus.constant';
-import { getUser } from 'helpers/auth.helper';
+import { getUser, logout } from 'helpers/auth.helper';
 
 const isMethodGET = (method) => method === 'GET';
 
@@ -20,7 +20,7 @@ export const fetchApiClient = (url, method, data) =>
     .then((response) => response.json())
     .then((respData) => {
       if (IS_UNAUTHORIZED(respData)) {
-        window.location.replace('/dashboard/login');
+        logout();
       }
 
       if (!IS_OK(respData)) {
