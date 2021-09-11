@@ -6,5 +6,36 @@
       "nis": "NIS",
       "class": "Kelas"
     }
+  },
+  "form": {
+    "title": "Form Santri",
+    "nis": "NIS",
+    "fullName": "Nama Lengkap",
+    "class": "Kelas",
+    "address": "Alamat",
+    "pin": "PIN"
+  },
+  "placeholder": {
+    "nis": "Masukkan NIS",
+    "fullName": "Masukkan nama lengkap",
+    "class": "Masukkan kelas",
+    "address": "Masukkan alamat",
+    "pin": "Masukkan PIN"
+  },
+  "button": {
+    "add": "Tambah",
+    "save": "Simpan",
+    "cancel": "Batal"
+  },
+  "validation": {
+    "nisLength": "NIS harus 16 digit.",
+    "nisFormat": "NIS harus angka.",
+    "nisRequired": "NIS harus diisi.",
+    "fullNameRequired": "Nama Lengkap harus diisi.",
+    "classRequired": "Kelas harus diisi.",
+    "addressRequired": "Alamat harus diisi.",
+    "pinRequired": "PIN harus diisi.",
+    "pinLength": "PIN harus 6 digit.",
+    "pinFormat": "PIN harus angka."
   }
 }
