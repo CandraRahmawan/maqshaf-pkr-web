@@ -27,6 +27,11 @@ const routes = [
     component: lazy(() => import('views/dashboard/users/UserList.view')),
   },
   {
+    path: '/dashboard/santri/:id',
+    exact: true,
+    component: lazy(() => import('views/dashboard/users/UserDetail.view')),
+  },
+  {
     path: '/dashboard/administrator',
     exact: true,
     component: lazy(() => import('views/dashboard/administrator/AdministratorList.view')),
