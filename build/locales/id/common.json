@@ -13,7 +13,9 @@
     "createdBy": "Dibuat oleh",
     "enterPin": "Masukkan PIN",
     "transactionCode": "Kode Transaksi",
-    "totalBuy": "Total Bayar"
+    "totalBuy": "Total Bayar",
+    "cancel": "Batal",
+    "ok": "OK"
   },
   "leftMenu": {
     "menu": "Menu",
@@ -24,6 +26,7 @@
     "transaction": "Transaksi",
     "in": "Masuk / Kredit",
     "out": "Keluar / Debit",
-    "checkBalanced": "Lihat Saldo"
+    "checkBalanced": "Lihat Saldo",
+    "logout": "Keluar"
   }
 }
