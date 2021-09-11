@@ -1,10 +1,10 @@
-import { TableRow, TableCell, Button } from '@material-ui/core';
+import { TableRow, TableCell, Button, Box } from '@material-ui/core';
 import { func, object } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { DataTables } from 'apps/components/ui';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-// import DeleteIcon from '@material-ui/icons/Delete';
+import LockOpenOutlined from '@material-ui/icons/LockOpenOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 import useGetAllUserHook from 'hooks/Dashboard/Users/useGetAllUser.hook';
 import { defaultFormatDate } from 'helpers/formattor.helper';
@@ -48,8 +48,13 @@ const UserListContainer = ({ classes, t }) => {
   const { data, isLoading } = useGetAllUserHook();
   return (
     <>
+      <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
+        <Box alignSelf="center">
+          <h2>{t('dashboard_user:table.title')}</h2>
+        </Box>
+      </Box>
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/santri/add')}>
-        Tambah
+        {t('dashboard_user:button.add')}
       </Button>
       <DataTables isLoading={isLoading} headers={headers(t)}>
         {data?.data?.map((row, index) => (
@@ -63,12 +68,12 @@ const UserListContainer = ({ classes, t }) => {
             <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
             <TableCell>{row.createdBy}</TableCell>
             <TableCell>
-              <IconButton aria-label="edit" color="primary" onClick={() => history.push('/dashboard/santri/'+row.userId)} >
+              <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/santri/' + row.userId)} >
                 <EditIcon fontSize="small" />
               </IconButton>
-              {/* <IconButton aria-label="delete" color="secondary" >
-                <DeleteIcon fontSize="small" />
-              </IconButton> */}
+              <IconButton title="Reset PIN" aria-label="delete" color="secondary" >
+                <LockOpenOutlined fontSize="small" />
+              </IconButton>
             </TableCell>
           </TableRow>
         ))}
