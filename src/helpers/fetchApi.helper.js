@@ -8,14 +8,14 @@ const isMethodGET = (method) => method === 'GET';
 const bindUrlWithParam = (url, method, data) =>
   format(url, data) + (isMethodGET(method) ? `?${qs.stringify(data)}` : '');
 
-export const fetchApiClient = (url, method, data) =>
+export const fetchApiClient = (url, method, data, isForm) =>
   fetch(bindUrlWithParam(process.env.REACT_APP_API + url, method, data), {
     method,
     headers: {
       api_token: getUser()?.token,
-      'Content-Type': 'application/json',
+      ...(!isForm && {'Content-Type': 'application/json'}),
     },
-    body: !isMethodGET(method) ? JSON.stringify(data) : undefined,
+    body: !isMethodGET(method) ? (isForm ? data : JSON.stringify(data)) : undefined,
   })
     .then((response) => response.json())
     .then((respData) => {

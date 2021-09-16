@@ -1,5 +1,6 @@
-import { TableRow, TableCell, Button, Box } from '@material-ui/core';
+import { TableRow, TableCell, Button, Box, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
 import { func, object } from 'prop-types';
+import Alert from '@material-ui/lab/Alert';
 import { withStyles } from '@material-ui/core/styles';
 import { DataTables } from 'apps/components/ui';
 import IconButton from '@material-ui/core/IconButton';
@@ -45,7 +46,7 @@ const headers = (t) => [
 
 const UserListContainer = ({ classes, t }) => {
   let history = useHistory();
-  const { data, isLoading } = useGetAllUserHook();
+  const { showAlert, error, message, data, isLoading, showPopup, handleReset, setSelectedData, selectedData, setShowPopup } = useGetAllUserHook();
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -53,6 +54,7 @@ const UserListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_user:table.title')}</h2>
         </Box>
       </Box>
+      {showAlert && <Alert severity={error?.message ? 'error': 'success'}>{message}</Alert>}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/santri/add')}>
         {t('dashboard_user:button.add')}
       </Button>
@@ -71,13 +73,37 @@ const UserListContainer = ({ classes, t }) => {
               <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/santri/' + row.userId)} >
                 <EditIcon fontSize="small" />
               </IconButton>
-              <IconButton title="Reset PIN" aria-label="delete" color="secondary" >
+              <IconButton title="Reset PIN" aria-label="delete" color="secondary" onClick={() => {
+                setShowPopup(true)
+                setSelectedData(row)
+              }} >
                 <LockOpenOutlined fontSize="small" />
               </IconButton>
             </TableCell>
           </TableRow>
         ))}
       </DataTables>
+      <Dialog
+        open={showPopup}
+        onClose={() => setShowPopup(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {t('dashboard_user:table.titleConfirmReset')} 
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {t('dashboard_user:table.confirmReset')} {selectedData.nis}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowPopup(false)}> {t('dashboard_user:button.no')}</Button>
+          <Button onClick={handleReset} autoFocus>
+            {t('dashboard_user:button.yes')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

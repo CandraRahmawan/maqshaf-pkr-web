@@ -2,6 +2,7 @@
   "metaTitle": "Daftar Produk",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "table": {
+    "title": "Daftar Produk",
     "header": {
       "image": "Gambar",
       "code": "Kode",
@@ -10,5 +11,34 @@
       "category": "Kategori",
       "status": "Status"
     }
+  },
+  "form": {
+    "title": "Form Produk",
+    "name": "Nama",
+    "description": "Keterangan",
+    "image": "Gambar",
+    "price": "Harga",
+    "category": "Kategori",
+    "status": "Status"
+  },
+  "placeholder": {
+    "name": "Masukkan Nama",
+    "description": "Masukkan Keterangan",
+    "price": "Masukkan Harga",
+    "category": "Masukkan Kategori",
+    "image": "Pilh gambar"
+  },
+  "button": {
+    "add": "Tambah",
+    "save": "Simpan",
+    "cancel": "Batal"
+  },
+  "validation": {
+    "titleRequired": "Form produk harus diisi.",
+    "nameRequired": "Nama harus diisi.",
+    "imageRequired": "Gambar harus diisi.",
+    "descriptionRequired": "Keterangan harus diisi.",
+    "priceRequired": "Harga harus diisi.",
+    "categoryRequired": "Kategori harus diisi."
   }
 }

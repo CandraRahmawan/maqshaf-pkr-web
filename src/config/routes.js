@@ -22,6 +22,11 @@ const routes = [
     component: lazy(() => import('views/dashboard/products/ProductList.view')),
   },
   {
+    path: '/dashboard/produk/:id',
+    exact: true,
+    component: lazy(() => import('views/dashboard/products/ProductDetail.view')),
+  },
+  {
     path: '/dashboard/santri',
     exact: true,
     component: lazy(() => import('views/dashboard/users/UserList.view')),

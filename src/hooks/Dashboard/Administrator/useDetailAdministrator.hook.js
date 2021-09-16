@@ -63,7 +63,7 @@ const useDetailAdministratorHook = (t, history, id) => {
   }, [data, dataUpdate, error, errorUpdate]);
 
   return {
-    error,
+    error: error || errorUpdate,
     isLoading: isLoading || isLoadingUpdate,
     formik,
     showAlert,
