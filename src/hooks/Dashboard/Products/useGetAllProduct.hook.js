@@ -7,7 +7,10 @@ const useGetAllProductHook = () => {
     fetchApiClient(`/mastergood/all`, 'GET', {
       limit: pageSummary.limit,
       page: pageSummary.page
-    })
+    }),
+    {
+      refetchOnMount: "always"
+    }
   );
 
   const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('listAllProductSearch', () =>

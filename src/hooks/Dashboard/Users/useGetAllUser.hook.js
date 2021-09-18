@@ -13,7 +13,10 @@ const useGetAllUserHook = () => {
     fetchApiClient(`/user/all`, 'GET', {
       limit: pageSummary.limit,
       page: pageSummary.page
-    })
+    }),
+    {
+      refetchOnMount: "always"
+    }
   );
 
   const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('listAllUserSearch', () =>

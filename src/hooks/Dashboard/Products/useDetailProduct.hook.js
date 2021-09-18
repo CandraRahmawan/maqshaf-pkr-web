@@ -19,7 +19,12 @@ const useDetailProductHook = (t, history, id) => {
   const [showAlert, setShowAlert] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
 
-  const { data: dataProduct } = useQuery(['getDetailAdministrator', id], () => id !== 'add' && fetchApiClient(`/mastergood/${id}`, 'GET'));
+  const { data: dataProduct } = useQuery(['getDetailAdministrator', id], () => fetchApiClient(`/mastergood/${id}`, 'GET'),
+    {
+      enabled: id !== 'add',
+      refetchOnMount: "always"
+    }
+  );
 
   const { data, error, isLoading, mutate } = useMutation('administratorMutation', (requestData) =>
     fetchApiClient(`/mastergood/add`, 'POST', requestData, true)
@@ -35,12 +40,12 @@ const useDetailProductHook = (t, history, id) => {
       description: '',
       image: '',
       price: '',
-      category: '',
+      category: 'makanan',
       isActive: '1',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      if (!isEmpty(selectedFile)) {
+      if (selectedFile) {
         setImageMessage('')
         const formData = new FormData();
         const { name, description, price, category } = values
@@ -51,7 +56,7 @@ const useDetailProductHook = (t, history, id) => {
         if (selectedFile.name) {
           formData.append('image_file', selectedFile, selectedFile.name)
         }
-  
+
         if (id !== 'add') {
           mutateUpdate(formData)
         } else {
@@ -66,7 +71,7 @@ const useDetailProductHook = (t, history, id) => {
   const onChangeFile = (event) => {
     setSelectedFile(event.target.files[0]);
     setImageMessage('')
-   };
+  };
 
   useEffect(() => {
     if (!isEmpty(dataProduct?.data)) {
@@ -97,7 +102,7 @@ const useDetailProductHook = (t, history, id) => {
     newValue = newValue.replace(/,/g, '')
     newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     return newValue
-  } 
+  }
 
   return {
     formatMoney,
