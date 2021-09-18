@@ -5,7 +5,9 @@
     "title": "Daftar Administrator",
     "header": {
       "username": "Username",
-      "id": "Admin ID"
+      "id": "Admin ID",
+      "nis": "NIS",
+      "address": "Alamat"
     }
   },
   "form": {
