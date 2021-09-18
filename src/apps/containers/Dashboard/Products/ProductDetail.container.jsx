@@ -124,7 +124,6 @@ const ProductDetailContainer = ({ history, classes, t }) => {
                 error={formik.touched.category && Boolean(formik.errors.category)}
                 helperText={formik.touched.category && formik.errors.category}
               >
-                <MenuItem value={""}>- Pilih -</MenuItem>
                 <MenuItem value={"makanan"}>Makanan</MenuItem>
                 <MenuItem value={"minuman"}>Minuman</MenuItem>
               </Select>
@@ -144,7 +143,7 @@ const ProductDetailContainer = ({ history, classes, t }) => {
             )
           }
           <Box display="flex" gridGap={20} justifyContent="center" paddingTop={4}>
-            <Button variant="contained" color="secondary" className={classes.button_tambah} onClick={() => history.replace('/dashboard/administrator')}>
+            <Button variant="contained" color="secondary" className={classes.button_tambah} onClick={() => history.replace('/dashboard/produk')}>
               {t('dashboard_product:button.cancel')}
             </Button>
             <Button variant="contained" color="primary" className={classes.button_tambah} type="submit" isLoading={isLoading}>

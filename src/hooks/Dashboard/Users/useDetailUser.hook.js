@@ -20,7 +20,12 @@ const useDetailUserHook = (t, history, id) => {
   const [showAlert, setShowAlert] = useState(false);
   const [showQRReader, setShowQRReader] = useState(false);
 
-  const { data: dataUser } = useQuery(['getDetailUser', id], () => id !== 'add' && fetchApiClient(`/user/${id}`, 'GET'));
+  const { data: dataUser } = useQuery(['getDetailUser', id], () => fetchApiClient(`/user/${id}`, 'GET'),
+    {
+      enabled: id !== 'add',
+      refetchOnMount: "always"
+    }
+  );
 
   const { data, error, isLoading, mutate } = useMutation('userMutation', (requestData) =>
     fetchApiClient(`/user/add`, 'POST', requestData)

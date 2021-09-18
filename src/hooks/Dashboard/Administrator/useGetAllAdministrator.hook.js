@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
 import { useMutation, useQuery } from 'react-query';
 import useTableHook from '../useTable.hook';
@@ -7,7 +8,10 @@ const useGetAllAdministratorHook = () => {
     fetchApiClient(`/administrator/all`, 'GET', {
       limit: pageSummary.limit,
       page: pageSummary.page
-    })
+    }),
+    {
+      refetchOnMount: "always"
+    }
   );
 
   const { mutate } = useMutation('administratorMutationUpdate', (id) =>

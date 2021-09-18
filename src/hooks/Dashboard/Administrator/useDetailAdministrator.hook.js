@@ -11,12 +11,17 @@ const useDetailAdministratorHook = (t, history, id) => {
   const validationSchema = yup.object({
     fullName: yup.string().required(t('dashboard_administrator:validation.fullNameRequired')),
     username: yup.string().required(t('dashboard_administrator:validation.usernameRequired')),
-    ...validationPass 
+    ...validationPass
   });
 
   const [showAlert, setShowAlert] = useState(false);
 
-  const { data: dataUser } = useQuery(['getDetailAdministrator', id], () => id !== 'add' && fetchApiClient(`/administrator/${id}`, 'GET'));
+  const { data: dataUser } = useQuery(['getDetailAdministrator', id], () => fetchApiClient(`/administrator/${id}`, 'GET'),
+    {
+      enabled: id !== 'add',
+      refetchOnMount: "always"
+    }
+  );
 
   const { data, error, isLoading, mutate } = useMutation('administratorMutation', (requestData) =>
     fetchApiClient(`/administrator/add`, 'POST', requestData)
