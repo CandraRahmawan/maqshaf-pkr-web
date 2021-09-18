@@ -2,13 +2,18 @@
   "metaTitle": "Daftar Santri",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "table": {
+    "title": "Daftar Santri",
     "header": {
       "nis": "NIS",
       "class": "Kelas"
-    }
+    },
+    "confirmReset": "Reset PIN",
+    "titleConfirmReset": "Reset PIN",
+    "searchName": "Cari Nama",
+    "searchClass": "Cari Kelas"
   },
   "form": {
-    "title": "Form Santri",
+    "title": "Forma Santri",
     "nis": "NIS",
     "fullName": "Nama Lengkap",
     "class": "Kelas",
@@ -25,7 +30,9 @@
   "button": {
     "add": "Tambah",
     "save": "Simpan",
-    "cancel": "Batal"
+    "cancel": "Batal",
+    "yes": "Ya",
+    "no": "Tidak"
   },
   "validation": {
     "nisLength": "NIS harus 16 digit.",

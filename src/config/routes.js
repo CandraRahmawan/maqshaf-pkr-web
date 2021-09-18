@@ -22,6 +22,11 @@ const routes = [
     component: lazy(() => import('views/dashboard/products/ProductList.view')),
   },
   {
+    path: '/dashboard/produk/:id',
+    exact: true,
+    component: lazy(() => import('views/dashboard/products/ProductDetail.view')),
+  },
+  {
     path: '/dashboard/santri',
     exact: true,
     component: lazy(() => import('views/dashboard/users/UserList.view')),
@@ -37,14 +42,19 @@ const routes = [
     component: lazy(() => import('views/dashboard/administrator/AdministratorList.view')),
   },
   {
+    path: '/dashboard/administrator/:id',
+    exact: true,
+    component: lazy(() => import('views/dashboard/administrator/AdministratorDetail.view')),
+  },
+  {
     path: '/dashboard/transaksi/masuk',
     exact: true,
-    component: lazy(() => import('views/dashboard/users/UserList.view')),
+    component: lazy(() => import('views/dashboard/transaction/TransactionCreditList.view')),
   },
   {
     path: '/dashboard/transaksi/keluar',
     exact: true,
-    component: lazy(() => import('views/dashboard/users/UserList.view')),
+    component: lazy(() => import('views/dashboard/transaction/TransactionDebetList.view')),
   },
   {
     path: '/dashboard/cek-saldo',

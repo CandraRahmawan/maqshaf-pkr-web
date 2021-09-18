@@ -1,5 +1,11 @@
-import { TableRow, TableCell } from '@material-ui/core';
+import { TableRow, TableCell, Box, Button } from '@material-ui/core';
 import { func, object } from 'prop-types';
+import Pagination from '@material-ui/lab/Pagination';
+import IconButton from '@material-ui/core/IconButton';
+import { useHistory } from "react-router-dom";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
 import { withStyles } from '@material-ui/core/styles';
 import { DataTables } from 'apps/components/ui';
 import { defaultFormatDate } from 'helpers/formattor.helper';
@@ -34,23 +40,44 @@ const headers = (t) => [
   },
 ];
 
-const AdministratorListContainer = ({ t }) => {
-  const { data, isLoading } = useGetAllAdministratorHook();
+const AdministratorListContainer = ({ classes, t }) => {
+  let history = useHistory();
+  const { data, isLoading, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook();
   return (
-    <DataTables isLoading={isLoading} headers={headers(t)}>
-      {data?.data?.map((row, index) => (
-        <TableRow key={row.id}>
-          <TableCell component="th" scope="row">
-            {index + 1}
-          </TableCell>
-          <TableCell>{row.administratorId}</TableCell>
-          <TableCell>{row.username}</TableCell>
-          <TableCell>{row.fullName}</TableCell>
-          <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
-          <TableCell>-</TableCell>
-        </TableRow>
-      ))}
-    </DataTables>
+    <>
+      <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
+        <Box alignSelf="center">
+          <h2>{t('dashboard_administrator:table.title')}</h2>
+        </Box>
+      </Box>
+      <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/administrator/add')}>
+        {t('dashboard_administrator:button.add')}
+      </Button>
+      <DataTables isLoading={isLoading} headers={headers(t)}>
+        {data?.data?.map((row, index) => (
+          <TableRow key={row.administratorId}>
+            <TableCell component="th" scope="row">
+              {index + 1}
+            </TableCell>
+            <TableCell>{row.administratorId}</TableCell>
+            <TableCell>{row.username}</TableCell>
+            <TableCell>{row.fullName}</TableCell>
+            <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
+            <TableCell>
+              <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/administrator/' + row.administratorId)} >
+                <EditIcon fontSize="small" />
+              </IconButton>
+              <IconButton title="Hapus" aria-label="delete" color="secondary" onClick={() => handleDelete(row.administratorId)} >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </TableCell>
+          </TableRow>
+        ))}
+      </DataTables>
+      <Box marginTop={2} display="flex" justifyContent="flex-end">
+        <Pagination count={getPaginationTotal()} onChange={handleChangePage} page={Number(pageSummary.page)}  color="primary" />
+      </Box>
+    </>
   );
 };
 

@@ -6,24 +6,21 @@ import { useMutation, useQuery } from 'react-query';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
 import * as yup from 'yup';
 
-const useGetAllUserHook = (t, history, id) => {
+const useDetailUserHook = (t, history, id) => {
 
   const validationSchema = yup.object({
-    nis: yup.string().length(16, t('dashboard_user:validation.nisLength'))
+    nis: yup.string()//.length(16, t('dashboard_user:validation.nisLength'))
       .matches(/^[0-9]+$/, t('dashboard_user:validation.nisFormat'))
       .required(t('dashboard_user:validation.nisRequired')),
     fullName: yup.string().required(t('dashboard_user:validation.fullNameRequired')),
     class: yup.string().required(t('dashboard_user:validation.classRequired')),
     address: yup.string().required(t('dashboard_user:validation.addressRequired')),
-    pin: yup.string().length(6, t('dashboard_user:validation.pinLength'))
-      .matches(/^[0-9]+$/, t('dashboard_user:validation.pinFormat'))
-      .required(t('dashboard_user:validation.pinRequired')),
   });
 
   const [showAlert, setShowAlert] = useState(false);
   const [showQRReader, setShowQRReader] = useState(false);
 
-  const { data: dataUser } = useQuery('getDetailUser', () => id !== 'add' && fetchApiClient(`/user/${id}`, 'GET'));
+  const { data: dataUser } = useQuery(['getDetailUser', id], () => id !== 'add' && fetchApiClient(`/user/${id}`, 'GET'));
 
   const { data, error, isLoading, mutate } = useMutation('userMutation', (requestData) =>
     fetchApiClient(`/user/add`, 'POST', requestData)
@@ -39,11 +36,10 @@ const useGetAllUserHook = (t, history, id) => {
       fullName: '',
       class: '',
       address: '',
-      pin: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      if (id) {
+      if (id !== 'add') {
         mutateUpdate(values)
       } else {
         mutate(values);
@@ -70,7 +66,6 @@ const useGetAllUserHook = (t, history, id) => {
       formik.setFieldValue('nis', nis)
       formik.setFieldValue('fullName', fullName)
       formik.setFieldValue('address', address)
-      formik.setFieldValue('pin', pin)
       formik.setFieldValue('class', user.class)
     }
   }, [dataUser?.data])
@@ -86,7 +81,7 @@ const useGetAllUserHook = (t, history, id) => {
   }, [data, dataUpdate, error, errorUpdate]);
 
   return {
-    error,
+    error: error || errorUpdate,
     isLoading: isLoading || isLoadingUpdate,
     formik,
     showAlert,
@@ -97,4 +92,4 @@ const useGetAllUserHook = (t, history, id) => {
   };
 };
 
-export default useGetAllUserHook;
+export default useDetailUserHook;

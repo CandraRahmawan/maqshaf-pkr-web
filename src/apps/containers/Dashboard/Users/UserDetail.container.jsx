@@ -24,12 +24,17 @@ const UserDetailContainer = ({ history, classes, t }) => {
         <Divider className={classes.title_divider} />
         {showAlert && <Alert severity="error">{error?.message}</Alert>}
         {showQRReader ? (
-          <QrReader
-            delay={300}
-            onError={handleScanError}
-            onScan={handleScan}
-            style={{ width: '100%' }}
-          />
+          <>
+            <Button variant="contained" color="secondary" className={classes.button_tambah} onClick={() => setShowQRReader(false)}>
+              {t('dashboard_user:button.cancel')}
+            </Button>
+            <QrReader
+              delay={300}
+              onError={handleScanError}
+              onScan={handleScan}
+              style={{ width: '100%' }}
+            />
+          </>
         ) : (
           <form onSubmit={formik.handleSubmit} className={classes.form}>
             <Box display="flex" marginBottom={1} marginTop={1}>
@@ -45,9 +50,6 @@ const UserDetailContainer = ({ history, classes, t }) => {
                 placeholder={t('dashboard_user:placeholder.nis')}
                 fullWidth
                 margin="normal"
-                inputProps={{
-                  maxLength: 16,
-                }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -116,26 +118,6 @@ const UserDetailContainer = ({ history, classes, t }) => {
                 helperText={formik.touched.address && formik.errors.address}
                 style={{ margin: 8 }}
                 placeholder={t('dashboard_user:placeholder.address')}
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Box>
-            <Box display="flex" marginBottom={1}>
-              <TextField
-                type="password"
-                id="pin"
-                label={t('dashboard_user:form.pin')}
-                name="pin"
-                autoComplete="off"
-                value={formik.values.pin}
-                error={formik.touched.pin && Boolean(formik.errors.pin)}
-                onChange={formik.handleChange}
-                helperText={formik.touched.pin && formik.errors.pin}
-                style={{ margin: 8 }}
-                placeholder={t('dashboard_user:placeholder.pin')}
                 fullWidth
                 margin="normal"
                 InputLabelProps={{

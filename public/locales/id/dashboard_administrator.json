@@ -2,9 +2,33 @@
   "metaTitle": "Daftar Administrator",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "table": {
+    "title": "Daftar Administrator",
     "header": {
       "username": "Username",
-      "id": "Admin ID"
+      "id": "Admin ID",
+      "nis": "NIS",
+      "address": "Alamat"
     }
+  },
+  "form": {
+    "title": "Form Administrator",
+    "username": "Username",
+    "fullName": "Nama Lengkap",
+    "password": "Password"
+  },
+  "placeholder": {
+    "username": "Masukkan username",
+    "fullName": "Masukkan nama lengkap",
+    "password": "Masukkan password"
+  },
+  "button": {
+    "add": "Tambah",
+    "save": "Simpan",
+    "cancel": "Batal"
+  },
+  "validation": {
+    "usernameRequired": "Username harus diisi.",
+    "fullNameRequired": "Nama Lengkap harus diisi.",
+    "passwordRequired": "Password harus diisi."
   }
 }

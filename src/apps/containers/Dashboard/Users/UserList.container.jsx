@@ -1,10 +1,12 @@
-import { TableRow, TableCell, Button } from '@material-ui/core';
+import { TableRow, TableCell, Button, Box, Dialog, TextField, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
 import { func, object } from 'prop-types';
+import Pagination from '@material-ui/lab/Pagination';
+import Alert from '@material-ui/lab/Alert';
 import { withStyles } from '@material-ui/core/styles';
 import { DataTables } from 'apps/components/ui';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
-// import DeleteIcon from '@material-ui/icons/Delete';
+import LockOpenOutlined from '@material-ui/icons/LockOpenOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 import useGetAllUserHook from 'hooks/Dashboard/Users/useGetAllUser.hook';
 import { defaultFormatDate } from 'helpers/formattor.helper';
@@ -45,13 +47,35 @@ const headers = (t) => [
 
 const UserListContainer = ({ classes, t }) => {
   let history = useHistory();
-  const { data, isLoading } = useGetAllUserHook();
+  const { showAlert, error, message, data, isLoading,
+    showPopup, handleReset, setSelectedData, selectedData, setShowPopup,
+    pageSummary, handleChange, handleSearch, getPaginationTotal, handleChangePage
+  } = useGetAllUserHook();
   return (
     <>
+      <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
+        <Box alignSelf="center">
+          <h2>{t('dashboard_user:table.title')}</h2>
+        </Box>
+      </Box>
+      {showAlert && <Alert severity={error?.message ? 'error' : 'success'}>{message}</Alert>}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/santri/add')}>
-        Tambah
+        {t('dashboard_user:button.add')}
       </Button>
       <DataTables isLoading={isLoading} headers={headers(t)}>
+        <TableRow>
+          <TableCell component="th" scope="row"></TableCell>
+          <TableCell></TableCell>
+          <TableCell>
+            <TextField variant="outlined" fullWidth placeholder={t('dashboard_user:table.searchName')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'name')} />
+          </TableCell>
+          <TableCell>
+            <TextField variant="outlined" fullWidth placeholder={t('dashboard_user:table.searchClass')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'class')} />
+          </TableCell>
+          <TableCell></TableCell>
+          <TableCell></TableCell>
+          <TableCell></TableCell>
+        </TableRow>
         {data?.data?.map((row, index) => (
           <TableRow key={row.userId}>
             <TableCell component="th" scope="row">
@@ -63,16 +87,43 @@ const UserListContainer = ({ classes, t }) => {
             <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
             <TableCell>{row.createdBy}</TableCell>
             <TableCell>
-              <IconButton aria-label="edit" color="primary" onClick={() => history.push('/dashboard/santri/'+row.userId)} >
+              <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/santri/' + row.userId)} >
                 <EditIcon fontSize="small" />
               </IconButton>
-              {/* <IconButton aria-label="delete" color="secondary" >
-                <DeleteIcon fontSize="small" />
-              </IconButton> */}
+              <IconButton title="Reset PIN" aria-label="delete" color="secondary" onClick={() => {
+                setShowPopup(true)
+                setSelectedData(row)
+              }} >
+                <LockOpenOutlined fontSize="small" />
+              </IconButton>
             </TableCell>
           </TableRow>
         ))}
       </DataTables>
+      <Box marginTop={2} display="flex" justifyContent="flex-end">
+        <Pagination count={getPaginationTotal()} onChange={handleChangePage} page={Number(pageSummary.page)} color="primary" />
+      </Box>
+      <Dialog
+        open={showPopup}
+        onClose={() => setShowPopup(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {t('dashboard_user:table.titleConfirmReset')}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {t('dashboard_user:table.confirmReset')} {selectedData.nis}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowPopup(false)}> {t('dashboard_user:button.no')}</Button>
+          <Button onClick={handleReset} autoFocus>
+            {t('dashboard_user:button.yes')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
