@@ -1,5 +1,6 @@
 import { TableRow, TableCell, Box, Button } from '@material-ui/core';
 import { func, object } from 'prop-types';
+import Pagination from '@material-ui/lab/Pagination';
 import IconButton from '@material-ui/core/IconButton';
 import { useHistory } from "react-router-dom";
 import EditIcon from '@material-ui/icons/Edit';
@@ -41,7 +42,7 @@ const headers = (t) => [
 
 const AdministratorListContainer = ({ classes, t }) => {
   let history = useHistory();
-  const { data, isLoading, handleDelete } = useGetAllAdministratorHook();
+  const { data, isLoading, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook();
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -73,6 +74,9 @@ const AdministratorListContainer = ({ classes, t }) => {
           </TableRow>
         ))}
       </DataTables>
+      <Box marginTop={2} display="flex" justifyContent="flex-end">
+        <Pagination count={getPaginationTotal()} onChange={handleChangePage} page={Number(pageSummary.page)}  color="primary" />
+      </Box>
     </>
   );
 };

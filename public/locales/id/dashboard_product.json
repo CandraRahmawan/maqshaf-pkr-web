@@ -10,7 +10,8 @@
       "price": "Harga",
       "category": "Kategori",
       "status": "Status"
-    }
+    },
+    "search": "Cari Produk"
   },
   "form": {
     "title": "Form Produk",

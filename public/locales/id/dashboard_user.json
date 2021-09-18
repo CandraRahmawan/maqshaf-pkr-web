@@ -8,7 +8,9 @@
       "class": "Kelas"
     },
     "confirmReset": "Reset PIN",
-    "titleConfirmReset": "Reset PIN"
+    "titleConfirmReset": "Reset PIN",
+    "searchName": "Cari Nama",
+    "searchClass": "Cari Kelas"
   },
   "form": {
     "title": "Forma Santri",

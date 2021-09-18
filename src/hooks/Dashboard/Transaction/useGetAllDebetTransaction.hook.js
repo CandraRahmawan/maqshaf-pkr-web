@@ -1,18 +1,20 @@
-import { useQuery } from 'react-query';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
+import { useQuery } from 'react-query';
 import useTableHook from '../useTable.hook';
 
-const useGetAllProductHook = () => {
-  const { data, isLoading, refetch: refetchAll } = useQuery('listAllProduct', () =>
-    fetchApiClient(`/mastergood/all`, 'GET', {
+const useGetAllDebetTransactionHook = () => {
+
+  const { data, isLoading, refetch: refetchAll } = useQuery('getDebetTransactions', () =>
+    fetchApiClient(`/debet/all`, 'GET', {
       limit: pageSummary.limit,
       page: pageSummary.page
     })
   );
 
-  const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('listAllProductSearch', () =>
-    fetchApiClient(`/mastergood/search`, 'GET', {
-      name: searchValue.name,
+  const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('getDebetTransactionsSearch', () =>
+    fetchApiClient(`/debet/search`, 'GET', {
+      transactionCode: searchValue.trxCode,
+      nis: searchValue.nis,
       limit: pageSummary.limit,
       page: pageSummary.page
     }),
@@ -41,7 +43,6 @@ const useGetAllProductHook = () => {
     getPaginationTotal,
     handleChangePage
   };
-
 };
 
-export default useGetAllProductHook;
+export default useGetAllDebetTransactionHook;

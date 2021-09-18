@@ -49,12 +49,12 @@ const routes = [
   {
     path: '/dashboard/transaksi/masuk',
     exact: true,
-    component: lazy(() => import('views/dashboard/users/UserList.view')),
+    component: lazy(() => import('views/dashboard/transaction/TransactionCreditList.view')),
   },
   {
     path: '/dashboard/transaksi/keluar',
     exact: true,
-    component: lazy(() => import('views/dashboard/users/UserList.view')),
+    component: lazy(() => import('views/dashboard/transaction/TransactionDebetList.view')),
   },
   {
     path: '/dashboard/cek-saldo',

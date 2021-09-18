@@ -1,0 +1,14 @@
+{
+  "metaTitle": "Transaksi Masuk",
+  "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
+  "table": {
+    "title": "Transaksi Masuk",
+    "header": {
+      "trxCode": "Kode Transaksi",
+      "amount": "Nominal",
+      "nis": "NIS"
+    },
+    "searchTrxCode": "Cari Kode Transaksi",
+    "searchNIS": "Cari NIS"
+  }
+}

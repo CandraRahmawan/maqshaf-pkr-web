@@ -2,15 +2,45 @@ import { useEffect, useState } from 'react';
 import { useQuery, useMutation } from 'react-query';
 import { IS_OK } from 'constants/httpStatus.constant';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
+import useTableHook from '../useTable.hook';
 
 const useGetAllUserHook = () => {
   const [showAlert, setShowAlert] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
   const [selectedData, setSelectedData] = useState({})
-  const { data, isLoading } = useQuery('listAllUser', () => fetchApiClient(`/user/all`, 'GET'));
+
+  const { data, isLoading, refetch: refetchAll } = useQuery('listAllUser', () =>
+    fetchApiClient(`/user/all`, 'GET', {
+      limit: pageSummary.limit,
+      page: pageSummary.page
+    })
+  );
+
+  const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('listAllUserSearch', () =>
+    fetchApiClient(`/user/search`, 'GET', {
+      class: searchValue.class,
+      name: searchValue.name,
+      limit: pageSummary.limit,
+      page: pageSummary.page
+    }),
+    { enabled: false }
+  );
 
   const { data: dataUpdate, error: errorUpdate, mutate: mutateUpdate } = useMutation('userMutationUpdate', (requestData) =>
     fetchApiClient(`/user/reset-pin/${requestData}`, 'PUT', {})
+  )
+
+  const {
+    responseData,
+    searchValue,
+    pageSummary,
+    handleSearch,
+    handleChange,
+    handleChangePage,
+    getPaginationTotal
+  } = useTableHook(
+    { data, refetch: refetchAll },
+    { data: dataSearch, refetch: refetchSearch }
   )
 
   useEffect(() => {
@@ -33,7 +63,7 @@ const useGetAllUserHook = () => {
   }
 
   return {
-    data,
+    data: responseData,
     showAlert,
     message: errorUpdate?.message || dataUpdate?.message,
     isLoading,
@@ -42,7 +72,12 @@ const useGetAllUserHook = () => {
     handleReset,
     selectedData,
     setSelectedData,
-    setShowPopup
+    pageSummary,
+    setShowPopup,
+    handleSearch,
+    handleChange,
+    handleChangePage,
+    getPaginationTotal
   };
 };
 

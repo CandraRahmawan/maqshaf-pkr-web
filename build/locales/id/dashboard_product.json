@@ -9,6 +9,7 @@
       "price": "Harga",
       "category": "Kategori",
       "status": "Status"
-    }
+    },
+    "search": "Cari Produk"
   }
 }

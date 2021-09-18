@@ -1,18 +1,18 @@
-import { useQuery } from 'react-query';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
+import { useQuery } from 'react-query';
 import useTableHook from '../useTable.hook';
 
-const useGetAllProductHook = () => {
-  const { data, isLoading, refetch: refetchAll } = useQuery('listAllProduct', () =>
-    fetchApiClient(`/mastergood/all`, 'GET', {
+const useGetAllCreditTransactionHook = () => {
+  const { data, isLoading, refetch: refetchAll } = useQuery('getCreditTransactions', () =>
+    fetchApiClient(`/deposit/all`, 'GET', {
       limit: pageSummary.limit,
       page: pageSummary.page
     })
   );
 
-  const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('listAllProductSearch', () =>
-    fetchApiClient(`/mastergood/search`, 'GET', {
-      name: searchValue.name,
+  const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('getCreditTransactionsSearch', () =>
+    fetchApiClient(`/deposit/search`, 'GET', {
+      transactionCode: searchValue.trxCode,
       limit: pageSummary.limit,
       page: pageSummary.page
     }),
@@ -44,4 +44,4 @@ const useGetAllProductHook = () => {
 
 };
 
-export default useGetAllProductHook;
+export default useGetAllCreditTransactionHook;
