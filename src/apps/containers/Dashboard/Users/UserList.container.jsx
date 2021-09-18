@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { DataTables } from 'apps/components/ui';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import LockOpenOutlined from '@material-ui/icons/LockOpenOutlined';
 import EditIcon from '@material-ui/icons/Edit';
 import useGetAllUserHook from 'hooks/Dashboard/Users/useGetAllUser.hook';
@@ -30,6 +31,10 @@ const headers = (t) => [
   {
     name: 'class',
     label: t('dashboard_user:table.header.class'),
+  },
+  {
+    name: 'address',
+    label: t('dashboard_user:table.header.address'),
   },
   {
     name: 'createdAt',
@@ -70,8 +75,9 @@ const UserListContainer = ({ classes, t }) => {
             <TextField variant="outlined" fullWidth placeholder={t('dashboard_user:table.searchName')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'name')} />
           </TableCell>
           <TableCell>
-            <TextField variant="outlined" fullWidth placeholder={t('dashboard_user:table.searchClass')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'class')} />
+            <TextField variant="outlined" style={{ width: 100 }} placeholder={t('dashboard_user:table.searchClass')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'class')} />
           </TableCell>
+          <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
@@ -84,6 +90,7 @@ const UserListContainer = ({ classes, t }) => {
             <TableCell>{row.nis}</TableCell>
             <TableCell>{row.fullName}</TableCell>
             <TableCell>{row.class}</TableCell>
+            <TableCell>{row.address}</TableCell>
             <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
             <TableCell>{row.createdBy}</TableCell>
             <TableCell>
@@ -95,6 +102,12 @@ const UserListContainer = ({ classes, t }) => {
                 setSelectedData(row)
               }} >
                 <LockOpenOutlined fontSize="small" />
+              </IconButton>
+              <IconButton title="Hapus" aria-label="hapus" color="secondary" onClick={() => {
+                setShowPopup(true)
+                setSelectedData({ ...row, isDelete: true })
+              }} >
+                <DeleteIcon fontSize="small" />
               </IconButton>
             </TableCell>
           </TableRow>
@@ -110,11 +123,11 @@ const UserListContainer = ({ classes, t }) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {t('dashboard_user:table.titleConfirmReset')}
+          {selectedData.isDelete ? t('dashboard_user:table.titleConfirmDelete') : t('dashboard_user:table.titleConfirmReset')}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {t('dashboard_user:table.confirmReset')} {selectedData.nis}
+            {selectedData.isDelete ? t('dashboard_user:table.confirmDelete') : t('dashboard_user:table.confirmReset')} {selectedData.nis}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
