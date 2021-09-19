@@ -1,4 +1,10 @@
 {
   "metaTitle": "Lihat Saldo",
-  "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin"
+  "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
+  "button": {
+    "scan": "Scan",
+    "cancel": "Cancel",
+    "close": "Tutup"
+  },
+  "balance": "Saldo"
 }
