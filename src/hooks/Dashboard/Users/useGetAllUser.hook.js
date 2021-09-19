@@ -33,6 +33,10 @@ const useGetAllUserHook = () => {
     fetchApiClient(`/user/reset-pin/${requestData}`, 'PUT', {})
   )
 
+  const { data: dataDelete, error: errorDelete, mutate: mutateDelete } = useMutation('userMutationDelete', (requestData) =>
+    fetchApiClient(`/user/delete/${requestData}`, 'DELETE', {})
+  )
+
   const {
     responseData,
     searchValue,
@@ -47,22 +51,27 @@ const useGetAllUserHook = () => {
   )
 
   useEffect(() => {
-    if (IS_OK(dataUpdate)) {
+    if (IS_OK(dataUpdate) || IS_OK(dataDelete)) {
       setShowAlert(true);
     }
 
-    if (errorUpdate) {
+    if (errorUpdate || errorDelete) {
       setShowAlert(true);
     }
 
     setTimeout(() => {
       setShowAlert(false)
     }, 4000)
-  }, [dataUpdate, errorUpdate]);
+  }, [dataUpdate, errorUpdate, dataDelete, errorDelete]);
 
-  const handleReset = () => {
-    mutateUpdate(selectedData.userId)
-    setShowPopup(false)
+  const handleConfirm = (isDelete) => {
+    if (isDelete) {
+      mutateDelete(selectedData.userId)
+      setShowPopup(false)
+    } else {
+      mutateUpdate(selectedData.userId)
+      setShowPopup(false)
+    }
   }
 
   return {
@@ -72,7 +81,7 @@ const useGetAllUserHook = () => {
     isLoading,
     error: errorUpdate,
     showPopup,
-    handleReset,
+    handleConfirm,
     selectedData,
     setSelectedData,
     pageSummary,

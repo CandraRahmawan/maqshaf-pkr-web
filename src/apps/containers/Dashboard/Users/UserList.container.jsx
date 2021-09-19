@@ -53,7 +53,7 @@ const headers = (t) => [
 const UserListContainer = ({ classes, t }) => {
   let history = useHistory();
   const { showAlert, error, message, data, isLoading,
-    showPopup, handleReset, setSelectedData, selectedData, setShowPopup,
+    showPopup, handleConfirm, setSelectedData, selectedData, setShowPopup,
     pageSummary, handleChange, handleSearch, getPaginationTotal, handleChangePage
   } = useGetAllUserHook();
   return (
@@ -132,7 +132,7 @@ const UserListContainer = ({ classes, t }) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShowPopup(false)}> {t('dashboard_user:button.no')}</Button>
-          <Button onClick={handleReset} autoFocus>
+          <Button onClick={() => handleConfirm(selectedData.isDelete)} autoFocus>
             {t('dashboard_user:button.yes')}
           </Button>
         </DialogActions>

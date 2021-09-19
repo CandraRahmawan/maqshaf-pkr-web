@@ -5,10 +5,13 @@
     "title": "Daftar Santri",
     "header": {
       "nis": "NIS",
-      "class": "Kelas"
+      "class": "Kelas",
+      "address": "Alamat"
     },
     "confirmReset": "Reset PIN",
+    "confirmDelete": "Hapus Santri",
     "titleConfirmReset": "Reset PIN",
+    "titleConfirmDelete": "Hapus Santri",
     "searchName": "Cari Nama",
     "searchClass": "Cari Kelas"
   },
