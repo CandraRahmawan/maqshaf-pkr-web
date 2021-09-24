@@ -90,7 +90,11 @@ const ProductListContainer = ({ t, classes }) => {
             <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
             <TableCell>{rupiahFormat(row.price)}</TableCell>
             <TableCell>{row.category}</TableCell>
-            <TableCell>{row.isActive}</TableCell>
+            <TableCell>
+              <div className={row.isActive === 1 ? classes.status_active : classes.status_inactive}>
+                {row.isActive === 1 ? 'Aktif' : 'Non Aktif'}
+              </div>
+            </TableCell>
             <TableCell>
               <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/produk/' + row.masterGoodsId)} >
                 <EditIcon fontSize="small" />

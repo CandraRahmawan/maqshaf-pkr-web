@@ -18,6 +18,22 @@ const styles = (theme) => ({
   text_error: {
     color: '#f44336',
     fontSize: 12
+  },
+  status_active: {
+    color: 'white',
+    backgroundColor: 'green',
+    padding: 5,
+    borderRadius: 4,
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  status_inactive: {
+    color: 'white',
+    backgroundColor: 'red',
+    padding: 5,
+    borderRadius: 4,
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 

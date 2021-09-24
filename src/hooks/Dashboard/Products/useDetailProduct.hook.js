@@ -10,7 +10,7 @@ const useDetailProductHook = (t, history, id) => {
   const validationSchema = yup.object({
     name: yup.string().required(t('dashboard_product:validation.nameRequired')),
     // image: yup.string().required(t('dashboard_product:validation.imageRequired')),
-    description: yup.string().required(t('dashboard_product:validation.descriptionRequired')),
+    // description: yup.string().required(t('dashboard_product:validation.descriptionRequired')),
     price: yup.string().required(t('dashboard_product:validation.priceRequired')),
     category: yup.string().required(t('dashboard_product:validation.categoryRequired')),
   });
@@ -48,11 +48,12 @@ const useDetailProductHook = (t, history, id) => {
       if (selectedFile) {
         setImageMessage('')
         const formData = new FormData();
-        const { name, description, price, category } = values
+        const { name, description, price, category, isActive } = values
         formData.append('name', name)
         formData.append('description', description)
         formData.append('price', Math.round(price.replaceAll(/,/g, '')))
         formData.append('category', category)
+        formData.append('isActive', isActive)
         if (selectedFile.name) {
           formData.append('image_file', selectedFile, selectedFile.name)
         }
@@ -94,6 +95,7 @@ const useDetailProductHook = (t, history, id) => {
 
     if (error || errorUpdate) {
       setShowAlert(true);
+      window.scrollTo(0, 0)
     }
   }, [data, dataUpdate, error, errorUpdate]);
 

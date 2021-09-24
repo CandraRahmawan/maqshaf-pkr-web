@@ -63,7 +63,11 @@ const UserListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_user:table.title')}</h2>
         </Box>
       </Box>
-      {showAlert && <Alert severity={error?.message ? 'error' : 'success'}>{message}</Alert>}
+      {showAlert && (
+        <Box marginBottom={2}>
+          <Alert severity={error?.message ? 'error' : 'success'}>{message}</Alert>
+        </Box>
+      )}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/santri/add')}>
         {t('dashboard_user:button.add')}
       </Button>
