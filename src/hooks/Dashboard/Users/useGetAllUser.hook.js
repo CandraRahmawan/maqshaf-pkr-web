@@ -4,7 +4,7 @@ import { IS_OK } from 'constants/httpStatus.constant';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
 import useTableHook from '../useTable.hook';
 
-const useGetAllUserHook = () => {
+const useGetAllUserHook = (history) => {
   const [showAlert, setShowAlert] = useState(false)
   const [showPopup, setShowPopup] = useState(false)
   const [selectedData, setSelectedData] = useState({})
@@ -36,6 +36,14 @@ const useGetAllUserHook = () => {
   const { data: dataDelete, error: errorDelete, mutate: mutateDelete } = useMutation('userMutationDelete', (requestData) =>
     fetchApiClient(`/user/delete/${requestData}`, 'DELETE', {})
   )
+
+  useEffect(() => {
+    if (history.location.search) {
+      setTimeout(() => {
+        history.replace('/dashboard/santri')
+      }, 2500)
+    }
+  }, [history.location.search])
 
   const {
     responseData,
@@ -78,7 +86,7 @@ const useGetAllUserHook = () => {
     data: responseData,
     showAlert,
     message: errorUpdate?.message || dataUpdate?.message,
-    isLoading,
+    isLoading: isLoading || isLoadingSearch,
     error: errorUpdate,
     showPopup,
     handleConfirm,

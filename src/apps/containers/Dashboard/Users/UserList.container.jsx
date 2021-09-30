@@ -55,7 +55,7 @@ const UserListContainer = ({ classes, t }) => {
   const { showAlert, error, message, data, isLoading,
     showPopup, handleConfirm, setSelectedData, selectedData, setShowPopup,
     pageSummary, handleChange, handleSearch, getPaginationTotal, handleChangePage
-  } = useGetAllUserHook();
+  } = useGetAllUserHook(history);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -63,6 +63,7 @@ const UserListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_user:table.title')}</h2>
         </Box>
       </Box>
+      {history.location.search && <Alert severity="success">{t('common:alert.success')}</Alert>}
       {showAlert && (
         <Box marginBottom={2}>
           <Alert severity={error?.message ? 'error' : 'success'}>{message}</Alert>

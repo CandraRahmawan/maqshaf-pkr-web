@@ -23,7 +23,7 @@ const headers = (t) => [
   },
   {
     name: 'createdAt',
-    label: t('common:label.createdAt'),
+    label: t('common:label.transactionDate'),
   },
 ];
 

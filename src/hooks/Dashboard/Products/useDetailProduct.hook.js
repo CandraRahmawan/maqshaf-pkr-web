@@ -15,6 +15,7 @@ const useDetailProductHook = (t, history, id) => {
     category: yup.string().required(t('dashboard_product:validation.categoryRequired')),
   });
 
+
   const [imageMessage, setImageMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
@@ -90,7 +91,7 @@ const useDetailProductHook = (t, history, id) => {
 
   useEffect(() => {
     if (IS_OK(data) || IS_OK(dataUpdate)) {
-      history.replace('/dashboard/produk');
+      history.replace('/dashboard/produk?success=true');
     }
 
     if (error || errorUpdate) {

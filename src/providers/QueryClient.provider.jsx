@@ -6,11 +6,11 @@ import { isDevelopment } from "constants/common.constant";
 export default function ReactQueryClientProvider({ children }) {
   const queryClient = new QueryClient({
     defaultOptions: {
-      // queries: {
-      //   refetchOnMount: false,
-      //   refetchOnWindowFocus: false,
-      //   retry: false,
-      // },
+      queries: {
+        // refetchOnMount: false,
+        // refetchOnWindowFocus: false,
+        retry: false,
+      },
     },
   });
   return (

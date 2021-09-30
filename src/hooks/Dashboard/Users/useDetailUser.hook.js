@@ -7,7 +7,6 @@ import { fetchApiClient } from 'helpers/fetchApi.helper';
 import * as yup from 'yup';
 
 const useDetailUserHook = (t, history, id) => {
-
   const validationSchema = yup.object({
     nis: yup.string()//.length(16, t('dashboard_user:validation.nisLength'))
       .matches(/^[0-9]+$/, t('dashboard_user:validation.nisFormat'))
@@ -77,7 +76,7 @@ const useDetailUserHook = (t, history, id) => {
 
   useEffect(() => {
     if (IS_OK(data) || IS_OK(dataUpdate)) {
-      history.replace('/dashboard/santri');
+      history.replace('/dashboard/santri?success=true');
     }
 
     if (error || errorUpdate) {

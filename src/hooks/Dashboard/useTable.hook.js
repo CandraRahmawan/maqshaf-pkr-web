@@ -38,8 +38,8 @@ const useTableHook = (response, responseSearch) => {
 
   const handleSearch = (ev) => {
     if (ev.key === 'Enter') {
+      setDataSearch(data)
       setPageSummary(defaultPageSummary)
-      setDataSearch([])
       setTimeout(() => {
         if (isEmpty(searchValue)) {
           response.refetch()

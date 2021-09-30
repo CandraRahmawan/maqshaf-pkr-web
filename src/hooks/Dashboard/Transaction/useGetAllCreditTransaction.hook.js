@@ -34,7 +34,7 @@ const useGetAllCreditTransactionHook = () => {
 
   return {
     data: responseData,
-    isLoading,
+    isLoading: isLoading || isLoadingSearch,
     pageSummary,
     handleSearch,
     handleChange,

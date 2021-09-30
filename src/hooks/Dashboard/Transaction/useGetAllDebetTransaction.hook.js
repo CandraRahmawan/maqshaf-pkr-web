@@ -36,7 +36,7 @@ const useGetAllDebetTransactionHook = () => {
 
   return {
     data: responseData,
-    isLoading,
+    isLoading: isLoading || isLoadingSearch,
     pageSummary,
     handleSearch,
     handleChange,
