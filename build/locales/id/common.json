@@ -10,6 +10,7 @@
     "fullName": "Nama Lengkap",
     "action": "Aksi",
     "createdAt": "Tanggal dibuat",
+    "transactionDate": "Tanggal Transaksi",
     "createdBy": "Dibuat oleh",
     "enterPin": "Masukkan PIN",
     "transactionCode": "Kode Transaksi",
@@ -28,5 +29,8 @@
     "out": "Keluar / Debit",
     "checkBalanced": "Lihat Saldo",
     "logout": "Keluar"
+  },
+  "alert": {
+    "success": "Sukses menyimpan data"
   }
 }

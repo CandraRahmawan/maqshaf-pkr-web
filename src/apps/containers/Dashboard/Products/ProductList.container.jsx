@@ -1,5 +1,6 @@
 import { TableRow, TableCell, Box, Button, TextField } from '@material-ui/core';
 import { func, object } from 'prop-types';
+import Alert from '@material-ui/lab/Alert';
 import Pagination from '@material-ui/lab/Pagination';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -54,7 +55,7 @@ const headers = (t) => [
 
 const ProductListContainer = ({ t, classes }) => {
   let history = useHistory();
-  const { data, isLoading, handleSearch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllProductHook();
+  const { data, isLoading, handleSearch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllProductHook(history);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -62,6 +63,7 @@ const ProductListContainer = ({ t, classes }) => {
           <h2>{t('dashboard_product:table.title')}</h2>
         </Box>
       </Box>
+      {history.location.search && <Alert severity="success">{t('common:alert.success')}</Alert>}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/produk/add')}>
         {t('dashboard_product:button.add')}
       </Button>
@@ -90,7 +92,11 @@ const ProductListContainer = ({ t, classes }) => {
             <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
             <TableCell>{rupiahFormat(row.price)}</TableCell>
             <TableCell>{row.category}</TableCell>
-            <TableCell>{row.isActive}</TableCell>
+            <TableCell>
+              <div className={row.isActive === 1 ? classes.status_active : classes.status_inactive}>
+                {row.isActive === 1 ? 'Aktif' : 'Non Aktif'}
+              </div>
+            </TableCell>
             <TableCell>
               <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/produk/' + row.masterGoodsId)} >
                 <EditIcon fontSize="small" />

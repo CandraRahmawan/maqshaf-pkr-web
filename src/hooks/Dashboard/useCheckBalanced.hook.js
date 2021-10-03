@@ -1,29 +1,54 @@
 import { fetchApiClient } from 'helpers/fetchApi.helper';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { IS_OK } from 'constants/httpStatus.constant';
+import { useFormik } from 'formik';
 import { useQuery } from 'react-query';
 
 const useCheckBalancedHook = () => {
   const [showQRReader, setShowQRReader] = useState(false);
   const [showAlertBalance, setShowAlertBalance] = useState(false);
-  const [nis, setNis] = useState('')
+  const [dataBalance, setDataBalance] = useState({});
 
-  const { data, refetch } = useQuery(['getDetailUser', nis], () => fetchApiClient(`/user/saldo`, 'GET', {
-    nis
+  const formik = useFormik({
+    initialValues: {
+      nis: '',
+    },
+  });
+
+  const { data, error, isLoading, refetch } = useQuery(['getDetailUser'], () => fetchApiClient(`/user/saldo`, 'GET', {
+    nis: formik.values.nis
   }),
     {
       enabled: false,
     }
   );
 
+  useEffect(() => {
+    if (IS_OK(data)) {
+      setDataBalance(data)
+      setShowAlertBalance(true)
+    }
+
+    if (error) {
+      setDataBalance({})
+      setShowAlertBalance(false)
+      formik.setErrors({ nis: 'Siswa tidak ditemukan' })
+    }
+  }, [data, error])
 
   const handleScan = (data) => {
     if (data) {
-      setNis(data)
+      formik.setValues({ nis: data })
       setTimeout(() => {
         refetch()
         setShowQRReader(false)
-        setShowAlertBalance(true)
       }, 0)
+    }
+  }
+
+  const handleBlurNIS = () => {
+    if (formik.values.nis) {
+      refetch()
     }
   }
 
@@ -31,16 +56,23 @@ const useCheckBalancedHook = () => {
     setShowQRReader(false)
   };
 
-
+  const handleCloseModal = () => {
+    setShowAlertBalance(false)
+    setDataBalance({})
+    formik.setFieldValue('nis', '')
+  }
 
   return {
-    data,
+    data: dataBalance,
+    formik,
+    handleBlurNIS,
     showQRReader,
     setShowQRReader,
     handleScan,
     handleScanError,
     showAlertBalance,
-    setShowAlertBalance
+    setShowAlertBalance,
+    handleCloseModal
   };
 };
 

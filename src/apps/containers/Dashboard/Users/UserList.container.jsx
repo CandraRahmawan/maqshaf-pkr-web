@@ -55,7 +55,7 @@ const UserListContainer = ({ classes, t }) => {
   const { showAlert, error, message, data, isLoading,
     showPopup, handleConfirm, setSelectedData, selectedData, setShowPopup,
     pageSummary, handleChange, handleSearch, getPaginationTotal, handleChangePage
-  } = useGetAllUserHook();
+  } = useGetAllUserHook(history);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -63,19 +63,25 @@ const UserListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_user:table.title')}</h2>
         </Box>
       </Box>
-      {showAlert && <Alert severity={error?.message ? 'error' : 'success'}>{message}</Alert>}
+      {history.location.search && <Alert severity="success">{t('common:alert.success')}</Alert>}
+      {showAlert && (
+        <Box marginBottom={2}>
+          <Alert severity={error?.message ? 'error' : 'success'}>{message}</Alert>
+        </Box>
+      )}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/santri/add')}>
         {t('dashboard_user:button.add')}
       </Button>
       <DataTables isLoading={isLoading} headers={headers(t)}>
         <TableRow>
           <TableCell component="th" scope="row"></TableCell>
-          <TableCell></TableCell>
+          <TableCell>
+           <TextField variant="outlined" style={{ width: 100 }} placeholder={t('dashboard_user:table.searchNIS')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'nis')} />
+          </TableCell>
           <TableCell>
             <TextField variant="outlined" fullWidth placeholder={t('dashboard_user:table.searchName')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'name')} />
           </TableCell>
           <TableCell>
-            <TextField variant="outlined" style={{ width: 100 }} placeholder={t('dashboard_user:table.searchClass')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'class')} />
           </TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>

@@ -1,8 +1,9 @@
 import { useQuery } from 'react-query';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
 import useTableHook from '../useTable.hook';
+import { useEffect } from 'react';
 
-const useGetAllProductHook = () => {
+const useGetAllProductHook = (history) => {
   const { data, isLoading, refetch: refetchAll } = useQuery('listAllProduct', () =>
     fetchApiClient(`/mastergood/all`, 'GET', {
       limit: pageSummary.limit,
@@ -22,6 +23,14 @@ const useGetAllProductHook = () => {
     { enabled: false }
   );
 
+  useEffect(() => {
+    if (history.location.search) {
+      setTimeout(() => {
+        history.replace('/dashboard/produk')
+      }, 2500)
+    }
+  }, [history.location.search])
+
   const {
     responseData,
     searchValue,
@@ -37,7 +46,7 @@ const useGetAllProductHook = () => {
 
   return {
     data: responseData,
-    isLoading,
+    isLoading: isLoading || isLoadingSearch,
     pageSummary,
     handleSearch,
     handleChange,

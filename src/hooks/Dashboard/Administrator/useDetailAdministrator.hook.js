@@ -59,11 +59,12 @@ const useDetailAdministratorHook = (t, history, id) => {
 
   useEffect(() => {
     if (IS_OK(data) || IS_OK(dataUpdate)) {
-      history.replace('/dashboard/administrator');
+      history.replace('/dashboard/administrator?success=true');
     }
 
     if (error || errorUpdate) {
       setShowAlert(true);
+      window.scrollTo(0, 0)
     }
   }, [data, dataUpdate, error, errorUpdate]);
 

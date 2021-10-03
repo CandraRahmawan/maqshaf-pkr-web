@@ -1,6 +1,7 @@
 const styles = (theme) => ({
   button_tambah: {
     marginBottom: 20,
+    marginTop: 20,
   },
   title_divider: {
     marginBottom: 20,

@@ -1,6 +1,12 @@
 {
   "metaTitle": "Lihat Saldo",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
+  "form": {
+    "nis": "NIS"
+  },
+  "placeholder": {
+    "nis": "Masukkan NIS"
+  },
   "button": {
     "scan": "Scan",
     "cancel": "Cancel",

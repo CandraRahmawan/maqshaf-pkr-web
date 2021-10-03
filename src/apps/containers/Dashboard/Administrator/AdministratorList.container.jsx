@@ -1,5 +1,6 @@
 import { TableRow, TableCell, Box, Button } from '@material-ui/core';
 import { func, object } from 'prop-types';
+import Alert from '@material-ui/lab/Alert';
 import Pagination from '@material-ui/lab/Pagination';
 import IconButton from '@material-ui/core/IconButton';
 import { useHistory } from "react-router-dom";
@@ -42,7 +43,7 @@ const headers = (t) => [
 
 const AdministratorListContainer = ({ classes, t }) => {
   let history = useHistory();
-  const { data, isLoading, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook();
+  const { data, isLoading, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook(history);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -50,6 +51,7 @@ const AdministratorListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_administrator:table.title')}</h2>
         </Box>
       </Box>
+      {history.location.search && <Alert severity="success">{t('common:alert.success')}</Alert>}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/administrator/add')}>
         {t('dashboard_administrator:button.add')}
       </Button>
