@@ -13,7 +13,7 @@
     "titleConfirmReset": "Reset PIN",
     "titleConfirmDelete": "Hapus Santri",
     "searchName": "Cari Nama",
-    "searchClass": "Cari Kelas"
+    "searchNIS": "Cari NIS"
   },
   "form": {
     "title": "Data Santri",

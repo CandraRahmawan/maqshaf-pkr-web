@@ -75,12 +75,13 @@ const UserListContainer = ({ classes, t }) => {
       <DataTables isLoading={isLoading} headers={headers(t)}>
         <TableRow>
           <TableCell component="th" scope="row"></TableCell>
-          <TableCell></TableCell>
+          <TableCell>
+           <TextField variant="outlined" style={{ width: 100 }} placeholder={t('dashboard_user:table.searchNIS')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'nis')} />
+          </TableCell>
           <TableCell>
             <TextField variant="outlined" fullWidth placeholder={t('dashboard_user:table.searchName')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'name')} />
           </TableCell>
           <TableCell>
-            <TextField variant="outlined" style={{ width: 100 }} placeholder={t('dashboard_user:table.searchClass')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'class')} />
           </TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>

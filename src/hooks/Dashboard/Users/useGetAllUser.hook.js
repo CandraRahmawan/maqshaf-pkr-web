@@ -21,7 +21,7 @@ const useGetAllUserHook = (history) => {
 
   const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('listAllUserSearch', () =>
     fetchApiClient(`/user/search`, 'GET', {
-      class: searchValue.class,
+      nis: searchValue.nis,
       name: searchValue.name,
       limit: pageSummary.limit,
       page: pageSummary.page
