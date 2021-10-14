@@ -3,24 +3,28 @@ import { object, func } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 import {
+  Box,
   TextField,
   InputAdornment,
   Container,
   Grid,
   Dialog,
   DialogTitle,
-  Fab,
-  Badge,
   IconButton,
   Typography,
 } from '@material-ui/core';
+import moment from 'moment';
+import QrReader from 'react-qr-reader';
+import { FooterNavigation } from 'apps/components/core';
 import { useSelector } from 'react-redux';
-import { Search, ShoppingCart, Close } from '@material-ui/icons';
+import { Search, Close } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { Card, Spinner } from 'apps/components/ui';
 import { SearchProduct } from 'apps/components/core';
 import useSearchProductHook from 'hooks/Shop/useSearchProduct.hook';
+import useCheckBalancedHook from 'hooks/Dashboard/useCheckBalanced.hook';
 import { selectCart } from 'redux/reducers/cartSelected.reducer';
+import { rupiahFormat } from 'helpers/formattor.helper';
 
 import styles from './style';
 
@@ -28,11 +32,16 @@ const SearchProductContainer = (props) => {
   const { classes, t, history } = props;
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [openScan, setOpenScan] = useState(false)
   const { goodList, isLoading, setKeyword } = useSearchProductHook();
   const { items, total, qty } = useSelector((state) => state.cartSelected);
   const { action } = useParams();
   const isIdentityAction = action === 'identitas';
   const isEnterPinAction = action === 'pin';
+
+  const { data, showQRReader, setShowQRReader, showAlertBalance, handleCloseModal: handleCloseBalance,
+    handleScan, handleScanError } = useCheckBalancedHook();
+
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -42,6 +51,16 @@ const SearchProductContainer = (props) => {
     history.replace('/');
     setOpen(false);
   };
+
+  const handleOpenScan = () => {
+    setOpenScan(true);
+    setShowQRReader(true);
+  }
+
+  const handleCloseScan = () => {
+    setOpenScan(false);
+    setShowQRReader(false);
+  }
 
   const addCartAction = (items) => {
     dispatch(selectCart({ items }));
@@ -96,7 +115,8 @@ const SearchProductContainer = (props) => {
           </Grid>
         </Grid>
       </Container>
-      <Badge
+      <FooterNavigation t={t} history={history} handleOpenModal={handleOpenModal} handleOpenScan={handleOpenScan} />
+      {/* <Badge
         className={classes.badge}
         badgeContent={items.length > 0 ? items.length : null}
         color="secondary"
@@ -112,15 +132,15 @@ const SearchProductContainer = (props) => {
         >
           <ShoppingCart />
         </Fab>
-      </Badge>
+      </Badge> */}
       <Dialog fullScreen open={open} aria-labelledby="form-dialog-title" onClose={handleCloseModal}>
         <DialogTitle disableTypography>
           <Typography variant="h6">
             {isIdentityAction
               ? t('search_product:dialogIdentityDataTitle')
               : isEnterPinAction
-              ? t('search_product:dialogConfirmationPin')
-              : t('search_product:dialogTotalSummaryTitle')}
+                ? t('search_product:dialogConfirmationPin')
+                : t('search_product:dialogTotalSummaryTitle')}
           </Typography>
           <IconButton aria-label="close" className={classes.closeButton} onClick={handleCloseModal}>
             <Close />
@@ -150,6 +170,46 @@ const SearchProductContainer = (props) => {
             total={total}
           />
         )}
+      </Dialog>
+      <Dialog fullScreen open={openScan} aria-labelledby="form-dialog-title" onClose={handleCloseScan}>
+        <DialogTitle disableTypography>
+          {showQRReader ? (
+            <Box marginTop={4}>
+              <QrReader
+                delay={300}
+                onError={handleScanError}
+                onScan={handleScan}
+                style={{ width: '100%', marginTop: 20 }}
+              />
+            </Box>
+          ) : (
+            <Box marginTop={14} paddingLeft={2} paddingRight={2}>
+              <Box display="flex" marginTop={4}>
+                <Box width={"50%"}>{t('search_product:dialogNIS')}</Box>
+                <Box width={"50%"} textAlign="right"><b>{data?.data?.user?.nis}</b></Box>
+              </Box>
+              <Box display="flex" marginTop={4}>
+                <Box width={"50%"}>{t('search_product:dialogName')}</Box>
+                <Box width={"50%"} textAlign="right"><b>{data?.data?.user?.fullName}</b></Box>
+              </Box>
+              <Box display="flex" marginTop={4} justifyContent="space-between">
+                <Box width={"50%"}>{t('search_product:dialogAddress')}</Box>
+                <Box width={"50%"} textAlign="right"><b>{data?.data?.user?.address}</b></Box>
+              </Box>
+              <Box display="flex" marginTop={4} justifyContent="space-between">
+                <Box width={"50%"}>{t('search_product:dialogLastUpdate')}</Box>
+                <Box width={"50%"} textAlign="right"> <b>{moment(data?.data?.deposit?.updatedAt).format('DD MMMM YYYY, HH:mm')}</b></Box>
+              </Box>
+              <Box display="flex" marginTop={8} fontSize={20} justifyContent="space-between">
+                <Box width={"50%"}><b>{t('search_product:dialogBalanceTotal')}</b></Box>
+                <Box width={"50%"} textAlign="right"><b>{data?.data?.deposit?.saldo && rupiahFormat(data?.data?.deposit?.saldo)}</b></Box>
+              </Box>
+            </Box>
+          )}
+          <IconButton aria-label="close" className={classes.closeButton} onClick={handleCloseScan}>
+            <Close />
+          </IconButton>
+        </DialogTitle>
       </Dialog>
     </div>
   );

@@ -5,7 +5,11 @@ import { fetchApiClient } from 'helpers/fetchApi.helper';
 import useTableHook from '../useTable.hook';
 
 const useGetAllUserHook = (history) => {
-  const [showAlert, setShowAlert] = useState(false)
+  const [alert, setAlert] = useState({
+    isShow: false,
+    type: 'success',
+    message: 'common:alert.success'
+  })
   const [showPopup, setShowPopup] = useState(false)
   const [selectedData, setSelectedData] = useState({})
 
@@ -38,12 +42,23 @@ const useGetAllUserHook = (history) => {
   )
 
   useEffect(() => {
-    if (history.location.search) {
-      setTimeout(() => {
-        history.replace('/dashboard/santri')
-      }, 2500)
+    if (history.location.state?.success) {
+      history.replace('/dashboard/santri');
+      setAlert({
+        isShow: true,
+        type: 'success',
+        message: 'common:alert.success'
+      })
     }
-  }, [history.location.search])
+  }, [history.location.state])
+
+  useEffect(() => {
+    if (alert.isShow) {
+      setTimeout(() => {
+        setAlert({ ...alert, isShow: false })
+      }, 3000)
+    }
+  }, [alert])
 
   const {
     responseData,
@@ -60,16 +75,20 @@ const useGetAllUserHook = (history) => {
 
   useEffect(() => {
     if (IS_OK(dataUpdate) || IS_OK(dataDelete)) {
-      setShowAlert(true);
+      setAlert({
+        isShow: true,
+        type: 'success',
+        message: 'common:alert.success'
+      })
     }
 
     if (errorUpdate || errorDelete) {
-      setShowAlert(true);
+      setAlert({
+        isShow: true,
+        type: 'error',
+        message: 'common:alert.failed'
+      })
     }
-
-    setTimeout(() => {
-      setShowAlert(false)
-    }, 4000)
   }, [dataUpdate, errorUpdate, dataDelete, errorDelete]);
 
   const handleConfirm = (isDelete) => {
@@ -84,7 +103,7 @@ const useGetAllUserHook = (history) => {
 
   return {
     data: responseData,
-    showAlert,
+    alert,
     message: errorUpdate?.message || dataUpdate?.message,
     isLoading: isLoading || isLoadingSearch,
     error: errorUpdate,

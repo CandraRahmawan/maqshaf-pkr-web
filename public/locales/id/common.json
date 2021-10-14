@@ -31,6 +31,7 @@
     "logout": "Keluar"
   },
   "alert": {
-    "success": "Sukses menyimpan data"
+    "success": "Sukses",
+    "failed": "Gagal"
   }
 }

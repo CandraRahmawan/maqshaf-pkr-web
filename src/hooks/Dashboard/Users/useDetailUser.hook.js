@@ -76,7 +76,7 @@ const useDetailUserHook = (t, history, id) => {
 
   useEffect(() => {
     if (IS_OK(data) || IS_OK(dataUpdate)) {
-      history.replace('/dashboard/santri?success=true');
+      history.replace('/dashboard/santri', { success: true });
     }
 
     if (error || errorUpdate) {

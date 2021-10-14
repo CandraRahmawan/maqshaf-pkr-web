@@ -1,12 +1,17 @@
 {
-  "metaTitle": "Transaksi Masuk",
+  "metaTitle": "Transaksi",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "table": {
     "title": "Transaksi Masuk",
+    "titleDebet": "Transaksi Keluar",
     "header": {
       "trxCode": "Kode Transaksi",
       "amount": "Nominal",
-      "nis": "NIS"
+      "nis": "NIS",
+      "name": "Nama",
+      "price": "Harga",
+      "qty": "Jumlah",
+      "totalPrice": "Total Harga"
     },
     "searchTrxCode": "Cari Kode Transaksi",
     "searchNIS": "Cari NIS"

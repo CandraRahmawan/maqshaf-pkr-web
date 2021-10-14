@@ -3,6 +3,7 @@
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "table": {
     "title": "Daftar Santri",
+    "descriptionPIN": "Default PIN santri adalah 111111",
     "header": {
       "nis": "NIS",
       "class": "Kelas",

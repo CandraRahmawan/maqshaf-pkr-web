@@ -1,6 +1,5 @@
 import { element, func } from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { Footer } from "apps/components/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -11,7 +10,6 @@ const ShopProductLayout = ({ children, t }) => {
   return (
     <div className={classes.root}>
       {children}
-      <Footer t={t} />
     </div>
   );
 };

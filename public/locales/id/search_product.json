@@ -10,6 +10,11 @@
   "dialogTotalSummaryInfo": "Pastikan Jajanan yang dipilih sudah sesuai",
   "dialogIdentityDataTitle": "Scan QRCode Identitas Santri",
   "dialogConfirmationPin": "Otorisasi Pin",
+  "dialogBalanceTotal": "TOTAL SALDO",
+  "dialogName": "Nama Lengkap",
+  "dialogNIS": "NIS",
+  "dialogAddress": "Alamat",
+  "dialogLastUpdate": "Terakhir Transaksi",
   "alert": {
     "successAddCart": "Jajanan berhasil ditambahkan",
     "successPay": "Pembayaran sukses"

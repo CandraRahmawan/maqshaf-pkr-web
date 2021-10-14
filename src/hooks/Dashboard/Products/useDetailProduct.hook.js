@@ -91,7 +91,7 @@ const useDetailProductHook = (t, history, id) => {
 
   useEffect(() => {
     if (IS_OK(data) || IS_OK(dataUpdate)) {
-      history.replace('/dashboard/produk?success=true');
+      history.replace('/dashboard/produk', { success: true });
     }
 
     if (error || errorUpdate) {

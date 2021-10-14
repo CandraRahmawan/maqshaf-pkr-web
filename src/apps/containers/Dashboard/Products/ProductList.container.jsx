@@ -55,7 +55,7 @@ const headers = (t) => [
 
 const ProductListContainer = ({ t, classes }) => {
   let history = useHistory();
-  const { data, isLoading, handleSearch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllProductHook(history);
+  const { alert, data, isLoading, handleSearch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllProductHook(history);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -63,7 +63,11 @@ const ProductListContainer = ({ t, classes }) => {
           <h2>{t('dashboard_product:table.title')}</h2>
         </Box>
       </Box>
-      {history.location.search && <Alert severity="success">{t('common:alert.success')}</Alert>}
+      {alert.isShow && (
+        <Box marginBottom={2}>
+          <Alert severity={alert.type}>{t(alert.message)}</Alert>
+        </Box>
+      )}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/produk/add')}>
         {t('dashboard_product:button.add')}
       </Button>

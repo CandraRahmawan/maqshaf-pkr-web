@@ -52,7 +52,7 @@ const headers = (t) => [
 
 const UserListContainer = ({ classes, t }) => {
   let history = useHistory();
-  const { showAlert, error, message, data, isLoading,
+  const { alert, data, isLoading,
     showPopup, handleConfirm, setSelectedData, selectedData, setShowPopup,
     pageSummary, handleChange, handleSearch, getPaginationTotal, handleChangePage
   } = useGetAllUserHook(history);
@@ -63,15 +63,15 @@ const UserListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_user:table.title')}</h2>
         </Box>
       </Box>
-      {history.location.search && <Alert severity="success">{t('common:alert.success')}</Alert>}
-      {showAlert && (
+      {alert.isShow && (
         <Box marginBottom={2}>
-          <Alert severity={error?.message ? 'error' : 'success'}>{message}</Alert>
+          <Alert severity={alert.type}>{t(alert.message)}</Alert>
         </Box>
       )}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/santri/add')}>
         {t('dashboard_user:button.add')}
       </Button>
+      <Box marginBottom={2}>{t('dashboard_user:table.descriptionPIN')}</Box>
       <DataTables isLoading={isLoading} headers={headers(t)}>
         <TableRow>
           <TableCell component="th" scope="row"></TableCell>

@@ -32,6 +32,7 @@
     "i18next": "^20.3.2",
     "i18next-http-backend": "^1.2.6",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
     "qs": "^6.10.1",
@@ -78,10 +79,6 @@
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0"
   },
-  "engines": {
-    "node": ">=12.16.x",
-    "yarn": ">=1.22.x"
-  },
   "private": true,
   "eslintConfig": {
     "extends": [
@@ -100,13 +97,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "yarn test"
-    }
   },
   "lint-staged": {
     "src/**/*.js?(x)": "eslint --fix",

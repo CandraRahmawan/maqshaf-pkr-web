@@ -59,7 +59,7 @@ const useDetailAdministratorHook = (t, history, id) => {
 
   useEffect(() => {
     if (IS_OK(data) || IS_OK(dataUpdate)) {
-      history.replace('/dashboard/administrator?success=true');
+      history.replace('/dashboard/administrator', { success: true });
     }
 
     if (error || errorUpdate) {
