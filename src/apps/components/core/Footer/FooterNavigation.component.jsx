@@ -15,11 +15,12 @@ const FooterNavigationComponent = ({ t, history, handleOpenModal, handleOpenScan
         history.replace('/')
         break;
       case 1:
-        history.replace('/')
+        setValue(0)
+        handleOpenScan('PIN')
         break;
       case 2:
         setValue(0)
-        handleOpenScan()
+        handleOpenScan('BALANCE')
         break;
       case 3:
         setValue(0)

@@ -17,6 +17,18 @@
   "dialogLastUpdate": "Terakhir Transaksi",
   "alert": {
     "successAddCart": "Jajanan berhasil ditambahkan",
-    "successPay": "Pembayaran sukses"
+    "successPay": "Pembayaran sukses",
+    "successReset": "Reset PIN sukses",
+    "errorReset": "Reset PIN gagal"
+  },
+  "validation": {
+    "requiredPin": "PIN harus diisi",
+    "requiredOldPin": "PIN lama harus diisi",
+    "requiredConfirmPin": "Konfirmasi PIN harus diisi",
+    "matchConfirmPin": "Konfirmasi PIN harus sesuai dengan PIN"
+  },
+  "menu": {
+    "balance": "Cek Saldo",
+    "resetPin": "Reset PIN"
   }
 }
