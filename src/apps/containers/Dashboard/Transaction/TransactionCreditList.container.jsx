@@ -1,6 +1,7 @@
 import { Box, TableCell, TableRow, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
+import HeaderDateComponent from 'apps/components/core/Transaction/HeaderDate.component';
 import { DataTables } from 'apps/components/ui';
 import { defaultFormatDate, rupiahFormat } from 'helpers/formattor.helper';
 import useGetAllCreditTransactionHook from 'hooks/Dashboard/Transaction/useGetAllCreditTransaction.hook';
@@ -28,7 +29,12 @@ const headers = (t) => [
 ];
 
 const TransactionCreditListContainer = ({ classes, t }) => {
-  const { data, isLoading, handleSearch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllCreditTransactionHook();
+  const {
+    searchValue,
+    data, isLoading, refetchAll, handleSearch, handleChange,
+    pageSummary, getPaginationTotal, handleChangePage,
+    month, year, handleHeaderFilter, listYears
+  } = useGetAllCreditTransactionHook();
 
   return (
     <>
@@ -37,11 +43,12 @@ const TransactionCreditListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_transaction:table.title')}</h2>
         </Box>
       </Box>
+      <HeaderDateComponent classes={classes} t={t} isLoading={isLoading} month={month} year={year} handleHeaderFilter={handleHeaderFilter} listYears={listYears} handleSearch={refetchAll} />
       <DataTables isLoading={isLoading} headers={headers(t)}>
         <TableRow>
           <TableCell component="th" scope="row"></TableCell>
           <TableCell>
-            <TextField variant="outlined" fullWidth placeholder={t('dashboard_transaction:table.searchTrxCode')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'trxCode')} />
+            <TextField variant="outlined" fullWidth placeholder={t('dashboard_transaction:table.searchTrxCode')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'trxCode')} value={searchValue?.trxCode || ''} />
           </TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>

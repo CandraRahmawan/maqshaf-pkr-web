@@ -14,6 +14,7 @@
       "totalPrice": "Total Harga"
     },
     "searchTrxCode": "Cari Kode Transaksi",
-    "searchNIS": "Cari NIS"
+    "searchNIS": "Cari NIS",
+    "search": "Cari"
   }
 }

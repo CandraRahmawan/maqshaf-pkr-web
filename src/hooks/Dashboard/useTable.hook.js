@@ -13,6 +13,7 @@ const useTableHook = (response, responseSearch) => {
   const [isEnterPressed, setIsEnterPressed] = useState(false)
   const [data, setData] = useState([])
   const [dataSearch, setDataSearch] = useState([])
+  const [responseData, setResponseData] = useState([])
 
   useEffect(() => {
     if (response?.data?.data && isEmpty(searchValue)) {
@@ -55,6 +56,7 @@ const useTableHook = (response, responseSearch) => {
   }
 
   const handleChange = (e, name) => {
+    setIsEnterPressed(false)
     const val = e.currentTarget.value
     if (val) {
       setSearchValue({
@@ -81,13 +83,13 @@ const useTableHook = (response, responseSearch) => {
     }, 0)
   }
 
-  const getData = () => {
-    if (!isEnterPressed || isEmpty(searchValue)) {
-      return data;
+  useEffect(() => {
+    if (isEnterPressed && !isEmpty(searchValue)) {
+      setResponseData(dataSearch)
     } else {
-      return dataSearch
+      setResponseData(data)
     }
-  }
+  }, [dataSearch, data, searchValue])
 
   const getPaginationTotal = () => {
     if (pageSummary.total < pageSummary.limit) {
@@ -101,11 +103,12 @@ const useTableHook = (response, responseSearch) => {
   return {
     pageSummary,
     searchValue,
-    responseData: getData(),
+    responseData,
     handleSearch,
     handleChange,
     getPaginationTotal,
-    handleChangePage
+    handleChangePage,
+    setSearchValue
   }
 
 }
