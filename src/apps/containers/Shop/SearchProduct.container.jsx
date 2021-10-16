@@ -228,6 +228,7 @@ const SearchProductContainer = (props) => {
                       price={item.price}
                       currency={item.currency}
                       category={item.category}
+                      masterGoodsId={item.masterGoodsId}
                       openModal={handleOpenModal}
                       addCartAction={addCartAction}
                       selectedItems={items}
