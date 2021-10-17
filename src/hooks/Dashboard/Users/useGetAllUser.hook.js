@@ -1,16 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useQuery, useMutation } from 'react-query';
 import { IS_OK } from 'constants/httpStatus.constant';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
 import useTableHook from '../useTable.hook';
 
-const useGetAllUserHook = (history) => {
+const useGetAllUserHook = (history, t) => {
+  const validationSchema = yup.object({
+    balance: yup.string()
+    .matches(/^[0-9,]+$/, t('dashboard_user:validation.balanceFormat'))
+    .required(t('dashboard_user:validation.balanceRequired')),
+  });
+
   const [alert, setAlert] = useState({
     isShow: false,
     type: 'success',
     message: 'common:alert.success'
   })
   const [showPopup, setShowPopup] = useState(false)
+  const [showPopupTopup, setShowPopupTopup] = useState(false)
   const [selectedData, setSelectedData] = useState({})
 
   const { data, isLoading, refetch: refetchAll } = useQuery('listAllUser', () =>
@@ -40,6 +49,11 @@ const useGetAllUserHook = (history) => {
   const { data: dataDelete, error: errorDelete, mutate: mutateDelete } = useMutation('userMutationDelete', (requestData) =>
     fetchApiClient(`/user/delete/${requestData}`, 'DELETE', {})
   )
+
+  const { data: dataTopup, error: errorTopup, mutate: mutateTopup } = useMutation('userMutationTopup', (requestData) =>
+    fetchApiClient(`/deposit/kredit/${selectedData.userId}`, 'POST', requestData)
+  )
+
 
   useEffect(() => {
     if (history.location.state?.success) {
@@ -74,7 +88,7 @@ const useGetAllUserHook = (history) => {
   )
 
   useEffect(() => {
-    if (IS_OK(dataUpdate) || IS_OK(dataDelete)) {
+    if (IS_OK(dataUpdate) || IS_OK(dataDelete) || IS_OK(dataTopup)) {
       setAlert({
         isShow: true,
         type: 'success',
@@ -82,14 +96,14 @@ const useGetAllUserHook = (history) => {
       })
     }
 
-    if (errorUpdate || errorDelete) {
+    if (errorUpdate || errorDelete || errorTopup) {
       setAlert({
         isShow: true,
         type: 'error',
         message: 'common:alert.failed'
       })
     }
-  }, [dataUpdate, errorUpdate, dataDelete, errorDelete]);
+  }, [dataUpdate, errorUpdate, dataDelete, errorDelete, dataTopup, errorTopup]);
 
   const handleConfirm = (isDelete) => {
     if (isDelete) {
@@ -99,6 +113,35 @@ const useGetAllUserHook = (history) => {
       mutateUpdate(selectedData.userId)
       setShowPopup(false)
     }
+  }
+
+
+  const formik = useFormik({
+    initialValues: {
+      balance: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      const { balance } = values
+      const val = Math.round(balance.replaceAll(/,/g, ''))
+      if (selectedData.userId) {
+        mutateTopup({ saldo: val })
+        setShowPopupTopup(false)
+        formik.resetForm({ balance: '' })
+      }
+    },
+  });
+
+  const handleCloseTopup = () => {
+    formik.resetForm({ balance: '' })
+    setShowPopupTopup(false)
+  }
+
+  const formatMoney = (val) => {
+    let newValue = formik.values.balance.toString();
+    newValue = newValue.replace(/,/g, '')
+    newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return newValue
   }
 
   return {
@@ -116,7 +159,12 @@ const useGetAllUserHook = (history) => {
     handleSearch,
     handleChange,
     handleChangePage,
-    getPaginationTotal
+    getPaginationTotal,
+    showPopupTopup,
+    setShowPopupTopup,
+    handleCloseTopup,
+    formik,
+    formatMoney,
   };
 };
 

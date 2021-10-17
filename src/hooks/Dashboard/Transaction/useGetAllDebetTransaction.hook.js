@@ -7,8 +7,8 @@ import useTableHook from '../useTable.hook';
 const useGetAllDebetTransactionHook = () => {
   const [open, setOpen] = useState(false);
   const [selectedData, setSelectedData] = useState({})
-  const [month, setMonth] = useState(0)
-  const [year, setYear] = useState(0)
+  const [month, setMonth] = useState(moment().month()+1)
+  const [year, setYear] = useState(moment().year())
 
   function generateArrayOfYears() {
     var max = year
@@ -41,10 +41,7 @@ const useGetAllDebetTransactionHook = () => {
   );
 
   useEffect(() => {
-    refetchAll()
     generateArrayOfYears() 
-    setMonth(moment().month()+1)
-    setYear(moment().year())
   }, [])
 
 

@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import useTableHook from '../useTable.hook';
 
 const useGetAllCreditTransactionHook = () => {
-  const [month, setMonth] = useState(0)
-  const [year, setYear] = useState(0)
+  const [month, setMonth] = useState(moment().month()+1)
+  const [year, setYear] = useState(moment().year())
 
   function generateArrayOfYears() {
     var max = year
@@ -39,10 +39,7 @@ const useGetAllCreditTransactionHook = () => {
 
 
   useEffect(() => {
-    refetchAll()
     generateArrayOfYears() 
-    setMonth(moment().month()+1)
-    setYear(moment().year())
   }, [])
 
 

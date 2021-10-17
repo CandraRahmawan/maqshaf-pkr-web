@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { DataTables } from 'apps/components/ui';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LockOpenOutlined from '@material-ui/icons/LockOpenOutlined';
 import EditIcon from '@material-ui/icons/Edit';
@@ -54,8 +55,11 @@ const UserListContainer = ({ classes, t }) => {
   let history = useHistory();
   const { alert, data, isLoading,
     showPopup, handleConfirm, setSelectedData, selectedData, setShowPopup,
-    pageSummary, handleChange, handleSearch, getPaginationTotal, handleChangePage
-  } = useGetAllUserHook(history);
+    pageSummary, handleChange, handleSearch, getPaginationTotal, handleChangePage,
+    formik, formatMoney,
+    showPopupTopup, setShowPopupTopup,
+    handleCloseTopup,
+  } = useGetAllUserHook(history, t);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -76,7 +80,7 @@ const UserListContainer = ({ classes, t }) => {
         <TableRow>
           <TableCell component="th" scope="row"></TableCell>
           <TableCell>
-           <TextField variant="outlined" style={{ width: 100 }} placeholder={t('dashboard_user:table.searchNIS')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'nis')} />
+            <TextField variant="outlined" style={{ width: 100 }} placeholder={t('dashboard_user:table.searchNIS')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'nis')} />
           </TableCell>
           <TableCell>
             <TextField variant="outlined" fullWidth placeholder={t('dashboard_user:table.searchName')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'name')} />
@@ -103,7 +107,13 @@ const UserListContainer = ({ classes, t }) => {
               <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/santri/' + row.userId)} >
                 <EditIcon fontSize="small" />
               </IconButton>
-              <IconButton title="Reset PIN" aria-label="delete" color="secondary" onClick={() => {
+              <IconButton title="Topup" aria-label="topup" color="default" onClick={() => {
+                setShowPopupTopup(true)
+                setSelectedData(row)
+              }} >
+                <AccountBalanceWalletIcon fontSize="small" />
+              </IconButton>
+              <IconButton title="Reset PIN" aria-label="reset PIN" color="secondary" onClick={() => {
                 setShowPopup(true)
                 setSelectedData(row)
               }} >
@@ -142,6 +152,30 @@ const UserListContainer = ({ classes, t }) => {
             {t('dashboard_user:button.yes')}
           </Button>
         </DialogActions>
+      </Dialog>
+      <Dialog open={showPopupTopup} aria-labelledby="form-dialog-title" onClose={handleCloseTopup}>
+        <form onSubmit={formik.handleSubmit} className={classes.form}>
+          <DialogTitle id="alert-dialog-title">
+            {t('dashboard_user:table.titleTopup')}
+          </DialogTitle>
+          <DialogContent>
+            <TextField
+              name="balance"
+              value={formatMoney(formik.values.balance)}
+              error={formik.touched.balance && Boolean(formik.errors.balance)}
+              onChange={formik.handleChange}
+              helperText={formik.touched.balance && formik.errors.balance}
+              label={t('dashboard_user:form.balance')}
+              type="text"
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button type="button" onClick={handleCloseTopup}> {t('dashboard_user:button.cancel')}</Button>
+            <Button type="submit" autoFocus>
+              {t('dashboard_user:button.save')}
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </>
   );
