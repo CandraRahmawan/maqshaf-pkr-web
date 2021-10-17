@@ -1,4 +1,4 @@
-import { TableRow, TableCell, Box, Button, TextField } from '@material-ui/core';
+import { TableRow, TableCell, Box, Button, TextField, MenuItem, Select } from '@material-ui/core';
 import { func, object } from 'prop-types';
 import Alert from '@material-ui/lab/Alert';
 import Pagination from '@material-ui/lab/Pagination';
@@ -55,7 +55,7 @@ const headers = (t) => [
 
 const ProductListContainer = ({ t, classes }) => {
   let history = useHistory();
-  const { alert, data, isLoading, handleSearch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllProductHook(history);
+  const { alert, data, isLoading, handleSearch, refetch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllProductHook(history);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -81,6 +81,25 @@ const ProductListContainer = ({ t, classes }) => {
           </TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
+          <TableCell></TableCell>
+          <TableCell>
+            <Select
+              id="status"
+              name="status"
+              labelId="status-label"
+              defaultValue=""
+              onChange={(e) => {
+                handleChange(e, 'status')
+                setTimeout(() =>{
+                  refetch()
+                }, 2)
+              }}
+            >
+              <MenuItem value="">Pilih</MenuItem>
+              <MenuItem value="1">Aktif</MenuItem>
+              <MenuItem value="0">Non Aktif</MenuItem>
+            </Select>
+          </TableCell>
           <TableCell></TableCell>
         </TableRow>
         {data?.data?.map((row, index) => (

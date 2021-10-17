@@ -7,9 +7,9 @@ const HeaderDateComponent = ({ t, classes, isLoading, month, year, handleHeaderF
     <Box display="flex" marginBottom={4} marginTop={4}>
       <Box paddingLeft={2} alignItems="center" justifyContent="center" display="flex">
         <Select
-          id="category"
-          name="category"
-          labelId="demo-simple-select-label"
+          id="month"
+          name="month"
+          labelId="monthLabel"
           value={month}
           onChange={(val) => handleHeaderFilter(val.target.value, 'M')}
         >
@@ -32,9 +32,9 @@ const HeaderDateComponent = ({ t, classes, isLoading, month, year, handleHeaderF
       </Box>
       <Box alignItems="center" justifyContent="center" display="flex">
         <Select
-          id="category"
-          name="category"
-          labelId="demo-simple-select-label"
+          id="year"
+          name="year"
+          labelId="yearLabel"
           value={year}
           onChange={(val) => handleHeaderFilter(val.target.value, 'Y')}
         >

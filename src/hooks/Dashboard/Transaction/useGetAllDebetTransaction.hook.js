@@ -6,6 +6,7 @@ import useTableHook from '../useTable.hook';
 
 const useGetAllDebetTransactionHook = () => {
   const [open, setOpen] = useState(false);
+  const [searchByDate, setSearchByDate] = useState(true)
   const [selectedData, setSelectedData] = useState({})
   const [month, setMonth] = useState(moment().month()+1)
   const [year, setYear] = useState(moment().year())
@@ -46,6 +47,7 @@ const useGetAllDebetTransactionHook = () => {
 
 
   const handleHeaderFilter = (val, type) => {
+    setSearchByDate(false)
     if (type === 'M') {
       setMonth(val)
     } else {
@@ -69,12 +71,19 @@ const useGetAllDebetTransactionHook = () => {
     setSearchValue
   } = useTableHook(
     { data, refetch: refetchAll },
-    { data: dataSearch, refetch: refetchSearch }
+    { data: dataSearch, refetch: refetchSearch },
+    searchByDate
   )
 
   const handleSearchByDate = () => {
+    setSearchByDate(true)
     setSearchValue({})
     refetchAll()
+  }
+
+  const handleSearchTable = (e) => {
+    setSearchByDate(false)
+    handleSearch(e)
   }
 
   return {
@@ -83,7 +92,7 @@ const useGetAllDebetTransactionHook = () => {
     data: responseData,
     isLoading: isLoading || isLoadingSearch,
     pageSummary,
-    handleSearch,
+    handleSearch: handleSearchTable,
     handleChange,
     getPaginationTotal,
     handleChangePage,

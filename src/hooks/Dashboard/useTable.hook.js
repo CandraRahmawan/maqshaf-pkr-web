@@ -7,7 +7,7 @@ const defaultPageSummary = {
   total: 0
 }
 
-const useTableHook = (response, responseSearch) => {
+const useTableHook = (response, responseSearch, isShowAll) => {
   const [searchValue, setSearchValue] = useState({})
   const [pageSummary, setPageSummary] = useState(defaultPageSummary)
   const [isEnterPressed, setIsEnterPressed] = useState(false)
@@ -57,7 +57,7 @@ const useTableHook = (response, responseSearch) => {
 
   const handleChange = (e, name) => {
     setIsEnterPressed(false)
-    const val = e.currentTarget.value
+    const val = e.currentTarget.value || e.target.value
     if (val) {
       setSearchValue({
         ...searchValue,
@@ -86,10 +86,12 @@ const useTableHook = (response, responseSearch) => {
   useEffect(() => {
     if (isEnterPressed && !isEmpty(searchValue)) {
       setResponseData(dataSearch)
-    } else {
+    } else if (isEnterPressed && isEmpty(searchValue)) {
+      setResponseData(data)
+    } else if (isShowAll) {
       setResponseData(data)
     }
-  }, [dataSearch, data, searchValue])
+  }, [dataSearch, data, searchValue, isShowAll])
 
   const getPaginationTotal = () => {
     if (pageSummary.total < pageSummary.limit) {

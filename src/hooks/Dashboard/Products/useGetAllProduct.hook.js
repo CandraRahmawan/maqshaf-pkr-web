@@ -12,7 +12,8 @@ const useGetAllProductHook = (history) => {
   const { data, isLoading, refetch: refetchAll } = useQuery('listAllProduct', () =>
     fetchApiClient(`/mastergood/all`, 'GET', {
       limit: pageSummary.limit,
-      page: pageSummary.page
+      page: pageSummary.page,
+      status: searchValue.status,
     }),
     {
       refetchOnMount: "always"
@@ -22,6 +23,7 @@ const useGetAllProductHook = (history) => {
   const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('listAllProductSearch', () =>
     fetchApiClient(`/mastergood/search`, 'GET', {
       name: searchValue.name,
+      status: searchValue.status,
       limit: pageSummary.limit,
       page: pageSummary.page
     }),
@@ -65,7 +67,9 @@ const useGetAllProductHook = (history) => {
     data: responseData,
     isLoading: isLoading || isLoadingSearch,
     pageSummary,
+    refetchSearch,
     handleSearch,
+    refetch: refetchAll,
     handleChange,
     getPaginationTotal,
     handleChangePage
