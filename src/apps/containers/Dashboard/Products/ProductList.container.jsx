@@ -1,4 +1,4 @@
-import { TableRow, TableCell, Box, Button, TextField } from '@material-ui/core';
+import { TableRow, TableCell, Box, Button, TextField, MenuItem, Select } from '@material-ui/core';
 import { func, object } from 'prop-types';
 import Alert from '@material-ui/lab/Alert';
 import Pagination from '@material-ui/lab/Pagination';
@@ -55,7 +55,7 @@ const headers = (t) => [
 
 const ProductListContainer = ({ t, classes }) => {
   let history = useHistory();
-  const { data, isLoading, handleSearch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllProductHook(history);
+  const { alert, data, isLoading, handleSearch, refetch, handleChange, pageSummary, getPaginationTotal, handleChangePage } = useGetAllProductHook(history);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -63,7 +63,11 @@ const ProductListContainer = ({ t, classes }) => {
           <h2>{t('dashboard_product:table.title')}</h2>
         </Box>
       </Box>
-      {history.location.search && <Alert severity="success">{t('common:alert.success')}</Alert>}
+      {alert.isShow && (
+        <Box marginBottom={2}>
+          <Alert severity={alert.type}>{t(alert.message)}</Alert>
+        </Box>
+      )}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/produk/add')}>
         {t('dashboard_product:button.add')}
       </Button>
@@ -77,6 +81,25 @@ const ProductListContainer = ({ t, classes }) => {
           </TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
+          <TableCell></TableCell>
+          <TableCell>
+            <Select
+              id="status"
+              name="status"
+              labelId="status-label"
+              defaultValue=""
+              onChange={(e) => {
+                handleChange(e, 'status')
+                setTimeout(() =>{
+                  refetch()
+                }, 2)
+              }}
+            >
+              <MenuItem value="">Pilih</MenuItem>
+              <MenuItem value="1">Aktif</MenuItem>
+              <MenuItem value="0">Non Aktif</MenuItem>
+            </Select>
+          </TableCell>
           <TableCell></TableCell>
         </TableRow>
         {data?.data?.map((row, index) => (

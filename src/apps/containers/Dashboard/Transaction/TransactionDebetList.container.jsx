@@ -1,12 +1,14 @@
-import { Box, TableCell, TableRow, TextField } from '@material-ui/core';
+import { IconButton, Box, TableCell, TableRow, TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
 import Pagination from '@material-ui/lab/Pagination';
+import HeaderDateComponent from 'apps/components/core/Transaction/HeaderDate.component';
+import ModalDetailComponent from 'apps/components/core/Transaction/ModalDetail.component';
 import { DataTables } from 'apps/components/ui';
 import { defaultFormatDate, rupiahFormat } from 'helpers/formattor.helper';
 import useGetAllDebetTransactionHook from 'hooks/Dashboard/Transaction/useGetAllDebetTransaction.hook';
 import { func, object } from 'prop-types';
 import styles from './style';
-
 
 const headers = (t) => [
   {
@@ -40,24 +42,34 @@ const headers = (t) => [
 ];
 
 const TransactionDebetListContainer = ({ classes, t }) => {
-  const { data, pageSummary, isLoading, handleChange, handleSearch, getPaginationTotal, handleChangePage } = useGetAllDebetTransactionHook();
+  const {
+    searchValue,
+    data, pageSummary, isLoading, refetchAll,
+    handleChange, handleSearch, getPaginationTotal,
+    handleChangePage,
+    setOpen,
+    open, handleOpen, selectedData,
+    month, year, handleHeaderFilter, listYears
+  } = useGetAllDebetTransactionHook();
+
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
         <Box alignSelf="center">
-          <h2>{t('dashboard_transaction:table.title')}</h2>
+          <h2>{t('dashboard_transaction:table.titleDebet')}</h2>
         </Box>
       </Box>
-
+      <HeaderDateComponent classes={classes} t={t} isLoading={isLoading} month={month} year={year} handleHeaderFilter={handleHeaderFilter} listYears={listYears} handleSearch={refetchAll} />
       <DataTables isLoading={isLoading} headers={headers(t)}>
         <TableRow>
           <TableCell component="th" scope="row"></TableCell>
-          <TableCell>    
-            <TextField variant="outlined" fullWidth placeholder="Cari Kode Transaksi" onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'trxCode')} />
+          <TableCell>
+            <TextField variant="outlined" fullWidth placeholder="Cari Kode Transaksi" onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'trxCode')} value={searchValue?.trxCode || ''} />
           </TableCell>
           <TableCell>
-            <TextField variant="outlined" fullWidth placeholder="Cari NIS" onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'nis')} />
+            <TextField variant="outlined" fullWidth placeholder="Cari NIS" onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'nis')} value={searchValue?.nis || ''} />
           </TableCell>
+          <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
@@ -74,12 +86,18 @@ const TransactionDebetListContainer = ({ classes, t }) => {
             {/* <TableCell>{row.address}</TableCell> */}
             <TableCell align="right">{rupiahFormat(row.debet)}</TableCell>
             <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
+            <TableCell>
+              <IconButton title="Detail" aria-label="edit" color="primary" onClick={() => handleOpen(row)} >
+                <RemoveRedEye fontSize="small" />
+              </IconButton>
+            </TableCell>
           </TableRow>
         ))}
       </DataTables>
       <Box marginTop={2} display="flex" justifyContent="flex-end">
-        <Pagination count={getPaginationTotal()} onChange={handleChangePage} page={Number(pageSummary.page)}  color="primary" />
+        <Pagination count={getPaginationTotal()} onChange={handleChangePage} page={Number(pageSummary.page)} color="primary" />
       </Box>
+      <ModalDetailComponent t={t} open={open} setOpen={setOpen} selectedData={selectedData} />
     </>
   );
 };

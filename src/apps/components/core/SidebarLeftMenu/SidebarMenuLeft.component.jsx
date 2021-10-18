@@ -46,8 +46,6 @@ const SidebarMenuLeftComponent = (props) => {
     setOpenSubmenu(!openSubmenu);
   };
 
-  console.log(history.location)
-
   const getActiveClasses = (url) => {
     if (url !== '/dashboard') {
       if(history.location.pathname.startsWith(url)) {

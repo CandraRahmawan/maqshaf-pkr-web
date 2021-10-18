@@ -15,6 +15,17 @@ const messageAlert = {
       }
       return Promise.resolve();
     }),
+  error: (alert) =>
+    Default.fire({
+      title: alert.title,
+      icon: "error",
+      text: alert.text,
+    }).then(() => {
+      if (alert.href) {
+        window.location.href = alert.href;
+      }
+      return Promise.resolve();
+    }),
 };
 
 export default messageAlert;

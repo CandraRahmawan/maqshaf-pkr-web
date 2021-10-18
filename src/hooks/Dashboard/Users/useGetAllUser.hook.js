@@ -1,12 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useQuery, useMutation } from 'react-query';
 import { IS_OK } from 'constants/httpStatus.constant';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import { fetchApiClient } from 'helpers/fetchApi.helper';
 import useTableHook from '../useTable.hook';
 
-const useGetAllUserHook = (history) => {
-  const [showAlert, setShowAlert] = useState(false)
+const useGetAllUserHook = (history, t) => {
+  const validationSchema = yup.object({
+    balance: yup.string()
+    .matches(/^[0-9,]+$/, t('dashboard_user:validation.balanceFormat'))
+    .required(t('dashboard_user:validation.balanceRequired')),
+  });
+
+  const [alert, setAlert] = useState({
+    isShow: false,
+    type: 'success',
+    message: 'common:alert.success'
+  })
   const [showPopup, setShowPopup] = useState(false)
+  const [showPopupTopup, setShowPopupTopup] = useState(false)
   const [selectedData, setSelectedData] = useState({})
 
   const { data, isLoading, refetch: refetchAll } = useQuery('listAllUser', () =>
@@ -37,13 +50,29 @@ const useGetAllUserHook = (history) => {
     fetchApiClient(`/user/delete/${requestData}`, 'DELETE', {})
   )
 
+  const { data: dataTopup, error: errorTopup, mutate: mutateTopup } = useMutation('userMutationTopup', (requestData) =>
+    fetchApiClient(`/deposit/kredit/${selectedData.userId}`, 'POST', requestData)
+  )
+
+
   useEffect(() => {
-    if (history.location.search) {
-      setTimeout(() => {
-        history.replace('/dashboard/santri')
-      }, 2500)
+    if (history.location.state?.success) {
+      history.replace('/dashboard/santri');
+      setAlert({
+        isShow: true,
+        type: 'success',
+        message: 'common:alert.success'
+      })
     }
-  }, [history.location.search])
+  }, [history.location.state])
+
+  useEffect(() => {
+    if (alert.isShow) {
+      setTimeout(() => {
+        setAlert({ ...alert, isShow: false })
+      }, 3000)
+    }
+  }, [alert])
 
   const {
     responseData,
@@ -59,18 +88,22 @@ const useGetAllUserHook = (history) => {
   )
 
   useEffect(() => {
-    if (IS_OK(dataUpdate) || IS_OK(dataDelete)) {
-      setShowAlert(true);
+    if (IS_OK(dataUpdate) || IS_OK(dataDelete) || IS_OK(dataTopup)) {
+      setAlert({
+        isShow: true,
+        type: 'success',
+        message: 'common:alert.success'
+      })
     }
 
-    if (errorUpdate || errorDelete) {
-      setShowAlert(true);
+    if (errorUpdate || errorDelete || errorTopup) {
+      setAlert({
+        isShow: true,
+        type: 'error',
+        message: 'common:alert.failed'
+      })
     }
-
-    setTimeout(() => {
-      setShowAlert(false)
-    }, 4000)
-  }, [dataUpdate, errorUpdate, dataDelete, errorDelete]);
+  }, [dataUpdate, errorUpdate, dataDelete, errorDelete, dataTopup, errorTopup]);
 
   const handleConfirm = (isDelete) => {
     if (isDelete) {
@@ -82,9 +115,38 @@ const useGetAllUserHook = (history) => {
     }
   }
 
+
+  const formik = useFormik({
+    initialValues: {
+      balance: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      const { balance } = values
+      const val = Math.round(balance.replaceAll(/,/g, ''))
+      if (selectedData.userId) {
+        mutateTopup({ saldo: val })
+        setShowPopupTopup(false)
+        formik.resetForm({ balance: '' })
+      }
+    },
+  });
+
+  const handleCloseTopup = () => {
+    formik.resetForm({ balance: '' })
+    setShowPopupTopup(false)
+  }
+
+  const formatMoney = (val) => {
+    let newValue = formik.values.balance.toString();
+    newValue = newValue.replace(/,/g, '')
+    newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return newValue
+  }
+
   return {
     data: responseData,
-    showAlert,
+    alert,
     message: errorUpdate?.message || dataUpdate?.message,
     isLoading: isLoading || isLoadingSearch,
     error: errorUpdate,
@@ -97,7 +159,12 @@ const useGetAllUserHook = (history) => {
     handleSearch,
     handleChange,
     handleChangePage,
-    getPaginationTotal
+    getPaginationTotal,
+    showPopupTopup,
+    setShowPopupTopup,
+    handleCloseTopup,
+    formik,
+    formatMoney,
   };
 };
 

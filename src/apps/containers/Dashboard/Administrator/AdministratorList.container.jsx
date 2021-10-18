@@ -43,7 +43,7 @@ const headers = (t) => [
 
 const AdministratorListContainer = ({ classes, t }) => {
   let history = useHistory();
-  const { data, isLoading, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook(history);
+  const { alert, data, isLoading, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook(history);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -51,7 +51,11 @@ const AdministratorListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_administrator:table.title')}</h2>
         </Box>
       </Box>
-      {history.location.search && <Alert severity="success">{t('common:alert.success')}</Alert>}
+      {alert.isShow && (
+        <Box marginBottom={2}>
+          <Alert severity={alert.type}>{t(alert.message)}</Alert>
+        </Box>
+      )}
       <Button startIcon={<AddIcon />} variant="contained" color="primary" className={classes.button_tambah} onClick={() => history.push('/dashboard/administrator/add')}>
         {t('dashboard_administrator:button.add')}
       </Button>

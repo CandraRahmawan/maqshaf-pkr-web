@@ -11,7 +11,9 @@ const useDetailProductHook = (t, history, id) => {
     name: yup.string().required(t('dashboard_product:validation.nameRequired')),
     // image: yup.string().required(t('dashboard_product:validation.imageRequired')),
     // description: yup.string().required(t('dashboard_product:validation.descriptionRequired')),
-    price: yup.string().required(t('dashboard_product:validation.priceRequired')),
+    price: yup.string()
+    .matches(/^[0-9,]+$/, t('dashboard_product:validation.priceFormat'))
+    .required(t('dashboard_product:validation.priceRequired')),
     category: yup.string().required(t('dashboard_product:validation.categoryRequired')),
   });
 
@@ -91,7 +93,7 @@ const useDetailProductHook = (t, history, id) => {
 
   useEffect(() => {
     if (IS_OK(data) || IS_OK(dataUpdate)) {
-      history.replace('/dashboard/produk?success=true');
+      history.replace('/dashboard/produk', { success: true });
     }
 
     if (error || errorUpdate) {

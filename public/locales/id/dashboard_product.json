@@ -40,6 +40,7 @@
     "imageRequired": "Gambar harus diisi.",
     "descriptionRequired": "Keterangan harus diisi.",
     "priceRequired": "Harga harus diisi.",
+    "priceFormat": "Harga harus angka.",
     "categoryRequired": "Kategori harus diisi."
   }
 }
