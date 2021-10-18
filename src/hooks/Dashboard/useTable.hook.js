@@ -7,56 +7,34 @@ const defaultPageSummary = {
   total: 0
 }
 
-const useTableHook = (response, responseSearch, isShowAll) => {
+const useTableHook = (response, refetch) => {
   const [searchValue, setSearchValue] = useState({})
   const [pageSummary, setPageSummary] = useState(defaultPageSummary)
-  const [isEnterPressed, setIsEnterPressed] = useState(false)
-  const [data, setData] = useState([])
-  const [dataSearch, setDataSearch] = useState([])
-  const [responseData, setResponseData] = useState([])
 
   useEffect(() => {
-    if (response?.data?.data && isEmpty(searchValue)) {
+    if (response?.data && isEmpty(searchValue)) {
       setPageSummary({
         ...pageSummary,
-        total: response?.data.pageSummary.total,
-        page: response?.data.pageSummary.current_page,
+        total: response.pageSummary.total,
+        page: response.pageSummary.current_page,
       })
-      setData(response?.data)
     }
 
-    if (responseSearch?.data?.data && !isEmpty(searchValue)) {
-      setPageSummary({
-        ...pageSummary,
-        total: Number(responseSearch?.data?.pageSummary.total),
-        page: Number(responseSearch?.data?.pageSummary.current_page),
-      })
-      setDataSearch(responseSearch?.data)
-    }
-
-  }, [response?.data, responseSearch?.data])
+  }, [response?.data])
 
 
   const handleSearch = (ev) => {
     if (ev.key === 'Enter') {
-      setDataSearch(data)
       setPageSummary(defaultPageSummary)
       setTimeout(() => {
-        if (isEmpty(searchValue)) {
-          response.refetch()
-        } else {
-          responseSearch.refetch()
-        }
+        refetch()
       }, 0)
-      setIsEnterPressed(true)
       ev.preventDefault();
-    } else {
-      setIsEnterPressed(false)
     }
   }
 
   const handleChange = (e, name) => {
-    setIsEnterPressed(false)
+    // setIsEnterPressed(false)
     const val = e.currentTarget.value || e.target.value
     if (val) {
       setSearchValue({
@@ -75,23 +53,9 @@ const useTableHook = (response, responseSearch, isShowAll) => {
       page: val
     })
     setTimeout(() => {
-      if (isEmpty(searchValue)) {
-        response.refetch()
-      } else {
-        responseSearch.refetch()
-      }
+      refetch()
     }, 0)
   }
-
-  useEffect(() => {
-    if (isEnterPressed && !isEmpty(searchValue)) {
-      setResponseData(dataSearch)
-    } else if (isEnterPressed && isEmpty(searchValue)) {
-      setResponseData(data)
-    } else if (isShowAll) {
-      setResponseData(data)
-    }
-  }, [dataSearch, data, searchValue, isShowAll])
 
   const getPaginationTotal = () => {
     if (pageSummary.total < pageSummary.limit) {
@@ -105,7 +69,6 @@ const useTableHook = (response, responseSearch, isShowAll) => {
   return {
     pageSummary,
     searchValue,
-    responseData,
     handleSearch,
     handleChange,
     getPaginationTotal,

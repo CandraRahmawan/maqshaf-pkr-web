@@ -7,7 +7,6 @@ import useTableHook from '../useTable.hook';
 const useGetAllCreditTransactionHook = () => {
   const [month, setMonth] = useState(moment().month()+1)
   const [year, setYear] = useState(moment().year())
-  const [searchByDate, setSearchByDate] = useState(true)
 
   function generateArrayOfYears() {
     var max = year
@@ -24,18 +23,10 @@ const useGetAllCreditTransactionHook = () => {
     fetchApiClient(`/deposit/all`, 'GET', {
       limit: pageSummary.limit,
       page: pageSummary.page,
+      transactionCode: searchValue.trxCode,
       year,
       month
     })
-  );
-
-  const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('getCreditTransactionsSearch', () =>
-    fetchApiClient(`/deposit/search`, 'GET', {
-      transactionCode: searchValue.trxCode,
-      limit: pageSummary.limit,
-      page: pageSummary.page
-    }),
-    { enabled: false }
   );
 
 
@@ -43,9 +34,7 @@ const useGetAllCreditTransactionHook = () => {
     generateArrayOfYears() 
   }, [])
 
-
   const {
-    responseData,
     searchValue,
     setSearchValue,
     pageSummary,
@@ -53,14 +42,9 @@ const useGetAllCreditTransactionHook = () => {
     handleChange,
     handleChangePage,
     getPaginationTotal
-  } = useTableHook(
-    { data, refetch: refetchAll },
-    { data: dataSearch, refetch: refetchSearch },
-    searchByDate
-  )
+  } = useTableHook(data, refetchAll)
 
   const handleHeaderFilter = (val, type) => {
-    setSearchByDate(false)
     if (type === 'M') {
       setMonth(val)
     } else {
@@ -69,13 +53,11 @@ const useGetAllCreditTransactionHook = () => {
   }
 
   const handleSearchByDate = () => {
-    setSearchByDate(true)
     setSearchValue({})
     refetchAll()
   }
 
   const handleSearchTable = (e) => {
-    setSearchByDate(false)
     handleSearch(e)
   }
   
@@ -83,8 +65,8 @@ const useGetAllCreditTransactionHook = () => {
   return {
     searchValue,
     refetchAll: handleSearchByDate,
-    data: responseData,
-    isLoading: isLoading || isLoadingSearch,
+    data,
+    isLoading,
     pageSummary,
     handleSearch: handleSearchTable,
     handleChange,

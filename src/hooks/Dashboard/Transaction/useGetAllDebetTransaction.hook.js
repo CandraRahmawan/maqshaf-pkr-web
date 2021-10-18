@@ -6,7 +6,6 @@ import useTableHook from '../useTable.hook';
 
 const useGetAllDebetTransactionHook = () => {
   const [open, setOpen] = useState(false);
-  const [searchByDate, setSearchByDate] = useState(true)
   const [selectedData, setSelectedData] = useState({})
   const [month, setMonth] = useState(moment().month()+1)
   const [year, setYear] = useState(moment().year())
@@ -26,19 +25,11 @@ const useGetAllDebetTransactionHook = () => {
     fetchApiClient(`/debet/all`, 'GET', {
       limit: pageSummary.limit,
       page: pageSummary.page,
+      transactionCode: searchValue.trxCode,
+      nis: searchValue.nis,
       year,
       month
     }),
-  );
-
-  const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery(['getDebetTransactionsSearch'], () =>
-    fetchApiClient(`/debet/search`, 'GET', {
-      transactionCode: searchValue.trxCode,
-      nis: searchValue.nis,
-      limit: pageSummary.limit,
-      page: pageSummary.page
-    }),
-    { enabled: false }
   );
 
   useEffect(() => {
@@ -47,7 +38,6 @@ const useGetAllDebetTransactionHook = () => {
 
 
   const handleHeaderFilter = (val, type) => {
-    setSearchByDate(false)
     if (type === 'M') {
       setMonth(val)
     } else {
@@ -61,7 +51,6 @@ const useGetAllDebetTransactionHook = () => {
   }
 
   const {
-    responseData,
     searchValue,
     pageSummary,
     handleSearch,
@@ -69,28 +58,22 @@ const useGetAllDebetTransactionHook = () => {
     handleChangePage,
     getPaginationTotal,
     setSearchValue
-  } = useTableHook(
-    { data, refetch: refetchAll },
-    { data: dataSearch, refetch: refetchSearch },
-    searchByDate
-  )
+  } = useTableHook(data, refetchAll)
 
   const handleSearchByDate = () => {
-    setSearchByDate(true)
     setSearchValue({})
     refetchAll()
   }
 
   const handleSearchTable = (e) => {
-    setSearchByDate(false)
     handleSearch(e)
   }
 
   return {
     searchValue,
     refetchAll: handleSearchByDate,
-    data: responseData,
-    isLoading: isLoading || isLoadingSearch,
+    data,
+    isLoading,
     pageSummary,
     handleSearch: handleSearchTable,
     handleChange,

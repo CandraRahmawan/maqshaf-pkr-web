@@ -24,22 +24,14 @@ const useGetAllUserHook = (history, t) => {
 
   const { data, isLoading, refetch: refetchAll } = useQuery('listAllUser', () =>
     fetchApiClient(`/user/all`, 'GET', {
+      nis: searchValue.nis,
+      name: searchValue.name,
       limit: pageSummary.limit,
       page: pageSummary.page
     }),
     {
       refetchOnMount: "always"
     }
-  );
-
-  const { data: dataSearch, isLoading: isLoadingSearch, refetch: refetchSearch } = useQuery('listAllUserSearch', () =>
-    fetchApiClient(`/user/search`, 'GET', {
-      nis: searchValue.nis,
-      name: searchValue.name,
-      limit: pageSummary.limit,
-      page: pageSummary.page
-    }),
-    { enabled: false }
   );
 
   const { data: dataUpdate, error: errorUpdate, mutate: mutateUpdate } = useMutation('userMutationUpdate', (requestData) =>
@@ -75,17 +67,13 @@ const useGetAllUserHook = (history, t) => {
   }, [alert])
 
   const {
-    responseData,
     searchValue,
     pageSummary,
     handleSearch,
     handleChange,
     handleChangePage,
     getPaginationTotal
-  } = useTableHook(
-    { data, refetch: refetchAll },
-    { data: dataSearch, refetch: refetchSearch }
-  )
+  } = useTableHook(data, refetchAll)
 
   useEffect(() => {
     if (IS_OK(dataUpdate) || IS_OK(dataDelete) || IS_OK(dataTopup)) {
@@ -145,10 +133,10 @@ const useGetAllUserHook = (history, t) => {
   }
 
   return {
-    data: responseData,
+    data,
     alert,
     message: errorUpdate?.message || dataUpdate?.message,
-    isLoading: isLoading || isLoadingSearch,
+    isLoading,
     error: errorUpdate,
     showPopup,
     handleConfirm,
