@@ -44,13 +44,10 @@ const useGetAllAdministratorHook = (history) => {
   }, [alert])
 
   const {
-    responseData,
     pageSummary,
     handleChangePage,
     getPaginationTotal
-  } = useTableHook(
-    { data, refetch },
-  )
+  } = useTableHook(data, refetch)
 
   const handleDelete = (id) => {
     mutate(id)
@@ -75,7 +72,7 @@ const useGetAllAdministratorHook = (history) => {
     }
   }, [dataDelete, error]);
 
-  return { alert, data: responseData, isLoading, refetch, handleDelete, pageSummary, getPaginationTotal, handleChangePage };
+  return { alert, data, isLoading, refetch, handleDelete, pageSummary, getPaginationTotal, handleChangePage };
 };
 
 export default useGetAllAdministratorHook;
