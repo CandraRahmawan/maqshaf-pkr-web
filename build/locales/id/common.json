@@ -5,6 +5,7 @@
   "next": "Lanjutkan",
   "balance": "Saldo",
   "confirmation": "Konfirmasi",
+  "save": "Simpan",
   "label": {
     "no": "No",
     "fullName": "Nama Lengkap",
@@ -13,6 +14,8 @@
     "transactionDate": "Tanggal Transaksi",
     "createdBy": "Dibuat oleh",
     "enterPin": "Masukkan PIN",
+    "enterOldPin": "Masukkan PIN Lama",
+    "enterConfirmPin": "Masukkan Konfirmasi PIN",
     "transactionCode": "Kode Transaksi",
     "totalBuy": "Total Bayar",
     "cancel": "Batal",
@@ -31,6 +34,7 @@
     "logout": "Keluar"
   },
   "alert": {
-    "success": "Sukses menyimpan data"
+    "success": "Sukses",
+    "failed": "Gagal"
   }
 }

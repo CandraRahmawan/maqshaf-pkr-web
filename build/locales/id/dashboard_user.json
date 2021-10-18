@@ -13,6 +13,7 @@
     "confirmDelete": "Hapus Santri",
     "titleConfirmReset": "Reset PIN",
     "titleConfirmDelete": "Hapus Santri",
+    "titleTopup": "Topup Saldo",
     "searchName": "Cari Nama",
     "searchNIS": "Cari NIS"
   },
@@ -22,7 +23,8 @@
     "fullName": "Nama Lengkap",
     "class": "Kelas",
     "address": "Alamat",
-    "pin": "PIN"
+    "pin": "PIN",
+    "balance": "Saldo"
   },
   "placeholder": {
     "nis": "Masukkan NIS",
@@ -42,6 +44,8 @@
     "nisLength": "NIS harus 16 digit.",
     "nisFormat": "NIS harus angka.",
     "nisRequired": "NIS harus diisi.",
+    "balanceFormat": "Saldo harus angka",
+    "balanceRequired": "Saldo harus diisi",
     "fullNameRequired": "Nama Lengkap harus diisi.",
     "classRequired": "Kelas harus diisi.",
     "addressRequired": "Alamat harus diisi.",
