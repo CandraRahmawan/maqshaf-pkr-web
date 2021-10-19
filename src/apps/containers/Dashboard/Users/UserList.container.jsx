@@ -1,9 +1,10 @@
-import { TableRow, TableCell, Button, Box, Dialog, TextField, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
+import { TableRow, TableCell, Popover, Button, Box, List, ListItem, ListItemIcon, ListItemText, Dialog, TextField, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@material-ui/core';
 import { func, object } from 'prop-types';
 import Pagination from '@material-ui/lab/Pagination';
 import Alert from '@material-ui/lab/Alert';
 import { withStyles } from '@material-ui/core/styles';
 import { DataTables } from 'apps/components/ui';
+import { rupiahFormat } from 'helpers/formattor.helper';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
@@ -46,6 +47,10 @@ const headers = (t) => [
     label: t('common:label.createdBy'),
   },
   {
+    name: 'saldo',
+    label: t('common:balance'),
+  },
+  {
     name: 'action',
     label: t('common:label.action'),
   },
@@ -57,8 +62,8 @@ const UserListContainer = ({ classes, t }) => {
     showPopup, handleConfirm, setSelectedData, selectedData, setShowPopup,
     pageSummary, handleChange, handleSearch, getPaginationTotal, handleChangePage,
     formik, formatMoney,
-    showPopupTopup, setShowPopupTopup,
-    handleCloseTopup,
+    showPopupSaldo, setShowPopupSaldo,
+    handleCloseSaldo,
   } = useGetAllUserHook(history, t);
   return (
     <>
@@ -83,10 +88,11 @@ const UserListContainer = ({ classes, t }) => {
             <TextField variant="outlined" style={{ width: 100 }} placeholder={t('dashboard_user:table.searchNIS')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'nis')} />
           </TableCell>
           <TableCell>
-            <TextField variant="outlined" fullWidth placeholder={t('dashboard_user:table.searchName')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'name')} />
+            <TextField variant="outlined" style={{ width: 120 }} placeholder={t('dashboard_user:table.searchName')} onKeyPress={handleSearch} onChange={(e) => handleChange(e, 'name')} />
           </TableCell>
           <TableCell>
           </TableCell>
+          <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
@@ -103,16 +109,41 @@ const UserListContainer = ({ classes, t }) => {
             <TableCell>{row.address}</TableCell>
             <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
             <TableCell>{row.createdBy}</TableCell>
+            <TableCell>{rupiahFormat(row.saldo)}</TableCell>
             <TableCell>
               <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/santri/' + row.userId)} >
                 <EditIcon fontSize="small" />
               </IconButton>
-              <IconButton title="Topup" aria-label="topup" color="default" onClick={() => {
-                setShowPopupTopup(true)
-                setSelectedData(row)
-              }} >
-                <AccountBalanceWalletIcon fontSize="small" />
-              </IconButton>
+              <>
+                <IconButton title="Topup" aria-label="topup" color="default" onClick={(e) => setSelectedData({ ...row, anchorEl: e.currentTarget })} >
+                  <AccountBalanceWalletIcon fontSize="small" />
+                </IconButton>
+                <Popover
+                  id={row.userId}
+                  onClose={() => setSelectedData({})}
+                  open={selectedData.anchorEl && selectedData.userId === row.userId}
+                  anchorEl={selectedData.anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                >
+                  <List>
+                    <ListItem button onClick={() => {
+                      setShowPopupSaldo(true)
+                      setSelectedData(row)
+                    }}>
+                      <ListItemText primary={t('dashboard_user:table.titleTopup')} />
+                    </ListItem>
+                    <ListItem button onClick={() => {
+                      setShowPopupSaldo(true)
+                      setSelectedData({ ...row, isWithdrawal: true })
+                    }}>
+                      <ListItemText primary={t('dashboard_user:table.titleWithdrawal')} />
+                    </ListItem>
+                  </List>
+                </Popover>
+              </>
               <IconButton title="Reset PIN" aria-label="reset PIN" color="secondary" onClick={() => {
                 setShowPopup(true)
                 setSelectedData(row)
@@ -125,6 +156,12 @@ const UserListContainer = ({ classes, t }) => {
               }} >
                 <DeleteIcon fontSize="small" />
               </IconButton>
+              {/* <IconButton title="Topup" aria-label="topup" color="default" onClick={() => {
+                setShowPopupTopup(true)
+                setSelectedData(row)
+              }} >
+                <AccountBalanceWalletIcon fontSize="small" />
+              </IconButton> */}
             </TableCell>
           </TableRow>
         ))}
@@ -153,12 +190,17 @@ const UserListContainer = ({ classes, t }) => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog open={showPopupTopup} aria-labelledby="form-dialog-title" onClose={handleCloseTopup}>
+      <Dialog open={showPopupSaldo} aria-labelledby="form-dialog-title" onClose={handleCloseSaldo}>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <DialogTitle id="alert-dialog-title">
-            {t('dashboard_user:table.titleTopup')}
+            {selectedData.isWithdrawal ? t('dashboard_user:table.titleWithdrawal') : t('dashboard_user:table.titleTopup')}
           </DialogTitle>
           <DialogContent>
+            {
+              selectedData.isWithdrawal && (
+                <Box marginBottom={2}>{t('dashboard_user:table.titleBalance')}: {rupiahFormat(selectedData.saldo)}</Box>
+              )
+            }
             <TextField
               name="balance"
               value={formatMoney(formik.values.balance)}
@@ -170,7 +212,7 @@ const UserListContainer = ({ classes, t }) => {
             />
           </DialogContent>
           <DialogActions>
-            <Button type="button" onClick={handleCloseTopup}> {t('dashboard_user:button.cancel')}</Button>
+            <Button type="button" onClick={handleCloseSaldo}> {t('dashboard_user:button.cancel')}</Button>
             <Button type="submit" autoFocus>
               {t('dashboard_user:button.save')}
             </Button>

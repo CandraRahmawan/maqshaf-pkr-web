@@ -240,7 +240,7 @@ const SearchProductContainer = (props) => {
           </Grid>
         </Grid>
       </Container>
-      <FooterNavigation t={t} history={history} handleOpenModal={handleOpenModal} handleOpenScan={handleOpenScan} />
+      <FooterNavigation t={t} cartTotal={qty} history={history} handleOpenModal={handleOpenModal} handleOpenScan={handleOpenScan} />
       <Dialog fullScreen open={open} aria-labelledby="form-dialog-title" onClose={handleCloseModal}>
         <DialogTitle disableTypography>
           <Typography variant="h6">

@@ -36,7 +36,7 @@ const useGetAllProductHook = (history) => {
     if (alert.isShow) {
       setTimeout(() => {
         setAlert({ ...alert, isShow: false })
-      }, 3000)
+      }, 5000)
     }
   }, [alert])
 
