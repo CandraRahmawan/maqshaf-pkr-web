@@ -9,8 +9,8 @@ import useTableHook from '../useTable.hook';
 const useGetAllUserHook = (history, t) => {
   const validationSchema = yup.object({
     balance: yup.string()
-    .matches(/^[0-9,]+$/, t('dashboard_user:validation.balanceFormat'))
-    .required(t('dashboard_user:validation.balanceRequired')),
+      .matches(/^[0-9,]+$/, t('dashboard_user:validation.balanceFormat'))
+      .required(t('dashboard_user:validation.balanceRequired')),
   });
 
   const [alert, setAlert] = useState({
@@ -19,7 +19,7 @@ const useGetAllUserHook = (history, t) => {
     message: 'common:alert.success'
   })
   const [showPopup, setShowPopup] = useState(false)
-  const [showPopupTopup, setShowPopupTopup] = useState(false)
+  const [showPopupSaldo, setShowPopupSaldo] = useState(false)
   const [selectedData, setSelectedData] = useState({})
 
   const { data, isLoading, refetch: refetchAll } = useQuery('listAllUser', () =>
@@ -46,6 +46,11 @@ const useGetAllUserHook = (history, t) => {
     fetchApiClient(`/deposit/kredit/${selectedData.userId}`, 'POST', requestData)
   )
 
+  const { data: dataWithdrawal, error: errorWithdrawal, mutate: mutateWithdrawal } = useMutation('userMutationWithdrawal', (requestData) =>
+    fetchApiClient(`/withDrawl/${selectedData.userId}`, 'POST', requestData)
+  )
+
+
 
   useEffect(() => {
     if (history.location.state?.success) {
@@ -62,7 +67,7 @@ const useGetAllUserHook = (history, t) => {
     if (alert.isShow) {
       setTimeout(() => {
         setAlert({ ...alert, isShow: false })
-      }, 3000)
+      }, 5000)
     }
   }, [alert])
 
@@ -75,23 +80,30 @@ const useGetAllUserHook = (history, t) => {
     getPaginationTotal
   } = useTableHook(data, refetchAll)
 
-  useEffect(() => {
-    if (IS_OK(dataUpdate) || IS_OK(dataDelete) || IS_OK(dataTopup)) {
+  const getResponseMessage = (data, error) => {
+    if (IS_OK(data)) {
       setAlert({
         isShow: true,
         type: 'success',
         message: 'common:alert.success'
       })
+      window.scrollTo(0, 0)
     }
 
-    if (errorUpdate || errorDelete || errorTopup) {
+    if (error) {
       setAlert({
         isShow: true,
         type: 'error',
-        message: 'common:alert.failed'
+        message: error?.message || 'common:alert.failed'
       })
+      window.scrollTo(0, 0)
     }
-  }, [dataUpdate, errorUpdate, dataDelete, errorDelete, dataTopup, errorTopup]);
+  }
+
+  useEffect(() => getResponseMessage(dataUpdate, errorUpdate), [dataUpdate, errorUpdate]);
+  useEffect(() => getResponseMessage(dataDelete, errorDelete), [dataDelete, errorDelete]);
+  useEffect(() => getResponseMessage(dataTopup, errorTopup), [dataTopup, errorTopup]);
+  useEffect(() => getResponseMessage(dataWithdrawal, errorWithdrawal), [dataWithdrawal, errorWithdrawal]);
 
   const handleConfirm = (isDelete) => {
     if (isDelete) {
@@ -113,16 +125,20 @@ const useGetAllUserHook = (history, t) => {
       const { balance } = values
       const val = Math.round(balance.replaceAll(/,/g, ''))
       if (selectedData.userId) {
-        mutateTopup({ saldo: val })
-        setShowPopupTopup(false)
+        if (selectedData.isWithdrawal) {
+          mutateWithdrawal({ saldo: val })
+        } else {
+          mutateTopup({ saldo: val })
+        }
+        setShowPopupSaldo(false)
         formik.resetForm({ balance: '' })
       }
     },
   });
 
-  const handleCloseTopup = () => {
+  const handleCloseSaldo = () => {
     formik.resetForm({ balance: '' })
-    setShowPopupTopup(false)
+    setShowPopupSaldo(false)
   }
 
   const formatMoney = (val) => {
@@ -135,9 +151,7 @@ const useGetAllUserHook = (history, t) => {
   return {
     data,
     alert,
-    message: errorUpdate?.message || dataUpdate?.message,
     isLoading,
-    error: errorUpdate,
     showPopup,
     handleConfirm,
     selectedData,
@@ -148,9 +162,9 @@ const useGetAllUserHook = (history, t) => {
     handleChange,
     handleChangePage,
     getPaginationTotal,
-    showPopupTopup,
-    setShowPopupTopup,
-    handleCloseTopup,
+    showPopupSaldo,
+    setShowPopupSaldo,
+    handleCloseSaldo,
     formik,
     formatMoney,
   };

@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogContentText, DialogTitle, TableCell, TableRow } from '@material-ui/core';
 import { DataTables } from 'apps/components/ui';
+import { rupiahFormat } from 'helpers/formattor.helper';
 import { bool, func, object } from 'prop-types';
 
 const ModalDetailComponent = ({ t, open, setOpen, selectedData }) => {
@@ -45,14 +46,14 @@ const ModalDetailComponent = ({ t, open, setOpen, selectedData }) => {
                 </TableCell>
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.qty}</TableCell>
-                <TableCell>{row.price}</TableCell>
+                <TableCell style={{ textAlign: 'right' }}>{row.price}</TableCell>
               </TableRow>
             ))}
             <TableRow>
               <TableCell></TableCell>
               <TableCell></TableCell>
               <TableCell><b>{t('dashboard_transaction:table.header.totalPrice')}</b></TableCell>
-              <TableCell><b>{selectedData.total}</b></TableCell>
+              <TableCell style={{ textAlign: 'right' }}><b>{rupiahFormat(selectedData.total)}</b></TableCell>
             </TableRow>
           </DataTables>
         </DialogContentText>

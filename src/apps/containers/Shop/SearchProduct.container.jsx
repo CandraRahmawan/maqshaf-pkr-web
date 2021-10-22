@@ -40,7 +40,7 @@ const SearchProductContainer = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openScan, setOpenScan] = useState(false)
-  const [showAlert, setShowAlert] = useState(false)
+  const [alert, setAlert] = useState({})
   const [scanType, setScanType] = useState('PIN')
   const { goodList, isLoading, setKeyword } = useSearchProductHook();
   const { items, total, qty } = useSelector((state) => state.cartSelected);
@@ -51,7 +51,7 @@ const SearchProductContainer = (props) => {
   const { data, showQRReader, setShowQRReader,
     handleScan, handleScanError } = useCheckBalancedHook();
 
-  const { mutate, isLoading: isLoadingReset } = useResetPINHook(history, setShowAlert, t, data?.data?.user?.userId)
+  const { mutate, isLoading: isLoadingReset } = useResetPINHook(history, setAlert, t, data?.data?.user?.userId)
 
 
   const handleOpenModal = () => {
@@ -94,6 +94,7 @@ const SearchProductContainer = (props) => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       if (data?.data?.user?.userId) {
+        setAlert({})
         mutate(values, data?.data?.user?.userId);
       }
     },
@@ -101,7 +102,6 @@ const SearchProductContainer = (props) => {
 
   const balanceContent = (
     <Box marginTop={14} paddingLeft={2} paddingRight={2}>
-      {showAlert && <Alert severity="error">{t('search_product:alert.errorReset')}</Alert>}
       <Box display="flex" marginTop={4}>
         <Box width={"50%"}>{t('search_product:dialogNIS')}</Box>
         <Box width={"50%"} textAlign="right"><b>{data?.data?.user?.nis}</b></Box>
@@ -127,7 +127,8 @@ const SearchProductContainer = (props) => {
 
   const PINContent = (
     <form onSubmit={formik.handleSubmit} className={classes.form}>
-      <Box marginTop={14} paddingLeft={2} paddingRight={2}>
+      {alert.isShow && <Alert severity={alert.type}>{alert.message}</Alert>}
+      <Box marginTop={8} paddingLeft={3} paddingRight={2}>
         <Box marginBottom={4}>
           <TextField
             name="oldPin"
@@ -240,7 +241,7 @@ const SearchProductContainer = (props) => {
           </Grid>
         </Grid>
       </Container>
-      <FooterNavigation t={t} history={history} handleOpenModal={handleOpenModal} handleOpenScan={handleOpenScan} />
+      <FooterNavigation t={t} cartTotal={qty} history={history} handleOpenModal={handleOpenModal} handleOpenScan={handleOpenScan} />
       <Dialog fullScreen open={open} aria-labelledby="form-dialog-title" onClose={handleCloseModal}>
         <DialogTitle disableTypography>
           <Typography variant="h6">

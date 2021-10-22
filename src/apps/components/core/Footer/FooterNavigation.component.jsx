@@ -1,12 +1,13 @@
-import { Paper, Box, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { Paper, Badge, BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import { func, object } from 'prop-types';
 import { useState } from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 import ResetIcon from '@material-ui/icons/LockOpen';
 import ScanIcon from '@material-ui/icons/CropFree';
 import CartIcon from '@material-ui/icons/ShoppingCart';
+import { number } from 'prop-types';
 
-const FooterNavigationComponent = ({ t, history, handleOpenModal, handleOpenScan }) => {
+const FooterNavigationComponent = ({ t, history, cartTotal, handleOpenModal, handleOpenScan }) => {
   const [value, setValue] = useState(0);
 
   const redirect = (val) => {
@@ -33,7 +34,7 @@ const FooterNavigationComponent = ({ t, history, handleOpenModal, handleOpenScan
   }
 
   return (
-    <Paper sx={{ position: 'absolute', bottom: 0, left: 0, right: 0 }} elevation={3}>
+    <Paper sx={{ position: 'absolute', bottom: 0, left: 0, right: 0 }} style={{ position: 'fixed', bottom: 0, width: '100%' }} elevation={3}>
       <BottomNavigation
         showLabels
         value={value}
@@ -45,7 +46,20 @@ const FooterNavigationComponent = ({ t, history, handleOpenModal, handleOpenScan
         <BottomNavigationAction label="Beranda" icon={<HomeIcon />} />
         <BottomNavigationAction label="Reset PIN" icon={<ResetIcon />} />
         <BottomNavigationAction label="Cek Saldo" icon={<ScanIcon />} />
-        <BottomNavigationAction label="Keranjang" icon={<CartIcon />} />
+        <BottomNavigationAction label="Keranjang" icon={
+          <>
+            <CartIcon />
+            {
+              cartTotal > 0 && (
+                <Badge badgeContent={cartTotal} color="primary" style={{
+                  width: 20,
+                  top: -20
+                }}>
+                </Badge>
+              )
+            }
+          </>
+        } />
       </BottomNavigation>
     </Paper>
   );
@@ -56,6 +70,12 @@ FooterNavigationComponent.propTypes = {
   history: object.isRequired,
   handleOpenModal: func.isRequired,
   handleOpenScan: func.isRequired,
+  cartTotal: number,
 };
+
+FooterNavigationComponent.defaultProps = {
+  cartTotal: 0
+}
+
 
 export default FooterNavigationComponent;

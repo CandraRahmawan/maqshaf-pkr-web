@@ -39,7 +39,7 @@ const useGetAllAdministratorHook = (history) => {
     if (alert.isShow) {
       setTimeout(() => {
         setAlert({ ...alert, isShow: false })
-      }, 3000)
+      }, 5000)
     }
   }, [alert])
 
@@ -61,14 +61,16 @@ const useGetAllAdministratorHook = (history) => {
         type: 'success',
         message: 'common:alert.success'
       })
+      window.scrollTo(0, 0)
     }
 
     if (error) {
       setAlert({
         isShow: true,
         type: 'error',
-        message: 'common:alert.failed'
+        message: error?.message || 'common:alert.failed'
       })
+      window.scrollTo(0, 0)
     }
   }, [dataDelete, error]);
 
