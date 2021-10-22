@@ -36,6 +36,10 @@ const headers = (t) => [
     label: t('common:label.createdAt'),
   },
   {
+    name: 'createdBy',
+    label: t('common:label.createdBy'),
+  },
+  {
     name: 'action',
     label: t('common:label.action'),
   },
@@ -69,6 +73,7 @@ const AdministratorListContainer = ({ classes, t }) => {
             <TableCell>{row.username}</TableCell>
             <TableCell>{row.fullName}</TableCell>
             <TableCell>{defaultFormatDate(row.createdAt)}</TableCell>
+            <TableCell>{row.createdBy}</TableCell>
             <TableCell>
               <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/administrator/' + row.administratorId)} >
                 <EditIcon fontSize="small" />
