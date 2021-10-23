@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   active: {
     color: '#1a237e',
-    // backgroundColor: 'silver'
+    backgroundColor: '#ecf0f1'
   },
   nested: {
     paddingLeft: theme.spacing(4),

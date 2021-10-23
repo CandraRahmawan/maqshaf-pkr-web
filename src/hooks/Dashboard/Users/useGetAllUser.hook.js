@@ -8,7 +8,8 @@ import useTableHook from '../useTable.hook';
 
 const useGetAllUserHook = (history, t) => {
   const validationSchema = yup.object({
-    balance: yup.string()
+    balance: yup
+      .string()
       .matches(/^[0-9,]+$/, t('dashboard_user:validation.balanceFormat'))
       .required(t('dashboard_user:validation.balanceRequired')),
   });
@@ -16,41 +17,62 @@ const useGetAllUserHook = (history, t) => {
   const [alert, setAlert] = useState({
     isShow: false,
     type: 'success',
-    message: 'common:alert.success'
-  })
-  const [showPopup, setShowPopup] = useState(false)
-  const [showPopupSaldo, setShowPopupSaldo] = useState(false)
-  const [selectedData, setSelectedData] = useState({})
+    message: 'common:alert.success',
+  });
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupSaldo, setShowPopupSaldo] = useState(false);
+  const [selectedData, setSelectedData] = useState({});
 
-  const { data, isLoading, refetch: refetchAll } = useQuery('listAllUser', () =>
-    fetchApiClient(`/user/all`, 'GET', {
-      nis: searchValue.nis,
-      name: searchValue.name,
-      limit: pageSummary.limit,
-      page: pageSummary.page
-    }),
+  const {
+    data,
+    isLoading,
+    refetch: refetchAll,
+  } = useQuery(
+    'listAllUser',
+    () =>
+      fetchApiClient(`/user/all`, 'GET', {
+        nis: searchValue.nis,
+        name: searchValue.name,
+        limit: pageSummary.limit,
+        page: pageSummary.page,
+      }),
     {
-      refetchOnMount: "always"
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
     }
   );
 
-  const { data: dataUpdate, error: errorUpdate, mutate: mutateUpdate } = useMutation('userMutationUpdate', (requestData) =>
+  const {
+    data: dataUpdate,
+    error: errorUpdate,
+    mutate: mutateUpdate,
+  } = useMutation('userMutationUpdate', (requestData) =>
     fetchApiClient(`/user/reset-pin/${requestData}`, 'PUT', {})
-  )
+  );
 
-  const { data: dataDelete, error: errorDelete, mutate: mutateDelete } = useMutation('userMutationDelete', (requestData) =>
+  const {
+    data: dataDelete,
+    error: errorDelete,
+    mutate: mutateDelete,
+  } = useMutation('userMutationDelete', (requestData) =>
     fetchApiClient(`/user/delete/${requestData}`, 'DELETE', {})
-  )
+  );
 
-  const { data: dataTopup, error: errorTopup, mutate: mutateTopup } = useMutation('userMutationTopup', (requestData) =>
+  const {
+    data: dataTopup,
+    error: errorTopup,
+    mutate: mutateTopup,
+  } = useMutation('userMutationTopup', (requestData) =>
     fetchApiClient(`/deposit/kredit/${selectedData.userId}`, 'POST', requestData)
-  )
+  );
 
-  const { data: dataWithdrawal, error: errorWithdrawal, mutate: mutateWithdrawal } = useMutation('userMutationWithdrawal', (requestData) =>
+  const {
+    data: dataWithdrawal,
+    error: errorWithdrawal,
+    mutate: mutateWithdrawal,
+  } = useMutation('userMutationWithdrawal', (requestData) =>
     fetchApiClient(`/withDrawl/${selectedData.userId}`, 'POST', requestData)
-  )
-
-
+  );
 
   useEffect(() => {
     if (history.location.state?.success) {
@@ -58,18 +80,18 @@ const useGetAllUserHook = (history, t) => {
       setAlert({
         isShow: true,
         type: 'success',
-        message: 'common:alert.success'
-      })
+        message: 'common:alert.success',
+      });
     }
-  }, [history.location.state])
+  }, [history.location.state]);
 
   useEffect(() => {
     if (alert.isShow) {
       setTimeout(() => {
-        setAlert({ ...alert, isShow: false })
-      }, 5000)
+        setAlert({ ...alert, isShow: false });
+      }, 5000);
     }
-  }, [alert])
+  }, [alert]);
 
   const {
     searchValue,
@@ -77,44 +99,49 @@ const useGetAllUserHook = (history, t) => {
     handleSearch,
     handleChange,
     handleChangePage,
-    getPaginationTotal
-  } = useTableHook(data, refetchAll)
+    getPaginationTotal,
+  } = useTableHook(data, refetchAll);
 
-  const getResponseMessage = (data, error) => {
+  const getResponseMessage = (data, error, isRefetch = false) => {
     if (IS_OK(data)) {
       setAlert({
         isShow: true,
         type: 'success',
-        message: 'common:alert.success'
-      })
-      window.scrollTo(0, 0)
+        message: 'common:alert.success',
+      });
+      window.scrollTo(0, 0);
+      if (isRefetch) {
+        refetchAll();
+      }
     }
 
     if (error) {
       setAlert({
         isShow: true,
         type: 'error',
-        message: error?.message || 'common:alert.failed'
-      })
-      window.scrollTo(0, 0)
+        message: error?.message || 'common:alert.failed',
+      });
+      window.scrollTo(0, 0);
     }
-  }
+  };
 
   useEffect(() => getResponseMessage(dataUpdate, errorUpdate), [dataUpdate, errorUpdate]);
-  useEffect(() => getResponseMessage(dataDelete, errorDelete), [dataDelete, errorDelete]);
-  useEffect(() => getResponseMessage(dataTopup, errorTopup), [dataTopup, errorTopup]);
-  useEffect(() => getResponseMessage(dataWithdrawal, errorWithdrawal), [dataWithdrawal, errorWithdrawal]);
+  useEffect(() => getResponseMessage(dataDelete, errorDelete, true), [dataDelete, errorDelete]);
+  useEffect(() => getResponseMessage(dataTopup, errorTopup, true), [dataTopup, errorTopup]);
+  useEffect(
+    () => getResponseMessage(dataWithdrawal, errorWithdrawal, true),
+    [dataWithdrawal, errorWithdrawal]
+  );
 
   const handleConfirm = (isDelete) => {
     if (isDelete) {
-      mutateDelete(selectedData.userId)
-      setShowPopup(false)
+      mutateDelete(selectedData.userId);
+      setShowPopup(false);
     } else {
-      mutateUpdate(selectedData.userId)
-      setShowPopup(false)
+      mutateUpdate(selectedData.userId);
+      setShowPopup(false);
     }
-  }
-
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -122,31 +149,31 @@ const useGetAllUserHook = (history, t) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      const { balance } = values
-      const val = Math.round(balance.replaceAll(/,/g, ''))
+      const { balance } = values;
+      const val = Math.round(balance.replaceAll(/,/g, ''));
       if (selectedData.userId) {
         if (selectedData.isWithdrawal) {
-          mutateWithdrawal({ saldo: val })
+          mutateWithdrawal({ saldo: val });
         } else {
-          mutateTopup({ saldo: val })
+          mutateTopup({ saldo: val });
         }
-        setShowPopupSaldo(false)
-        formik.resetForm({ balance: '' })
+        setShowPopupSaldo(false);
+        formik.resetForm({ balance: '' });
       }
     },
   });
 
   const handleCloseSaldo = () => {
-    formik.resetForm({ balance: '' })
-    setShowPopupSaldo(false)
-  }
+    formik.resetForm({ balance: '' });
+    setShowPopupSaldo(false);
+  };
 
   const formatMoney = (val) => {
     let newValue = formik.values.balance.toString();
-    newValue = newValue.replace(/,/g, '')
-    newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    return newValue
-  }
+    newValue = newValue.replace(/,/g, '');
+    newValue = newValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return newValue;
+  };
 
   return {
     data,

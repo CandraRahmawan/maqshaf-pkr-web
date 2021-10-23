@@ -9,8 +9,8 @@ const TransactionCreditListView = (props) => {
   return (
     <>
       <Helmet>
-        <title>{t('dashboard_administrator:metaTitle')}</title>
-        <meta name="description" content={t('dashboard_administrator:metaDescription')} />
+        <title>{t('dashboard_transaction:metaTitle')}</title>
+        <meta name="description" content={t('dashboard_transaction:metaDescription')} />
       </Helmet>
       <DashboardLayout t={t} history={history}>
         <TransactionDebetListContainer t={t} history={history} location={location} />
@@ -25,4 +25,4 @@ TransactionCreditListView.propTypes = {
   location: object.isRequired,
 };
 
-export default withTranslation(['dashboard_administrator', 'glossary'])(TransactionCreditListView);
+export default withTranslation(['dashboard_transaction', 'glossary'])(TransactionCreditListView);

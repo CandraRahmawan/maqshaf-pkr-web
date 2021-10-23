@@ -61,10 +61,10 @@ const routes = [
     exact: true,
     component: lazy(() => import('views/dashboard/CheckBalanced.view')),
   },
-  // {
-  //   path: "*",
-  //   component: lazy(() => import("views/error-page/404")),
-  // },
+  {
+    path: "*",
+    component: lazy(() => import("views/error-page/notFound.view")),
+  },
 ];
 
 export default routes;

@@ -56,7 +56,7 @@ const SidebarMenuLeftComponent = (props) => {
         return classes.active
       }
     }
-    
+
     return ''
   }
 
@@ -163,7 +163,7 @@ const SidebarMenuLeftComponent = (props) => {
         handleOk={logout}
         handleClose={() => setOpenDialog(false)}
         title={t('common:confirmation')}
-        content={t('dashboard:confirmationLogout')}
+        content={t('glossary:confirmationLogout')}
       />
     </Drawer>
   );

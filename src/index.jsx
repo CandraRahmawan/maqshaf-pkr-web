@@ -11,8 +11,7 @@ import App from './apps';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
-import { pwaTrackingListeners } from "./pwaEventListeners";
-
+import { pwaTrackingListeners } from './pwaEventListeners';
 
 import 'dayjs/locale/id';
 
@@ -24,15 +23,15 @@ dayjs.locale('id');
 ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback={<Spinner label="Sedang memnuat halaman..." />}>
-      <I18nextProvider i18n={i18n}>
-        <ReduxProvider>
-          <ThemeProvider>
-            <QueryClientProvider>
+      <ReduxProvider>
+        <QueryClientProvider>
+          <I18nextProvider i18n={i18n}>
+            <ThemeProvider>
               <App />
-            </QueryClientProvider>
-          </ThemeProvider>
-        </ReduxProvider>
-      </I18nextProvider>
+            </ThemeProvider>
+          </I18nextProvider>
+        </QueryClientProvider>
+      </ReduxProvider>
     </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
@@ -42,22 +41,21 @@ serviceWorkerRegistration.unregister();
 
 reportWebVitals();
 
-const isBrowser = typeof window !== "undefined";
+const isBrowser = typeof window !== 'undefined';
 
 if (isBrowser) {
   pwaTrackingListeners();
 }
 
-
-if (isBrowser && "serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
+if (isBrowser && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register("/service-worker.js")
+      .register('/service-worker.js')
       .then(() => {
-        console.log("Service worker registered");
+        console.log('Service worker registered');
       })
       .catch((err) => {
-        console.log("Service worker registration failed", err);
+        console.log('Service worker registration failed', err);
       });
   });
 }

@@ -8,21 +8,28 @@ const useGetAllAdministratorHook = (history) => {
   const [alert, setAlert] = useState({
     isShow: false,
     type: 'success',
-    message: 'common:alert.success'
-  })
-  const { data, isLoading, refetch } = useQuery('listAllAdministrator', () =>
-    fetchApiClient(`/administrator/all`, 'GET', {
-      limit: pageSummary.limit,
-      page: pageSummary.page
-    }),
+    message: 'common:alert.success',
+  });
+  const { data, isLoading, refetch } = useQuery(
+    'listAllAdministrator',
+    () =>
+      fetchApiClient(`/administrator/all`, 'GET', {
+        limit: pageSummary.limit,
+        page: pageSummary.page,
+      }),
     {
-      refetchOnMount: "always"
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
     }
   );
 
-  const { data: dataDelete,  mutate, error } = useMutation('administratorMutationUpdate', (id) =>
+  const {
+    data: dataDelete,
+    mutate,
+    error,
+  } = useMutation('administratorMutationUpdate', (id) =>
     fetchApiClient(`/administrator/delete/${id}`, 'DELETE', {})
-  )
+  );
 
   useEffect(() => {
     if (history.location.state?.success) {
@@ -30,51 +37,56 @@ const useGetAllAdministratorHook = (history) => {
       setAlert({
         isShow: true,
         type: 'success',
-        message: 'common:alert.success'
-      })
+        message: 'common:alert.success',
+      });
     }
-  }, [history.location.state])
+  }, [history.location.state]);
 
   useEffect(() => {
     if (alert.isShow) {
       setTimeout(() => {
-        setAlert({ ...alert, isShow: false })
-      }, 5000)
+        setAlert({ ...alert, isShow: false });
+      }, 5000);
     }
-  }, [alert])
+  }, [alert]);
 
-  const {
-    pageSummary,
-    handleChangePage,
-    getPaginationTotal
-  } = useTableHook(data, refetch)
+  const { pageSummary, handleChangePage, getPaginationTotal } = useTableHook(data, refetch);
 
   const handleDelete = (id) => {
-    mutate(id)
-  }
+    mutate(id);
+  };
 
   useEffect(() => {
     if (IS_OK(dataDelete)) {
-      refetch()
+      refetch();
       setAlert({
         isShow: true,
         type: 'success',
-        message: 'common:alert.success'
-      })
-      window.scrollTo(0, 0)
+        message: 'common:alert.success',
+      });
+      window.scrollTo(0, 0);
     }
 
     if (error) {
       setAlert({
         isShow: true,
         type: 'error',
-        message: error?.message || 'common:alert.failed'
-      })
-      window.scrollTo(0, 0)
+        message: error?.message || 'common:alert.failed',
+      });
+      window.scrollTo(0, 0);
     }
   }, [dataDelete, error]);
 
-  return { alert, data, isLoading, refetch, handleDelete, pageSummary, getPaginationTotal, handleChangePage };
+  return {
+    alert,
+    data,
+    isLoading,
+    refetch,
+    handleDelete,
+    pageSummary,
+    getPaginationTotal,
+    handleChangePage,
+  };
 };
 
 export default useGetAllAdministratorHook;

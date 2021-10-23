@@ -7,8 +7,8 @@ export default function ReactQueryClientProvider({ children }) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        // refetchOnMount: false,
-        // refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
         retry: false,
       },
     },

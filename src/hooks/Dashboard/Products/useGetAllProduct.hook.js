@@ -17,7 +17,8 @@ const useGetAllProductHook = (history) => {
       status: searchValue.status,
     }),
     {
-      refetchOnMount: "always"
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
     }
   );
 
