@@ -14,10 +14,10 @@ const useGetUserByQrCodeHook = (code, setShowAlert) => {
       {
         nis: code,
       },
-      {
-        enabled: !!code,
-      }
-    )
+    ),
+    {
+      enabled: !!code,
+    }
   );
 
   useEffect(() => {
