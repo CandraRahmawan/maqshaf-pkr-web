@@ -7,12 +7,22 @@ import { fetchApiClient } from 'helpers/fetchApi.helper';
 import * as yup from 'yup';
 
 const useDetailAdministratorHook = (t, history, id) => {
-  const validationPass = id === 'add' ? { password: yup.string().required(t('dashboard_administrator:validation.passwordRequired')) } : null
+  const validationPass = id === 'add' ? {
+    password: yup.string().required(t('dashboard_administrator:validation.passwordRequired')),
+    repassword: yup.string()
+    .oneOf([yup.ref('password'), null], t('dashboard_administrator:validation.matchPasswordConfirm'))
+  } : null
+  
   const validationSchema = yup.object({
     fullName: yup.string().required(t('dashboard_administrator:validation.fullNameRequired')),
     username: yup.string().required(t('dashboard_administrator:validation.usernameRequired')),
     ...validationPass
   });
+
+  const [togglePassword, setTogglePassword] = useState({
+    password: false,
+    repassword: false
+  })
 
   const [showAlert, setShowAlert] = useState(false);
 
@@ -68,11 +78,20 @@ const useDetailAdministratorHook = (t, history, id) => {
     }
   }, [data, dataUpdate, error, errorUpdate]);
 
+  const handleTogglePassword = (name) => {
+    setTogglePassword({
+      ...togglePassword,
+      [name]: !togglePassword[name]
+    })
+  }
+
   return {
     error: error || errorUpdate,
     isLoading: isLoading || isLoadingUpdate,
     formik,
     showAlert,
+    togglePassword,
+    handleTogglePassword
   };
 };
 
