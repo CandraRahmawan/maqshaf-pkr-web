@@ -8,6 +8,7 @@ import useTableHook from '../useTable.hook';
 
 const useGetAllAdministratorHook = (history, t) => {
   const [showPopup, setShowPopup] = useState(false)
+  const [showPopupDelete, setShowPopupDelete] = useState(false)
   const [selectedData, setSelectedData] = useState({})
   const [togglePassword, setTogglePassword] = useState({
     password: false,
@@ -105,8 +106,9 @@ const useGetAllAdministratorHook = (history, t) => {
 
   const { pageSummary, handleChangePage, getPaginationTotal } = useTableHook(data, refetch);
 
-  const handleDelete = (id) => {
-    mutate(id);
+  const handleDelete = () => {
+    mutate(selectedData.administratorId);
+    setShowPopupDelete(false);
   };
 
   useEffect(() => {
@@ -141,9 +143,14 @@ const useGetAllAdministratorHook = (history, t) => {
     })
   }
 
+  const handleOpenDelete = (row) => {
+    setSelectedData(row)
+  }
+
   return {
     alert,
     data,
+    selectedData,
     isLoading,
     refetch,
     handleDelete,
@@ -156,7 +163,10 @@ const useGetAllAdministratorHook = (history, t) => {
     handleClosePopup,
     togglePassword,
     handleTogglePassword,
-    formik
+    formik,
+    showPopupDelete,
+    setShowPopupDelete,
+    handleOpenDelete
   };
 };
 

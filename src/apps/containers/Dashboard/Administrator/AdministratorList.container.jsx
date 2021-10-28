@@ -7,7 +7,8 @@ import {
   FormLabel,
   Input,
   InputAdornment,
-  FormHelperText
+  FormHelperText,
+  DialogContentText
 } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -60,8 +61,9 @@ const headers = (t) => [
 
 const AdministratorListContainer = ({ classes, t }) => {
   let history = useHistory();
-  const { alert, data, formik, isLoading, handleChangePassword, togglePassword, handleTogglePassword,
-    setShowPopup, showPopup, handleClosePopup, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook(history, t);
+  const { alert, data, selectedData, formik, isLoading, handleChangePassword, togglePassword, handleTogglePassword,
+    setShowPopup, showPopup, handleClosePopup, showPopupDelete, setShowPopupDelete, handleOpenDelete,
+    handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook(history, t);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -103,7 +105,10 @@ const AdministratorListContainer = ({ classes, t }) => {
               >
                 <LockOpenOutlined fontSize="small" />
               </IconButton>
-              <IconButton title="Hapus" aria-label="delete" color="secondary" onClick={() => handleDelete(row.administratorId)} >
+              <IconButton title="Hapus" aria-label="delete" color="secondary" onClick={() => {
+                handleOpenDelete(row)
+                setShowPopupDelete(true)
+              }} >
                 <DeleteIcon fontSize="small" />
               </IconButton>
             </TableCell>
@@ -113,6 +118,29 @@ const AdministratorListContainer = ({ classes, t }) => {
       <Box marginTop={2} display="flex" justifyContent="flex-end">
         <Pagination count={getPaginationTotal()} onChange={handleChangePage} page={Number(pageSummary.page)} color="primary" />
       </Box>
+      <Dialog
+        open={showPopupDelete}
+        onClose={() => setShowPopupDelete(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {t('dashboard_administrator:titleConfirmDelete')}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {t('dashboard_administrator:table.confirmDelete')} {selectedData.username}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowPopupDelete(false)}> {t('dashboard_administrator:button.no')}</Button>
+          <Button onClick={() => {
+            handleDelete()
+          }} autoFocus>
+            {t('dashboard_administrator:button.yes')}
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Dialog open={showPopup} aria-labelledby="form-dialog-title" onClose={handleClosePopup}>
         <form onSubmit={formik.handleSubmit} className={classes.form}>
           <DialogTitle id="alert-dialog-title">

@@ -1,4 +1,4 @@
-import { Box, Divider, Paper, Input, TextField, InputAdornment, IconButton, FormControl, FormLabel } from '@material-ui/core';
+import { Box, Divider, Paper, Input, TextField, InputAdornment, FormHelperText, IconButton, FormControl, FormLabel } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -94,6 +94,7 @@ const AdministratorDetailContainer = ({ history, classes, t }) => {
                         </InputAdornment>
                       }
                     />
+                    <FormHelperText style={{ marginLeft: 8 }} error={formik.touched.password && Boolean(formik.errors.password)}>{formik.touched.password && formik.errors.password}</FormHelperText>
                   </FormControl>
                 </Box>
 
@@ -127,6 +128,7 @@ const AdministratorDetailContainer = ({ history, classes, t }) => {
                         </InputAdornment>
                       }
                     />
+                    <FormHelperText style={{ marginLeft: 8 }} error={formik.touched.repassword && Boolean(formik.errors.repassword)}>{formik.touched.repassword && formik.errors.repassword}</FormHelperText>
                   </FormControl>
                 </Box>
               </>
