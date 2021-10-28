@@ -6,7 +6,6 @@ import {
   Box,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Dialog,
   TextField,

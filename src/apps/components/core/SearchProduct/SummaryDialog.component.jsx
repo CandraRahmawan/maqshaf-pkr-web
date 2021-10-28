@@ -85,16 +85,29 @@ const SummaryDialogComponent = (props) => {
             </>
           ))}
         </List>
-        <Box display="flex" justifyContent="space-between">
-          <div>
-            <Typography variant="subtitle1" color="disabled">
-              {t('search_product:dialogTotalBuy')}
-            </Typography>
-          </div>
-          <div>
-            <Typography variant="subtitle1">{rupiahFormat(total)}</Typography>
-          </div>
-        </Box>
+        {
+          items.length === 0 ? (
+            <Box display="flex">
+              <div>
+                <Typography variant="subtitle1" color="disabled">
+                  {t('search_product:dialogEmptyBuy')}
+                </Typography>
+              </div>
+            </Box>
+          ) : (
+            <Box display="flex" justifyContent="space-between">
+              <div>
+                <Typography variant="subtitle1" color="disabled">
+                  {t('search_product:dialogTotalBuy')}
+                </Typography>
+              </div>
+              <div>
+                <Typography variant="subtitle1">{rupiahFormat(total)}</Typography>
+              </div>
+            </Box>
+          )
+        }
+
       </DialogContent>
       <DialogActions>
         <Button
@@ -106,7 +119,7 @@ const SummaryDialogComponent = (props) => {
         >
           {t('common:cancel')}
         </Button>
-        <Button onClick={() => history.push('/identitas')} color="primary">
+        <Button disabled={items.length === 0} onClick={() => history.push('/identitas')} color="primary">
           {t('common:next')}
         </Button>
       </DialogActions>

@@ -1,6 +1,7 @@
 {
   "metaTitle": "Daftar Administrator",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
+  "titleTopup": "Ubah Password",
   "table": {
     "title": "Daftar Administrator",
     "header": {
@@ -14,12 +15,16 @@
     "title": "Form Administrator",
     "username": "Username",
     "fullName": "Nama Lengkap",
-    "password": "Password"
+    "oldPassword": "Password Lama",
+    "password": "Password",
+    "repassword": "Konfirmasi Password"
   },
   "placeholder": {
     "username": "Masukkan username",
     "fullName": "Masukkan nama lengkap",
-    "password": "Masukkan password"
+    "oldPassword": "Masukkan Password Lama",
+    "password": "Masukkan password",
+    "repassword": "Masukkan konfirmasi password"
   },
   "button": {
     "add": "Tambah",
@@ -29,6 +34,8 @@
   "validation": {
     "usernameRequired": "Username harus diisi.",
     "fullNameRequired": "Nama Lengkap harus diisi.",
-    "passwordRequired": "Password harus diisi."
+    "oldPasswordRequired": "Password lama harus diisi.",
+    "passwordRequired": "Password harus diisi.",
+    "matchPasswordConfirm": "Konfirmasi password tidak sesuai."
   }
 }

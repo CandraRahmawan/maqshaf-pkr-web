@@ -93,12 +93,14 @@ const CardComponent = (props) => {
           {isXsDevice ? (
             <AddShoppingCartIcon onClick={handleShowAlert} />
           ) : (
-            <span onClick={handleShowAlert}>{t('search_product:addToCart')}}</span>
+            <span onClick={handleShowAlert}>{t('search_product:addToCart')}</span>
           )}
         </Button>
       </CardActions>
-      <Snackbar open={showAlert} autoHideDuration={2000} onClose={() => setShowAlert(false)}>
-        <Alert severity="success" variant="filled">
+      <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={showAlert} autoHideDuration={2000} onClose={() => setShowAlert(false)}>
+        <Alert
+          severity="success" variant="filled"
+        >
           {t('search_product:alert.successAddCart')}
         </Alert>
       </Snackbar>

@@ -7,6 +7,7 @@
   "addToCart": "Masukkan ke keranjang",
   "dialogTotalSummaryTitle": "Total Jajanan",
   "dialogTotalBuy": "Total Bayar Jajan",
+  "dialogEmptyBuy": "Jajanan masih kosong",
   "dialogTotalSummaryInfo": "Pastikan Jajanan yang dipilih sudah sesuai",
   "dialogIdentityDataTitle": "Scan QRCode Identitas Santri",
   "dialogConfirmationPin": "Otorisasi Pin",

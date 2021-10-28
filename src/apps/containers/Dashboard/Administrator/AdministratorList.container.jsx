@@ -1,7 +1,20 @@
-import { TableRow, TableCell, Box, Button } from '@material-ui/core';
+import {
+  TableRow, TableCell, Box, Button, DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  FormControl,
+  FormLabel,
+  Input,
+  InputAdornment,
+  FormHelperText
+} from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { func, object } from 'prop-types';
 import Alert from '@material-ui/lab/Alert';
 import Pagination from '@material-ui/lab/Pagination';
+import LockOpenOutlined from '@material-ui/icons/LockOpenOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import { useHistory } from "react-router-dom";
 import EditIcon from '@material-ui/icons/Edit';
@@ -47,7 +60,8 @@ const headers = (t) => [
 
 const AdministratorListContainer = ({ classes, t }) => {
   let history = useHistory();
-  const { alert, data, isLoading, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook(history);
+  const { alert, data, formik, isLoading, handleChangePassword, togglePassword, handleTogglePassword,
+    setShowPopup, showPopup, handleClosePopup, handleDelete, getPaginationTotal, handleChangePage, pageSummary } = useGetAllAdministratorHook(history, t);
   return (
     <>
       <Box display="flex" justifyContent="center" className={classes.logo_login_wrapper}>
@@ -78,6 +92,17 @@ const AdministratorListContainer = ({ classes, t }) => {
               <IconButton title="Ubah" aria-label="edit" color="primary" onClick={() => history.push('/dashboard/administrator/' + row.administratorId)} >
                 <EditIcon fontSize="small" />
               </IconButton>
+              <IconButton
+                title="Ubah Password"
+                aria-label="Ubah Password"
+                color="secondary"
+                onClick={() => {
+                  setShowPopup(true);
+                  handleChangePassword(row);
+                }}
+              >
+                <LockOpenOutlined fontSize="small" />
+              </IconButton>
               <IconButton title="Hapus" aria-label="delete" color="secondary" onClick={() => handleDelete(row.administratorId)} >
                 <DeleteIcon fontSize="small" />
               </IconButton>
@@ -86,8 +111,126 @@ const AdministratorListContainer = ({ classes, t }) => {
         ))}
       </DataTables>
       <Box marginTop={2} display="flex" justifyContent="flex-end">
-        <Pagination count={getPaginationTotal()} onChange={handleChangePage} page={Number(pageSummary.page)}  color="primary" />
+        <Pagination count={getPaginationTotal()} onChange={handleChangePage} page={Number(pageSummary.page)} color="primary" />
       </Box>
+      <Dialog open={showPopup} aria-labelledby="form-dialog-title" onClose={handleClosePopup}>
+        <form onSubmit={formik.handleSubmit} className={classes.form}>
+          <DialogTitle id="alert-dialog-title">
+            {t('dashboard_administrator:titleTopup')}
+          </DialogTitle>
+          <DialogContent>
+            <Box display="flex" marginBottom={1}>
+              <FormControl fullWidth style={{ paddingRight: 14, marginTop: 10 }}>
+                <FormLabel style={{ fontSize: 12, paddingLeft: 8 }}>{t('dashboard_administrator:form.oldPassword')}</FormLabel>
+                <Input
+                  type={togglePassword.oldPassword ? 'text' : 'password'}
+                  id="oldPassword"
+                  label={t('dashboard_administrator:form.oldPassword')}
+                  name="oldPassword"
+                  value={formik.values.oldPassword}
+                  error={formik.touched.oldPassword && Boolean(formik.errors.oldPassword)}
+                  onChange={formik.handleChange}
+                  helperText={formik.touched.oldPassword && formik.errors.oldPassword}
+                  style={{ margin: 8 }}
+                  placeholder={t('dashboard_administrator:placeholder.oldPassword')}
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => handleTogglePassword('oldPassword')}
+                      >
+                        {togglePassword.password ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                <FormHelperText style={{ marginLeft: 10 }} error={formik.touched.oldPassword && Boolean(formik.errors.oldPassword)}>{formik.touched.oldPassword && formik.errors.oldPassword}</FormHelperText>
+              </FormControl>
+            </Box>
+            <Box display="flex" marginBottom={1}>
+              <FormControl fullWidth style={{ paddingRight: 14, marginTop: 10 }}>
+                <FormLabel style={{ fontSize: 12, paddingLeft: 8 }}>{t('dashboard_administrator:form.password')}</FormLabel>
+                <Input
+                  type={togglePassword.password ? 'text' : 'password'}
+                  id="password"
+                  label={t('dashboard_administrator:form.password')}
+                  name="password"
+                  value={formik.values.password}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  onChange={formik.handleChange}
+                  helperText={formik.touched.password && formik.errors.password}
+                  style={{ margin: 8 }}
+                  placeholder={t('dashboard_administrator:placeholder.password')}
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => handleTogglePassword('password')}
+                      >
+                        {togglePassword.password ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                <FormHelperText style={{ marginLeft: 10 }} error={formik.touched.password && Boolean(formik.errors.password)}>{formik.touched.password && formik.errors.password}</FormHelperText>
+              </FormControl>
+            </Box>
+
+            <Box display="flex" marginBottom={1}>
+              <FormControl fullWidth style={{ paddingRight: 14, marginTop: 10 }}>
+                <FormLabel style={{ fontSize: 12, paddingLeft: 8 }}>{t('dashboard_administrator:form.repassword')}</FormLabel>
+                <Input
+                  type={togglePassword.repassword ? 'text' : 'password'}
+                  id="repassword"
+                  label={t('dashboard_administrator:form.repassword')}
+                  name="repassword"
+                  value={formik.values.repassword}
+                  error={formik.touched.repassword && Boolean(formik.errors.repassword)}
+                  onChange={formik.handleChange}
+                  helperText={formik.touched.repassword && formik.errors.repassword}
+                  style={{ margin: 8 }}
+                  placeholder={t('dashboard_administrator:placeholder.repassword')}
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => handleTogglePassword('repassword')}
+                      >
+                        {togglePassword.repassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                <FormHelperText style={{ marginLeft: 10 }} error={formik.touched.repassword && Boolean(formik.errors.repassword)}>{formik.touched.repassword && formik.errors.repassword}</FormHelperText>
+              </FormControl>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button type="button" onClick={handleClosePopup}>
+              {' '}
+              {t('dashboard_administrator:button.cancel')}
+            </Button>
+            <Button type="submit" autoFocus>
+              {t('dashboard_administrator:button.save')}
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </>
   );
 };
