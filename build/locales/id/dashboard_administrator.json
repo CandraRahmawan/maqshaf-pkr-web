@@ -2,8 +2,10 @@
   "metaTitle": "Daftar Administrator",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "titleTopup": "Ubah Password",
+  "titleConfirmDelete": "Hapus Admin",
   "table": {
     "title": "Daftar Administrator",
+    "confirmDelete": "Hapus admin",
     "header": {
       "username": "Username",
       "id": "Admin ID",
@@ -29,7 +31,9 @@
   "button": {
     "add": "Tambah",
     "save": "Simpan",
-    "cancel": "Batal"
+    "cancel": "Batal",
+    "yes": "Ya",
+    "no": "Tidak"
   },
   "validation": {
     "usernameRequired": "Username harus diisi.",
