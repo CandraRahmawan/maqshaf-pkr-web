@@ -40,6 +40,7 @@
     "fullNameRequired": "Nama Lengkap harus diisi.",
     "oldPasswordRequired": "Password lama harus diisi.",
     "passwordRequired": "Password harus diisi.",
+    "repasswordRequired": "Konfirmasi Password harus diisi.",
     "matchPasswordConfirm": "Konfirmasi password tidak sesuai."
   }
 }

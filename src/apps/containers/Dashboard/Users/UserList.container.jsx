@@ -46,8 +46,8 @@ const headers = (t) => [
     label: t('common:label.fullName'),
   },
   {
-    name: 'class',
-    label: t('dashboard_user:table.header.class'),
+    name: 'angkatan',
+    label: t('dashboard_user:table.header.angkatan'),
   },
   {
     name: 'address',

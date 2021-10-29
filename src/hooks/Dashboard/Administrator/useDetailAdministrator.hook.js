@@ -9,7 +9,7 @@ import * as yup from 'yup';
 const useDetailAdministratorHook = (t, history, id) => {
   const validationPass = id === 'add' ? {
     password: yup.string().required(t('dashboard_administrator:validation.passwordRequired')),
-    repassword: yup.string()
+    repassword: yup.string().required(t('dashboard_administrator:validation.repasswordRequired'))
     .oneOf([yup.ref('password'), null], t('dashboard_administrator:validation.matchPasswordConfirm'))
   } : null
   

@@ -52,7 +52,7 @@ const useGetAllAdministratorHook = (history, t) => {
   const validationSchema = yup.object({
     oldPassword: yup.string().required(t('dashboard_administrator:validation.oldPasswordRequired')),
     password: yup.string().required(t('dashboard_administrator:validation.passwordRequired')),
-    repassword: yup.string()
+    repassword: yup.string().required(t('dashboard_administrator:validation.repasswordRequired'))
       .oneOf([yup.ref('password'), null], t('dashboard_administrator:validation.matchPasswordConfirm'))
   });
 
