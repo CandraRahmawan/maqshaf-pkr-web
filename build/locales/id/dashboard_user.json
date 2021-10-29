@@ -6,7 +6,7 @@
     "descriptionPIN": "Default PIN santri adalah 111111",
     "header": {
       "nis": "NIS",
-      "class": "Kelas",
+      "angkatan": "Angkatan",
       "address": "Alamat"
     },
     "confirmReset": "Reset PIN",
@@ -23,7 +23,7 @@
     "title": "Data Santri",
     "nis": "NIS",
     "fullName": "Nama Lengkap",
-    "class": "Kelas",
+    "angkatan": "Angkatan",
     "address": "Alamat",
     "pin": "PIN",
     "balance": "Saldo"
@@ -31,7 +31,7 @@
   "placeholder": {
     "nis": "Masukkan NIS",
     "fullName": "Masukkan nama lengkap",
-    "class": "Masukkan kelas",
+    "angkatan": "Masukkan Angkatan",
     "address": "Masukkan alamat",
     "pin": "Masukkan PIN"
   },

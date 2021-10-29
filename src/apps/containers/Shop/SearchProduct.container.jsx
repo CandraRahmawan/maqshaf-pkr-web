@@ -81,7 +81,7 @@ const SearchProductContainer = (props) => {
   const validationSchema = yup.object({
     oldPin: yup.string().required(t('search_product:validation.requiredOldPin')),
     pin: yup.string().required(t('search_product:validation.requiredPin')),
-    confirmPin: yup.string()
+    confirmPin: yup.string().required(t('search_product:validation.requiredConfirmPin'))
       .oneOf([yup.ref('pin'), null], t('search_product:validation.matchConfirmPin'))
   });
 

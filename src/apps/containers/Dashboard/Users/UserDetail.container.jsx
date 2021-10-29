@@ -89,14 +89,14 @@ const UserDetailContainer = ({ history, classes, t }) => {
             <Box display="flex" marginBottom={1}>
               <TextField
                 id="class"
-                label={t('dashboard_user:form.class')}
+                label={t('dashboard_user:form.angkatan')}
                 name="class"
                 value={formik.values.class}
                 error={formik.touched.class && Boolean(formik.errors.class)}
                 onChange={formik.handleChange}
                 helperText={formik.touched.class && formik.errors.class}
                 style={{ margin: 8 }}
-                placeholder={t('dashboard_user:placeholder.class')}
+                placeholder={t('dashboard_user:placeholder.angkatan')}
                 fullWidth
                 margin="normal"
                 inputProps={{ autoComplete: 'off' }}
