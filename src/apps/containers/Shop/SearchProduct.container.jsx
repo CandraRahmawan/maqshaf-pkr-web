@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { object, func } from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
@@ -51,8 +51,18 @@ const SearchProductContainer = (props) => {
   const { data, showQRReader, setShowQRReader,
     handleScan, handleScanError } = useCheckBalancedHook();
 
-  const { mutate, isLoading: isLoadingReset } = useResetPINHook(history, setAlert, t, data?.data?.user?.userId)
+  const { error, mutate, isLoading: isLoadingReset } = useResetPINHook(history, setAlert, t, data?.data?.user?.userId)
 
+  useEffect(() => {
+    if (error) {
+      setAlert({
+        isShow: true,
+        type: 'error',
+        message: error?.message || 'common:alert.failed',
+      });
+    }
+
+  }, [error])
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -128,7 +138,12 @@ const SearchProductContainer = (props) => {
   const PINContent = (
     <form onSubmit={formik.handleSubmit} className={classes.form}>
       {alert.isShow && <Alert severity={alert.type}>{alert.message}</Alert>}
-      <Box marginTop={8} paddingLeft={3} paddingRight={2}>
+      <Box paddingLeft={3} marginTop={4}>
+        <Box display="flex" marginTop={1}><Box width={120}>{t('search_product:dialogNIS')}</Box> : &nbsp; <b>{data?.data?.user?.nis}</b></Box>
+        <Box display="flex" marginTop={1}><Box width={120}>{t('search_product:dialogName')}</Box> : &nbsp; <b>{data?.data?.user?.fullName}</b></Box>
+        <Box display="flex" marginTop={1}><Box width={120}>{t('search_product:dialogClass')}</Box> : &nbsp;<b>{data?.data?.user?.class}</b></Box>
+      </Box>
+      <Box marginTop={4} paddingLeft={3} paddingRight={2}>
         <Box marginBottom={4}>
           <TextField
             name="oldPin"
