@@ -139,8 +139,9 @@ const SearchProductContainer = (props) => {
     <form onSubmit={formik.handleSubmit} className={classes.form}>
       {alert.isShow && <Alert severity={alert.type}>{alert.message}</Alert>}
       <Box paddingLeft={3} marginTop={4}>
-        <Box display="flex"><Box width={74}>Nama</Box> : &nbsp; <b>{data?.data?.user?.fullName} -  {data?.data?.user?.nis}</b></Box>
-        <Box display="flex" marginTop={1}><Box width={74}>Angkatan</Box> : &nbsp;<b>{data?.data?.user?.class}</b></Box>
+        <Box display="flex" marginTop={1}><Box width={120}>{t('search_product:dialogNIS')}</Box> : &nbsp; <b>{data?.data?.user?.nis}</b></Box>
+        <Box display="flex" marginTop={1}><Box width={120}>{t('search_product:dialogName')}</Box> : &nbsp; <b>{data?.data?.user?.fullName}</b></Box>
+        <Box display="flex" marginTop={1}><Box width={120}>{t('search_product:dialogClass')}</Box> : &nbsp;<b>{data?.data?.user?.class}</b></Box>
       </Box>
       <Box marginTop={4} paddingLeft={3} paddingRight={2}>
         <Box marginBottom={4}>
