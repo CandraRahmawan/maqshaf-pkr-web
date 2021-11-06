@@ -11,7 +11,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { AccountBox, AccountBalanceWallet } from '@material-ui/icons';
-import get from 'lodash/get';
+import {get, isEmpty} from 'lodash';
 import QrReader from 'react-qr-reader';
 import { array, func, number, object } from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -63,7 +63,7 @@ const IdentityDataDialogComponent = (props) => {
         {isLoading ? (
           <Spinner label={t('common:loading')} />
         ) : (
-          !errorUser && (
+          !errorUser && !isEmpty(getUser) && (
             <List>
               <ListItem key="user">
                 <ListItemAvatar>
