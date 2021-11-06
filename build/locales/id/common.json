@@ -5,15 +5,22 @@
   "next": "Lanjutkan",
   "balance": "Saldo",
   "confirmation": "Konfirmasi",
+  "save": "Simpan",
+  "backToHome": "Kembali ke Beranda",
   "label": {
     "no": "No",
     "fullName": "Nama Lengkap",
     "action": "Aksi",
     "createdAt": "Tanggal dibuat",
+    "transactionDate": "Tanggal Transaksi",
     "createdBy": "Dibuat oleh",
     "enterPin": "Masukkan PIN",
+    "enterOldPin": "Masukkan PIN Lama",
+    "enterConfirmPin": "Masukkan Konfirmasi PIN",
     "transactionCode": "Kode Transaksi",
-    "totalBuy": "Total Bayar"
+    "totalBuy": "Total Bayar",
+    "cancel": "Batal",
+    "ok": "OK"
   },
   "leftMenu": {
     "menu": "Menu",
@@ -24,6 +31,11 @@
     "transaction": "Transaksi",
     "in": "Masuk / Kredit",
     "out": "Keluar / Debit",
-    "checkBalanced": "Lihat Saldo"
+    "checkBalanced": "Lihat Saldo",
+    "logout": "Keluar"
+  },
+  "alert": {
+    "success": "Sukses",
+    "failed": "Gagal"
   }
 }

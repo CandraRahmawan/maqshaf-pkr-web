@@ -10,6 +10,8 @@ import {
   Typography,
   Collapse,
 } from '@material-ui/core';
+import clsx from 'clsx';
+import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import {
   ChevronLeft,
@@ -33,6 +35,7 @@ import { logout } from 'helpers/auth.helper';
 import useStyles from './style';
 
 const SidebarMenuLeftComponent = (props) => {
+  const history = useHistory()
   const classes = useStyles();
   const theme = useTheme();
   const { open, handleDrawerClose, t } = props;
@@ -42,6 +45,20 @@ const SidebarMenuLeftComponent = (props) => {
   const handleSubmenuClick = () => {
     setOpenSubmenu(!openSubmenu);
   };
+
+  const getActiveClasses = (url) => {
+    if (url !== '/dashboard') {
+      if(history.location.pathname.startsWith(url)) {
+        return classes.active
+      }
+    } else {
+      if (history.location.pathname === '/dashboard') {
+        return classes.active
+      }
+    }
+
+    return ''
+  }
 
   return (
     <Drawer
@@ -65,33 +82,33 @@ const SidebarMenuLeftComponent = (props) => {
       <Divider />
       <List>
         <Link to="/dashboard">
-          <ListItem button key="dashboard">
+          <ListItem button key="dashboard"  className={getActiveClasses('/dashboard')}>
             <ListItemIcon>
-              <Dashboard />
+              <Dashboard className={getActiveClasses('/dashboard')} />
             </ListItemIcon>
             <ListItemText primary={t('common:leftMenu.dashboard')} />
           </ListItem>
         </Link>
         <Link to="/dashboard/produk">
-          <ListItem button key="product">
+          <ListItem button key="product" className={getActiveClasses('/dashboard/produk')}>
             <ListItemIcon>
-              <Storefront />
+              <Storefront className={getActiveClasses('/dashboard/produk')} />
             </ListItemIcon>
             <ListItemText primary={t('common:leftMenu.product')} />
           </ListItem>
         </Link>
         <Link to="/dashboard/santri">
-          <ListItem button key="user">
+          <ListItem button key="user" className={getActiveClasses('/dashboard/santri')}>
             <ListItemIcon>
-              <People />
+              <People className={getActiveClasses('/dashboard/santri')} />
             </ListItemIcon>
             <ListItemText primary={t('common:leftMenu.user')} />
           </ListItem>
         </Link>
         <Link to="/dashboard/administrator">
-          <ListItem button key="administrator">
+          <ListItem button key="administrator" className={getActiveClasses('/dashboard/administrator')}>
             <ListItemIcon>
-              <SupervisedUserCircle />
+              <SupervisedUserCircle className={getActiveClasses('/dashboard/administrator')} />
             </ListItemIcon>
             <ListItemText primary={t('common:leftMenu.admin')} />
           </ListItem>
@@ -106,17 +123,17 @@ const SidebarMenuLeftComponent = (props) => {
         <Collapse in={openSubmenu} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <Link to="/dashboard/transaksi/masuk">
-              <ListItem button className={classes.nested}>
+              <ListItem button className={clsx(classes.nested, getActiveClasses('/dashboard/transaksi/masuk'))}>
                 <ListItemIcon>
-                  <CallReceived />
+                  <CallReceived className={getActiveClasses('/dashboard/transaksi/masuk')} />
                 </ListItemIcon>
                 <ListItemText primary={t('common:leftMenu.in')} />
               </ListItem>
             </Link>
             <Link to="/dashboard/transaksi/keluar">
-              <ListItem button className={classes.nested}>
+              <ListItem button className={clsx(classes.nested, getActiveClasses('/dashboard/transaksi/keluar'))}>
                 <ListItemIcon>
-                  <CallMade />
+                  <CallMade className={getActiveClasses('/dashboard/transaksi/keluar')} />
                 </ListItemIcon>
                 <ListItemText primary={t('common:leftMenu.out')} />
               </ListItem>
@@ -124,9 +141,9 @@ const SidebarMenuLeftComponent = (props) => {
           </List>
         </Collapse>
         <Link to="/dashboard/cek-saldo">
-          <ListItem button key="balanced">
+          <ListItem button key="balanced" className={getActiveClasses('/dashboard/cek-saldo')}>
             <ListItemIcon>
-              <CreditCard />
+              <CreditCard  className={getActiveClasses('/dashboard/cek-saldo')}/>
             </ListItemIcon>
             <ListItemText primary={t('common:leftMenu.checkBalanced')} />
           </ListItem>
@@ -146,7 +163,7 @@ const SidebarMenuLeftComponent = (props) => {
         handleOk={logout}
         handleClose={() => setOpenDialog(false)}
         title={t('common:confirmation')}
-        content={t('dashboard:confirmationLogout')}
+        content={t('glossary:confirmationLogout')}
       />
     </Drawer>
   );

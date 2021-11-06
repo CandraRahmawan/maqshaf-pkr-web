@@ -18,12 +18,40 @@ import { rupiahFormat } from 'helpers/formattor.helper';
 import { useStyles } from './style';
 
 const CardComponent = (props) => {
-  const { image, title, price, currency, category, t, openModal, addCartAction, selectedItems } =
+  const { image, title, price, currency, category, masterGoodsId, t, openModal, addCartAction, selectedItems } =
     props;
   const [showAlert, setShowAlert] = useState(false);
   const classes = useStyles();
   const isXsDevice = useMediaQuery((theme) => theme.breakpoints.down('xs'));
   const handleShowAlert = () => setShowAlert(true);
+
+
+  const addToCart = () => {
+    let tempSelected = selectedItems
+    const idx = tempSelected.findIndex((obj) => obj.masterGoodsId === masterGoodsId)
+    if (idx !== -1) {
+      const selected = { ...tempSelected[idx], qty: tempSelected[idx].qty + 1 }
+      const tempSelectedFiltered = tempSelected.filter((obj) => obj.masterGoodsId !== masterGoodsId)
+      tempSelected = [
+        selected,
+        ...tempSelectedFiltered,
+      ]
+    } else {
+      tempSelected = [
+        {
+          masterGoodsId,
+          image,
+          qty: 1,
+          currency,
+          price,
+          name: title,
+        },
+        ...selectedItems,
+      ]
+    }
+    addCartAction(tempSelected)
+  }
+
   return (
     <Card className={classes.root} key={title}>
       <CardActionArea
@@ -32,6 +60,7 @@ const CardComponent = (props) => {
           openModal();
           addCartAction([
             {
+              masterGoodsId,
               qty: 1,
               price,
               currency,
@@ -59,28 +88,19 @@ const CardComponent = (props) => {
           size="small"
           color="primary"
           variant="contained"
-          onClick={() =>
-            addCartAction([
-              ...selectedItems,
-              {
-                image,
-                qty: 1,
-                currency,
-                price,
-                name: title,
-              },
-            ])
-          }
+          onClick={addToCart}
         >
           {isXsDevice ? (
             <AddShoppingCartIcon onClick={handleShowAlert} />
           ) : (
-            <span onClick={handleShowAlert}>{t('search_product:addToCart')}}</span>
+            <span onClick={handleShowAlert}>{t('search_product:addToCart')}</span>
           )}
         </Button>
       </CardActions>
-      <Snackbar open={showAlert} autoHideDuration={2000} onClose={() => setShowAlert(false)}>
-        <Alert severity="success" variant="filled">
+      <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={showAlert} autoHideDuration={2000} onClose={() => setShowAlert(false)}>
+        <Alert
+          severity="success" variant="filled"
+        >
           {t('search_product:alert.successAddCart')}
         </Alert>
       </Snackbar>
@@ -90,6 +110,7 @@ const CardComponent = (props) => {
 
 CardComponent.propTypes = {
   t: func.isRequired,
+  masterGoodsId: string.isRequired,
   image: string.isRequired,
   title: string.isRequired,
   price: number.isRequired,

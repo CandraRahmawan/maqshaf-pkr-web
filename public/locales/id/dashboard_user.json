@@ -2,9 +2,57 @@
   "metaTitle": "Daftar Santri",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
   "table": {
+    "title": "Daftar Santri",
+    "descriptionPIN": "Default PIN santri adalah 111111",
     "header": {
       "nis": "NIS",
-      "class": "Kelas"
-    }
+      "angkatan": "Angkatan",
+      "address": "Alamat"
+    },
+    "confirmReset": "Reset PIN",
+    "confirmDelete": "Hapus Santri",
+    "titleConfirmReset": "Reset PIN",
+    "titleConfirmDelete": "Hapus Santri",
+    "titleTopup": "Topup Saldo",
+    "titleWithdrawal": "Withdrawal",
+    "titleBalance": "Sisa Saldo",
+    "searchName": "Cari Nama",
+    "searchNIS": "Cari NIS"
+  },
+  "form": {
+    "title": "Data Santri",
+    "nis": "NIS",
+    "fullName": "Nama Lengkap",
+    "angkatan": "Angkatan",
+    "address": "Alamat",
+    "pin": "PIN",
+    "balance": "Saldo"
+  },
+  "placeholder": {
+    "nis": "Masukkan NIS",
+    "fullName": "Masukkan nama lengkap",
+    "angkatan": "Masukkan Angkatan",
+    "address": "Masukkan alamat",
+    "pin": "Masukkan PIN"
+  },
+  "button": {
+    "add": "Tambah",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "yes": "Ya",
+    "no": "Tidak"
+  },
+  "validation": {
+    "nisLength": "NIS harus 16 digit.",
+    "nisFormat": "NIS harus angka.",
+    "nisRequired": "NIS harus diisi.",
+    "balanceFormat": "Saldo harus angka",
+    "balanceRequired": "Saldo harus diisi",
+    "fullNameRequired": "Nama Lengkap harus diisi.",
+    "classRequired": "Kelas harus diisi.",
+    "addressRequired": "Alamat harus diisi.",
+    "pinRequired": "PIN harus diisi.",
+    "pinLength": "PIN harus 6 digit.",
+    "pinFormat": "PIN harus angka."
   }
 }

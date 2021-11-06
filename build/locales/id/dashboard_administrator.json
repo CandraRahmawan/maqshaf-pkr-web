@@ -1,10 +1,46 @@
 {
   "metaTitle": "Daftar Administrator",
   "metaDescription": "Dashboard Maqshaf - Pesantren Khoirur Rooziqiin",
+  "titleTopup": "Ubah Password",
+  "titleConfirmDelete": "Hapus Admin",
   "table": {
+    "title": "Daftar Administrator",
+    "confirmDelete": "Hapus admin",
     "header": {
       "username": "Username",
-      "id": "Admin ID"
+      "id": "Admin ID",
+      "nis": "NIS",
+      "address": "Alamat"
     }
+  },
+  "form": {
+    "title": "Form Administrator",
+    "username": "Username",
+    "fullName": "Nama Lengkap",
+    "oldPassword": "Password Lama",
+    "password": "Password",
+    "repassword": "Konfirmasi Password"
+  },
+  "placeholder": {
+    "username": "Masukkan username",
+    "fullName": "Masukkan nama lengkap",
+    "oldPassword": "Masukkan Password Lama",
+    "password": "Masukkan password",
+    "repassword": "Masukkan konfirmasi password"
+  },
+  "button": {
+    "add": "Tambah",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "yes": "Ya",
+    "no": "Tidak"
+  },
+  "validation": {
+    "usernameRequired": "Username harus diisi.",
+    "fullNameRequired": "Nama Lengkap harus diisi.",
+    "oldPasswordRequired": "Password lama harus diisi.",
+    "passwordRequired": "Password harus diisi.",
+    "repasswordRequired": "Konfirmasi Password harus diisi.",
+    "matchPasswordConfirm": "Konfirmasi password tidak sesuai."
   }
 }

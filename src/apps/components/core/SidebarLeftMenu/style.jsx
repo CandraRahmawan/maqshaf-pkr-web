@@ -39,7 +39,10 @@ const useStyles = makeStyles((theme) => ({
       alignSelf: 'center',
     },
   },
-
+  active: {
+    color: '#1a237e',
+    backgroundColor: '#ecf0f1'
+  },
   nested: {
     paddingLeft: theme.spacing(4),
   },

@@ -2,16 +2,35 @@
   "metaTitle": "Cari Jajanan Kantin",
   "metaDescription": "Maqshaf - Pesantren Khoirur Rooziqiin",
   "greeting": "Assalamu alaikum, Para Santri",
-  "subGreeting": "Mau beli jajan apa hari ini ?",
+  "subGreeting": "Mau belanja apa sekarang?",
   "searchPlaceholder": "Cari jajan disini...",
   "addToCart": "Masukkan ke keranjang",
   "dialogTotalSummaryTitle": "Total Jajanan",
   "dialogTotalBuy": "Total Bayar Jajan",
+  "dialogEmptyBuy": "Jajanan masih kosong",
   "dialogTotalSummaryInfo": "Pastikan Jajanan yang dipilih sudah sesuai",
   "dialogIdentityDataTitle": "Scan QRCode Identitas Santri",
   "dialogConfirmationPin": "Otorisasi Pin",
+  "dialogBalanceTotal": "TOTAL SALDO",
+  "dialogName": "Nama Lengkap",
+  "dialogNIS": "NIS",
+  "dialogClass": "Angkatan",
+  "dialogAddress": "Alamat",
+  "dialogLastUpdate": "Terakhir Transaksi",
   "alert": {
     "successAddCart": "Jajanan berhasil ditambahkan",
-    "successPay": "Pembayaran sukses"
+    "successPay": "Pembayaran sukses",
+    "successReset": "Reset PIN sukses",
+    "errorReset": "Reset PIN gagal"
+  },
+  "validation": {
+    "requiredPin": "PIN harus diisi",
+    "requiredOldPin": "PIN lama harus diisi",
+    "requiredConfirmPin": "Konfirmasi PIN harus diisi",
+    "matchConfirmPin": "Konfirmasi PIN harus sesuai dengan PIN"
+  },
+  "menu": {
+    "balance": "Cek Saldo",
+    "resetPin": "Reset PIN"
   }
 }

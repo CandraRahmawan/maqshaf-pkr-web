@@ -55,6 +55,7 @@ const styles = (theme) => ({
   listProduct: {
     marginTop: 32,
     minHeight: 300,
+    marginBottom: 80,
   },
 });
 
