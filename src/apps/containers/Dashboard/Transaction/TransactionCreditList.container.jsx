@@ -33,7 +33,7 @@ const TransactionCreditListContainer = ({ classes, t }) => {
     searchValue,
     data, isLoading, refetchAll, handleSearch, handleChange,
     pageSummary, getPaginationTotal, handleChangePage,
-    month, year, handleHeaderFilter, listYears
+    month, year, handleHeaderFilter, listYears, handleDownload
   } = useGetAllCreditTransactionHook();
 
   return (
@@ -43,7 +43,7 @@ const TransactionCreditListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_transaction:table.title')}</h2>
         </Box>
       </Box>
-      <HeaderDateComponent classes={classes} t={t} isLoading={isLoading} month={month} year={year} handleHeaderFilter={handleHeaderFilter} listYears={listYears} handleSearch={refetchAll} />
+      <HeaderDateComponent classes={classes} t={t} isLoading={isLoading} month={month} year={year} handleHeaderFilter={handleHeaderFilter} listYears={listYears} handleSearch={refetchAll} handleDownload={handleDownload} />
       <DataTables isLoading={isLoading} headers={headers(t)}>
         <TableRow>
           <TableCell component="th" scope="row"></TableCell>

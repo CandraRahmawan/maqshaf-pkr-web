@@ -69,6 +69,14 @@ const useGetAllDebetTransactionHook = () => {
     handleSearch(e)
   }
 
+  const handleDownload = () => {
+    fetchApiClient(`/print/invoice`, 'GET', {
+      year,
+      month,
+      name: 'Invoice'
+    }, false, true).then((res) => console.log('res', res))
+  }
+  
   return {
     searchValue,
     refetchAll: handleSearchByDate,
@@ -87,6 +95,7 @@ const useGetAllDebetTransactionHook = () => {
     year,
     handleHeaderFilter,
     listYears: generateArrayOfYears(),
+    handleDownload,
   };
 };
 

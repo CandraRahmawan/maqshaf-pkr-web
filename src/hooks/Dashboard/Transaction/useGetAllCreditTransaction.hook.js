@@ -60,6 +60,14 @@ const useGetAllCreditTransactionHook = () => {
   const handleSearchTable = (e) => {
     handleSearch(e)
   }
+
+  const handleDownload = () => {
+    fetchApiClient(`/print/kredit`, 'GET', {
+      year,
+      month,
+      name: 'Deposit'
+    }, false, true).then((res) => console.log('res', res))
+  }
   
 
   return {
@@ -76,6 +84,7 @@ const useGetAllCreditTransactionHook = () => {
     year,
     handleHeaderFilter,
     listYears: generateArrayOfYears(),
+    handleDownload,
   };
 
 };

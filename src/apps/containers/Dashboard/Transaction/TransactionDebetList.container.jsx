@@ -47,7 +47,7 @@ const TransactionDebetListContainer = ({ classes, t }) => {
     data, pageSummary, isLoading, refetchAll,
     handleChange, handleSearch, getPaginationTotal,
     handleChangePage,
-    setOpen,
+    setOpen, handleDownload,
     open, handleOpen, selectedData,
     month, year, handleHeaderFilter, listYears
   } = useGetAllDebetTransactionHook();
@@ -59,7 +59,7 @@ const TransactionDebetListContainer = ({ classes, t }) => {
           <h2>{t('dashboard_transaction:table.titleDebet')}</h2>
         </Box>
       </Box>
-      <HeaderDateComponent classes={classes} t={t} isLoading={isLoading} month={month} year={year} handleHeaderFilter={handleHeaderFilter} listYears={listYears} handleSearch={refetchAll} />
+      <HeaderDateComponent classes={classes} t={t} isLoading={isLoading} month={month} year={year} handleHeaderFilter={handleHeaderFilter} listYears={listYears} handleSearch={refetchAll} handleDownload={handleDownload} />
       <DataTables isLoading={isLoading} headers={headers(t)}>
         <TableRow>
           <TableCell component="th" scope="row"></TableCell>

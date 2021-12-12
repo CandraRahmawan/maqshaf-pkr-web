@@ -2,7 +2,7 @@ import { Box, MenuItem, Select } from '@material-ui/core';
 import { Button } from 'apps/components/ui';
 import { func, bool, number, array, any } from 'prop-types';
 
-const HeaderDateComponent = ({ t, classes, isLoading, month, year, handleHeaderFilter, listYears, handleSearch }) => {
+const HeaderDateComponent = ({ t, hideDownload, classes, isLoading, month, year, handleHeaderFilter, listYears, handleSearch, handleDownload }) => {
   return (
     <Box display="flex" marginBottom={4} marginTop={4}>
       <Box paddingLeft={2} alignItems="center" justifyContent="center" display="flex">
@@ -48,19 +48,30 @@ const HeaderDateComponent = ({ t, classes, isLoading, month, year, handleHeaderF
           {t('dashboard_transaction:search')}
         </Button>
       </Box>
+      {
+        !hideDownload && (
+          <Box paddingLeft={2}>
+            <Button onClick={handleDownload} variant="contained" color="primary" className={classes.button_tambah} type="submit">
+              {t('dashboard_transaction:download')}
+            </Button>
+          </Box>
+        )
+      }
     </Box>
   );
 };
 
 HeaderDateComponent.propTypes = {
   t: func.isRequired,
-  isLoading: bool.isRequired, 
-  month: number.isRequired, 
+  hideDownload: bool.isRequired,
+  isLoading: bool.isRequired,
+  month: number.isRequired,
   year: number.isRequired,
-  handleHeaderFilter: func.isRequired, 
+  handleHeaderFilter: func.isRequired,
   listYears: array.isRequired,
   handleSearch: func.isRequired,
-  classes: any.isRequired
+  classes: any.isRequired,
+  handleDownload: func.isRequired
 };
 
 export default HeaderDateComponent;

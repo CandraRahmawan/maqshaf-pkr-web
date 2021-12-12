@@ -15,6 +15,8 @@
     },
     "searchTrxCode": "Cari Kode Transaksi",
     "searchNIS": "Cari NIS",
-    "search": "Cari"
+    "search": "Cari",
+    "download": "Download",
+    "downloadReport": "Download Report"
   }
 }
