@@ -4,7 +4,7 @@ import { IS_OK } from 'constants/httpStatus.constant';
 import { useFormik } from 'formik';
 import { useQuery } from 'react-query';
 
-const useCheckBalancedHook = () => {
+const useCheckBalancedHook = (callbackSuccess) => {
   const [showQRReader, setShowQRReader] = useState(false);
   const [showAlertBalance, setShowAlertBalance] = useState(false);
   const [dataBalance, setDataBalance] = useState({});
@@ -20,6 +20,7 @@ const useCheckBalancedHook = () => {
   }),
     {
       enabled: false,
+      onSuccess: callbackSuccess
     }
   );
 

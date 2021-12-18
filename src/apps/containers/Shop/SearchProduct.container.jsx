@@ -23,6 +23,7 @@ import moment from 'moment';
 import QrReader from 'react-qr-reader';
 import { FooterNavigation } from 'apps/components/core';
 import { useSelector } from 'react-redux';
+import { CropFreeOutlined } from '@material-ui/icons';
 import { Search, Close } from '@material-ui/icons';
 import { useDispatch } from 'react-redux';
 import { Card, Spinner } from 'apps/components/ui';
@@ -48,10 +49,19 @@ const SearchProductContainer = (props) => {
   const isIdentityAction = action === 'identitas';
   const isEnterPinAction = action === 'pin';
 
-  const { data, showQRReader, setShowQRReader,
-    handleScan, handleScanError } = useCheckBalancedHook();
+
+  const onSuccessScan = () => {
+    setShowQRReader(false)
+    setTimeout(() => {
+      setOpenScan(true);
+    }, 1000)
+  }
+
+  const { data, showQRReader, setShowQRReader, formik,
+    handleScan, handleScanError, handleBlurNIS } = useCheckBalancedHook(onSuccessScan);
 
   const { error, mutate, isLoading: isLoadingReset } = useResetPINHook(history, setAlert, t, data?.data?.user?.userId)
+
 
   useEffect(() => {
     if (error) {
@@ -73,15 +83,22 @@ const SearchProductContainer = (props) => {
     setOpen(false);
   };
 
+  const handleClickMenu = (scanType) => {
+    formik.resetForm()
+    setScanType(scanType)
+  }
+
   const handleOpenScan = (type) => {
-    setScanType(type)
     setOpenScan(true);
     setShowQRReader(true);
   }
 
   const handleCloseScan = () => {
+    setOpen(false)
     setOpenScan(false);
-    setShowQRReader(false);
+    setTimeout(() => {
+      setShowQRReader(false);
+    }, 1)
   }
 
   const addCartAction = (items) => {
@@ -94,8 +111,8 @@ const SearchProductContainer = (props) => {
     confirmPin: yup.string().required(t('search_product:validation.requiredConfirmPin'))
       .oneOf([yup.ref('pin'), null], t('search_product:validation.matchConfirmPin'))
   });
-
-  const formik = useFormik({
+  
+  const formikPIN = useFormik({
     initialValues: {
       pin: '',
       confirmPin: '',
@@ -136,7 +153,7 @@ const SearchProductContainer = (props) => {
   )
 
   const PINContent = (
-    <form onSubmit={formik.handleSubmit} className={classes.form}>
+    <form onSubmit={formikPIN.handleSubmit} className={classes.form}>
       {alert.isShow && <Alert severity={alert.type}>{alert.message}</Alert>}
       <Box paddingLeft={3} marginTop={4}>
         <Box display="flex" marginTop={1}><Box width={120}>{t('search_product:dialogNIS')}</Box> : &nbsp; <b>{data?.data?.user?.nis}</b></Box>
@@ -147,10 +164,10 @@ const SearchProductContainer = (props) => {
         <Box marginBottom={4}>
           <TextField
             name="oldPin"
-            value={formik.values.oldPin}
-            error={formik.touched.oldPin && Boolean(formik.errors.oldPin)}
-            onChange={formik.handleChange}
-            helperText={formik.touched.oldPin && formik.errors.oldPin}
+            value={formikPIN.values.oldPin}
+            error={formikPIN.touched.oldPin && Boolean(formikPIN.errors.oldPin)}
+            onChange={formikPIN.handleChange}
+            helperText={formikPIN.touched.oldPin && formikPIN.errors.oldPin}
             label={t('common:label.enterOldPin')}
             type="password"
             className={classes.input_pin}
@@ -159,10 +176,10 @@ const SearchProductContainer = (props) => {
         <Box marginBottom={4}>
           <TextField
             name="pin"
-            value={formik.values.pin}
-            error={formik.touched.pin && Boolean(formik.errors.pin)}
-            onChange={formik.handleChange}
-            helperText={formik.touched.pin && formik.errors.pin}
+            value={formikPIN.values.pin}
+            error={formikPIN.touched.pin && Boolean(formikPIN.errors.pin)}
+            onChange={formikPIN.handleChange}
+            helperText={formikPIN.touched.pin && formikPIN.errors.pin}
             label={t('common:label.enterPin')}
             type="password"
             className={classes.input_pin}
@@ -171,10 +188,10 @@ const SearchProductContainer = (props) => {
         <Box marginBottom={4}>
           <TextField
             name="confirmPin"
-            value={formik.values.confirmPin}
-            error={formik.touched.confirmPin && Boolean(formik.errors.confirmPin)}
-            onChange={formik.handleChange}
-            helperText={formik.touched.confirmPin && formik.errors.confirmPin}
+            value={formikPIN.values.confirmPin}
+            error={formikPIN.touched.confirmPin && Boolean(formikPIN.errors.confirmPin)}
+            onChange={formikPIN.handleChange}
+            helperText={formikPIN.touched.confirmPin && formikPIN.errors.confirmPin}
             label={t('common:label.enterConfirmPin')}
             type="password"
             className={classes.input_pin}
@@ -213,6 +230,8 @@ const SearchProductContainer = (props) => {
           <h2>{t('greeting')}</h2>
           <h4>{t('subGreeting')}</h4>
           <TextField
+            auto
+            name="search-product"
             onChange={(event) => setKeyword(event.target.value)}
             size="medium"
             variant="outlined"
@@ -256,21 +275,26 @@ const SearchProductContainer = (props) => {
           </Grid>
         </Grid>
       </Container>
-      <FooterNavigation t={t} cartTotal={qty} history={history} handleOpenModal={handleOpenModal} handleOpenScan={handleOpenScan} />
+      <FooterNavigation t={t} cartTotal={qty} history={history} handleOpenModal={handleOpenModal} handleClickMenu={handleClickMenu} />
       <Dialog fullScreen open={open} aria-labelledby="form-dialog-title" onClose={handleCloseModal}>
         <DialogTitle disableTypography>
           <Typography variant="h6">
-            {isIdentityAction
+            {
+              scanType && t('search_product:dialogIdentityDataTitle')
+            }
+            {!scanType && (isIdentityAction
               ? t('search_product:dialogIdentityDataTitle')
               : isEnterPinAction
                 ? t('search_product:dialogConfirmationPin')
-                : t('search_product:dialogTotalSummaryTitle')}
+                : t('search_product:dialogTotalSummaryTitle')
+            )}
           </Typography>
           <IconButton aria-label="close" className={classes.closeButton} onClick={handleCloseModal}>
             <Close />
           </IconButton>
         </DialogTitle>
-        {isIdentityAction ? (
+        {/* ============= flow cart ============= */}
+        {  !scanType && (isIdentityAction ? (
           <SearchProduct.IdentityDataDialog
             t={t}
             handleCloseModal={handleCloseModal}
@@ -293,9 +317,49 @@ const SearchProductContainer = (props) => {
             history={history}
             total={total}
           />
-        )}
+        ))
+        }
+        {/* ============= end of flow cart ============= */}
+        {
+          scanType && (
+            <Box display="flex" paddingLeft={2} paddingRight={2} marginBottom={1} marginTop={1}>
+              <TextField
+                id="nis"
+                label={t('search_product:form.nis')}
+                name="nis"
+                value={formik.values.nis}
+                error={Boolean(formik.errors.nis)}
+                onChange={formik.handleChange}
+                onBlur={handleBlurNIS}
+                helperText={formik.errors.nis}
+                style={{ margin: 8 }}
+                placeholder={t('search_product:placeholder.nis')}
+                fullWidth
+                margin="normal"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => handleOpenScan()}
+                      >
+                        <CropFreeOutlined />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+                InputLabelProps={{
+                  shrink: true,
+
+                }}
+              />
+            </Box>
+          )
+        }
       </Dialog>
-      <Dialog fullScreen open={openScan} aria-labelledby="form-dialog-title" onClose={handleCloseScan}>
+      <Dialog fullScreen open={openScan} aria-labelledby="form-dialog-title" onClose={() => {
+        handleCloseScan()
+      }}>
         <DialogTitle disableTypography>
           <Typography variant="h6">
             {scanType === 'BALANCE' ? t('search_product:menu.balance') : t('search_product:menu.resetPin')}
@@ -304,16 +368,27 @@ const SearchProductContainer = (props) => {
             <Close />
           </IconButton>
         </DialogTitle>
-        {showQRReader ? (
-          <QrReader
-            delay={300}
-            onError={handleScanError}
-            onScan={handleScan}
-            style={{ width: '100%', marginTop: 20 }}
-          />
-        ) : (
-          scanType === 'BALANCE' ? balanceContent : PINContent
-        )}
+        {
+          showQRReader ? (
+            <>
+            <Button variant="contained"  color="secondary" className={classes.button_tambah} style={{ width: 200, marginLeft: 10 }} onClick={() => {
+              setOpenScan(false)
+              setTimeout(() => {
+                setShowQRReader(false)
+              }, 1)
+            }}>
+              {t('search_product:button.cancel')}
+            </Button>
+            <QrReader
+              delay={300}
+              onError={handleScanError}
+              onScan={handleScan}
+              style={{ width: '100%', marginTop: 20 }}
+            />
+          </>
+          )
+          : (scanType === 'BALANCE' ? balanceContent : PINContent)
+        }
       </Dialog>
     </div>
   );

@@ -7,7 +7,7 @@ import ScanIcon from '@material-ui/icons/CropFree';
 import CartIcon from '@material-ui/icons/ShoppingCart';
 import { number } from 'prop-types';
 
-const FooterNavigationComponent = ({ t, history, cartTotal, handleOpenModal, handleOpenScan }) => {
+const FooterNavigationComponent = ({ t, history, cartTotal, handleOpenModal, handleClickMenu }) => {
   const [value, setValue] = useState(0);
 
   const redirect = (val) => {
@@ -17,15 +17,24 @@ const FooterNavigationComponent = ({ t, history, cartTotal, handleOpenModal, han
         break;
       case 1:
         setValue(0)
-        handleOpenScan('PIN')
+        handleClickMenu('PIN')
+        setTimeout(() => {
+          handleOpenModal()
+        }, 1000)
         break;
       case 2:
         setValue(0)
-        handleOpenScan('BALANCE')
+        handleClickMenu('BALANCE')
+        setTimeout(() => {
+          handleOpenModal()
+        }, 1000)
         break;
       case 3:
         setValue(0)
-        handleOpenModal()
+        handleClickMenu('')
+        setTimeout(() => {
+          handleOpenModal()
+        }, 1000)
         break;
       default:
         history.replace('/')
